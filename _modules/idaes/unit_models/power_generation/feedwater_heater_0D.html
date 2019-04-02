@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>idaes.unit_models.power_generation.feedwater_heater_0D &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../../../../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core/index.html">Core Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../models/index.html">Unit Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer/index.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>idaes.unit_models.power_generation.feedwater_heater_0D</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for idaes.unit_models.power_generation.feedwater_heater_0D</h1><div class="highlight"><pre>
+<span></span><span class="c1">##############################################################################</span>
+<span class="c1"># Institute for the Design of Advanced Energy Systems Process Systems</span>
+<span class="c1"># Engineering Framework (IDAES PSE Framework) Copyright (c) 2018-2019, by the</span>
+<span class="c1"># software owners: The Regents of the University of California, through</span>
+<span class="c1"># Lawrence Berkeley National Laboratory,  National Technology &amp; Engineering</span>
+<span class="c1"># Solutions of Sandia, LLC, Carnegie Mellon University, West Virginia</span>
+<span class="c1"># University Research Corporation, et al. All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Please see the files COPYRIGHT.txt and LICENSE.txt for full copyright and</span>
+<span class="c1"># license information, respectively. Both files are also available online</span>
+<span class="c1"># at the URL &quot;https://github.com/IDAES/idaes-pse&quot;.</span>
+<span class="c1">##############################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This file contains 0D feedwater heater models. These models are suitable for</span>
+<span class="sd">steady state calculations. For dynamic modeling 1D models are required. There</span>
+<span class="sd">are two models included here.</span>
+
+<span class="sd">1) FWHCondensing0D: this is a regular 0D heat exchanger model with a constraint</span>
+<span class="sd">   added to ensure all the steam fed to the feedwater heater is condensed at the</span>
+<span class="sd">   outlet. At the side_1 outlet the molar enthalpy is equal to the the staurated</span>
+<span class="sd">   liquid molar enthalpy.</span>
+<span class="sd">2) FWH0D is a feedwater heater model with three sections and a mixer for</span>
+<span class="sd">   combining another feedwater heater&#39;s drain outlet with steam extracted from</span>
+<span class="sd">   the turbine.  The drain mixer, desuperheat, and drain cooling sections are</span>
+<span class="sd">   optional.  Only the condensing section is required.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;John Eslick&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">pyomo.common.config</span> <span class="k">import</span> <span class="n">ConfigValue</span><span class="p">,</span> <span class="n">In</span><span class="p">,</span> <span class="n">ConfigBlock</span>
+<span class="kn">from</span> <span class="nn">pyomo.environ</span> <span class="k">import</span> <span class="n">SolverFactory</span><span class="p">,</span> <span class="n">TransformationFactory</span><span class="p">,</span> <span class="n">Var</span><span class="p">,</span> <span class="n">value</span>
+<span class="kn">from</span> <span class="nn">pyomo.opt</span> <span class="k">import</span> <span class="n">TerminationCondition</span>
+<span class="kn">from</span> <span class="nn">pyomo.network</span> <span class="k">import</span> <span class="n">Arc</span>
+
+<span class="kn">from</span> <span class="nn">idaes.core</span> <span class="k">import</span> <span class="n">declare_process_block_class</span><span class="p">,</span> <span class="n">UnitModelBlockData</span>
+<span class="kn">from</span> <span class="nn">idaes.unit_models.heat_exchanger</span> <span class="k">import</span> <span class="n">HeatExchangerData</span>
+<span class="kn">from</span> <span class="nn">idaes.unit_models</span> <span class="k">import</span> <span class="n">Mixer</span><span class="p">,</span> <span class="n">MomentumMixingType</span><span class="p">,</span> <span class="n">HeatExchanger</span>
+<span class="kn">from</span> <span class="nn">idaes.core.util</span> <span class="k">import</span> <span class="n">from_json</span><span class="p">,</span> <span class="n">to_json</span><span class="p">,</span> <span class="n">StoreSpec</span>
+<span class="kn">from</span> <span class="nn">idaes.ui.report</span> <span class="k">import</span> <span class="n">degrees_of_freedom</span>
+<span class="kn">from</span> <span class="nn">idaes.core</span> <span class="k">import</span> <span class="n">useDefault</span>
+<span class="kn">from</span> <span class="nn">idaes.core.util.config</span> <span class="k">import</span> <span class="n">is_physical_parameter_block</span>
+
+<span class="n">_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_define_feedwater_heater_0D_config</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">declare</span><span class="p">(</span><span class="s2">&quot;has_drain_mixer&quot;</span><span class="p">,</span> <span class="n">ConfigValue</span><span class="p">(</span>
+            <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">domain</span><span class="o">=</span><span class="n">In</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Add a mixer to the inlet of the condensing section&quot;</span><span class="p">,</span>
+            <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Add a mixer to the inlet of the condensing section to add</span>
+<span class="s2">water from the drain of another feedwaterheater to the steam, if True&quot;&quot;&quot;</span><span class="p">))</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">declare</span><span class="p">(</span><span class="s2">&quot;has_desuperheat&quot;</span><span class="p">,</span> <span class="n">ConfigValue</span><span class="p">(</span>
+            <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">domain</span><span class="o">=</span><span class="n">In</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Add a mixer desuperheat section to the heat exchanger&quot;</span><span class="p">,</span>
+            <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Add a mixer desuperheat section to the heat exchanger&quot;</span><span class="p">))</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">declare</span><span class="p">(</span><span class="s2">&quot;has_drain_cooling&quot;</span><span class="p">,</span> <span class="n">ConfigValue</span><span class="p">(</span>
+            <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">domain</span><span class="o">=</span><span class="n">In</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Add a section after condensing section cool condensate.&quot;</span><span class="p">,</span>
+            <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Add a section after condensing section to cool condensate.&quot;</span><span class="p">))</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">declare</span><span class="p">(</span><span class="s2">&quot;property_package&quot;</span><span class="p">,</span> <span class="n">ConfigValue</span><span class="p">(</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">useDefault</span><span class="p">,</span>
+        <span class="n">domain</span><span class="o">=</span><span class="n">is_physical_parameter_block</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Property package to use for control volume&quot;</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Property parameter object used to define property calculations,</span>
+<span class="s2">**default** - useDefault.</span>
+<span class="s2">**Valid values:** {</span>
+<span class="s2">**useDefault** - use default package from parent model or flowsheet,</span>
+<span class="s2">**PropertyParameterObject** - a PropertyParameterBlock object.}&quot;&quot;&quot;</span><span class="p">))</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">declare</span><span class="p">(</span><span class="s2">&quot;property_package_args&quot;</span><span class="p">,</span> <span class="n">ConfigBlock</span><span class="p">(</span>
+        <span class="n">implicit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Arguments to use for constructing property packages&quot;</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;A ConfigBlock with arguments to be passed to a property block(s)</span>
+<span class="s2">and used when constructing these,</span>
+<span class="s2">**default** - None.</span>
+<span class="s2">**Valid values:** {</span>
+<span class="s2">see property package for documentation.}&quot;&quot;&quot;</span><span class="p">))</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">declare</span><span class="p">(</span><span class="s2">&quot;condense&quot;</span><span class="p">,</span> <span class="n">HeatExchangerData</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">())</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">declare</span><span class="p">(</span><span class="s2">&quot;desuperheat&quot;</span><span class="p">,</span> <span class="n">HeatExchangerData</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">())</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">declare</span><span class="p">(</span><span class="s2">&quot;cooling&quot;</span><span class="p">,</span> <span class="n">HeatExchangerData</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">())</span>
+
+<span class="k">def</span> <span class="nf">_set_port</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Copy the values from port p2 to port p1.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        p1: port to copy values to</span>
+<span class="sd">        p2: port to compy values from</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">p1</span><span class="o">.</span><span class="n">vars</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Var</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+                <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="n">p2</span><span class="o">.</span><span class="n">vars</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">_set_prop_pack</span><span class="p">(</span><span class="n">hxcfg</span><span class="p">,</span> <span class="n">fwhcfg</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the property package and property pacakge args to the values given for</span>
+<span class="sd">    the overall feedwater heater model if not otherwise specified.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hxcfg: Heat exchanger subblock config block</span>
+<span class="sd">        fwhcfg: Overall feedwater heater config block</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">hxcfg</span><span class="o">.</span><span class="n">side_1</span><span class="o">.</span><span class="n">property_package</span> <span class="o">==</span> <span class="n">useDefault</span><span class="p">:</span>
+        <span class="n">hxcfg</span><span class="o">.</span><span class="n">side_1</span><span class="o">.</span><span class="n">property_package</span> <span class="o">=</span> <span class="n">fwhcfg</span><span class="o">.</span><span class="n">property_package</span>
+        <span class="n">hxcfg</span><span class="o">.</span><span class="n">side_1</span><span class="o">.</span><span class="n">property_package_args</span> <span class="o">=</span> <span class="n">fwhcfg</span><span class="o">.</span><span class="n">property_package_args</span>
+    <span class="k">if</span> <span class="n">hxcfg</span><span class="o">.</span><span class="n">side_2</span><span class="o">.</span><span class="n">property_package</span> <span class="o">==</span> <span class="n">useDefault</span><span class="p">:</span>
+        <span class="n">hxcfg</span><span class="o">.</span><span class="n">side_2</span><span class="o">.</span><span class="n">property_package</span> <span class="o">=</span> <span class="n">fwhcfg</span><span class="o">.</span><span class="n">property_package</span>
+        <span class="n">hxcfg</span><span class="o">.</span><span class="n">side_2</span><span class="o">.</span><span class="n">property_package_args</span> <span class="o">=</span> <span class="n">fwhcfg</span><span class="o">.</span><span class="n">property_package_args</span>
+
+
+<div class="viewcode-block" id="FWHCondensing0DData"><a class="viewcode-back" href="../../../../models/power_generation/feedwater_heater_condensing_0D.html#idaes.unit_models.power_generation.feedwater_heater_0D.FWHCondensing0DData">[docs]</a><span class="nd">@declare_process_block_class</span><span class="p">(</span><span class="s2">&quot;FWHCondensing0D&quot;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span>
+<span class="sd">&quot;&quot;&quot;Feedwater Heater Condensing Section</span>
+<span class="sd">The feedwater heater condensing section model is a normal 0D heat exchanger</span>
+<span class="sd">model with an added constraint to calculate the steam flow such that the outlet</span>
+<span class="sd">of side_1 is a saturated liquid.&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">FWHCondensing0DData</span><span class="p">(</span><span class="n">HeatExchangerData</span><span class="p">):</span>
+<div class="viewcode-block" id="FWHCondensing0DData.build"><a class="viewcode-back" href="../../../../models/power_generation/feedwater_heater_condensing_0D.html#idaes.unit_models.power_generation.feedwater_heater_0D.FWHCondensing0DData.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+        <span class="nd">@self</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_ref</span><span class="p">,</span>
+            <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Calculate steam extraction rate such that all steam condenses&quot;</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">extraction_rate_constraint</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="n">side_1</span><span class="o">.</span><span class="n">properties_out</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">enth_mol_sat_phase</span><span class="p">[</span><span class="s2">&quot;Liq&quot;</span><span class="p">]</span> <span class="o">==</span> \
+                   <span class="n">b</span><span class="o">.</span><span class="n">side_1</span><span class="o">.</span><span class="n">properties_out</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">enth_mol</span></div>
+
+<div class="viewcode-block" id="FWHCondensing0DData.initialize"><a class="viewcode-back" href="../../../../models/power_generation/feedwater_heater_condensing_0D.html#idaes.unit_models.power_generation.feedwater_heater_0D.FWHCondensing0DData.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Use the regular heat exchanger initilization, with the extraction rate</span>
+<span class="sd">        constraint deactivated; then it activates the constraint and calculates</span>
+<span class="sd">        a steam inlet flow rate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extraction_rate_constraint</span><span class="o">.</span><span class="n">deactivate</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extraction_rate_constraint</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+
+        <span class="n">solver</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;solver&quot;</span><span class="p">,</span> <span class="s2">&quot;ipopt&quot;</span><span class="p">)</span>
+        <span class="n">optarg</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;oparg&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">outlvl</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;outlvl&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">SolverFactory</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">optarg</span>
+        <span class="n">tee</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">outlvl</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="n">sp</span> <span class="o">=</span> <span class="n">StoreSpec</span><span class="o">.</span><span class="n">value_isfixed_isactive</span><span class="p">(</span><span class="n">only_fixed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">istate</span> <span class="o">=</span> <span class="n">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">return_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wts</span><span class="o">=</span><span class="n">sp</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overall_heat_transfer_coefficient</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_1</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_2</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outlet_1</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outlet_2</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_1</span><span class="o">.</span><span class="n">flow_mol</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tee</span><span class="o">=</span><span class="n">tee</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">termination_condition</span> <span class="o">==</span> <span class="n">TerminationCondition</span><span class="o">.</span><span class="n">optimal</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">outlvl</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> Initialization Failed.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> Initialization Failed.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="n">from_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">istate</span><span class="p">,</span> <span class="n">wts</span><span class="o">=</span><span class="n">sp</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="FWH0DData"><a class="viewcode-back" href="../../../../models/power_generation/feedwater_heater_0D.html#idaes.unit_models.power_generation.feedwater_heater_0D.FWH0DData">[docs]</a><span class="nd">@declare_process_block_class</span><span class="p">(</span><span class="s2">&quot;FWH0D&quot;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Feedwater Heater Model</span>
+<span class="s2">This is a 0D feedwater heater model.  The model may contain three 0D heat</span>
+<span class="s2">exchanger models representing the desuperheat, condensing and drain cooling</span>
+<span class="s2">sections of the feedwater heater. Only the condensing section must be included.</span>
+<span class="s2">A drain mixer can also be optionally included, which mixes the drain outlet of</span>
+<span class="s2">another feedwater heater with the steam fed into the condensing section.</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">FWH0DData</span><span class="p">(</span><span class="n">UnitModelBlockData</span><span class="p">):</span>
+    <span class="n">CONFIG</span> <span class="o">=</span> <span class="n">UnitModelBlockData</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">()</span>
+    <span class="n">_define_feedwater_heater_0D_config</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FWH0DData.build"><a class="viewcode-back" href="../../../../models/power_generation/feedwater_heater_0D.html#idaes.unit_models.power_generation.feedwater_heater_0D.FWH0DData.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="c1"># sorter ref to config for less line splitting</span>
+
+        <span class="c1"># All feedwater heaters have a condensing section</span>
+        <span class="n">_set_prop_pack</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">condense</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">condense</span> <span class="o">=</span> <span class="n">FWHCondensing0D</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">condense</span><span class="p">)</span>
+
+        <span class="c1"># Add a mixer to add the drain stream from another feedwater heater</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_drain_mixer</span><span class="p">:</span>
+            <span class="n">mix_cfg</span> <span class="o">=</span> <span class="p">{</span> <span class="c1"># general unit model config</span>
+                <span class="s2">&quot;dynamic&quot;</span><span class="p">:</span><span class="n">config</span><span class="o">.</span><span class="n">dynamic</span><span class="p">,</span>
+                <span class="s2">&quot;has_holdup&quot;</span><span class="p">:</span><span class="n">config</span><span class="o">.</span><span class="n">has_holdup</span><span class="p">,</span>
+                <span class="s2">&quot;property_package&quot;</span><span class="p">:</span><span class="n">config</span><span class="o">.</span><span class="n">property_package</span><span class="p">,</span>
+                <span class="s2">&quot;property_package_args&quot;</span><span class="p">:</span><span class="n">config</span><span class="o">.</span><span class="n">property_package_args</span><span class="p">,</span>
+                <span class="s2">&quot;momentum_mixing_type&quot;</span><span class="p">:</span><span class="n">MomentumMixingType</span><span class="o">.</span><span class="n">none</span><span class="p">,</span>
+                <span class="s2">&quot;inlet_list&quot;</span><span class="p">:[</span><span class="s2">&quot;steam&quot;</span><span class="p">,</span> <span class="s2">&quot;drain&quot;</span><span class="p">]}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span> <span class="o">=</span> <span class="n">Mixer</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">mix_cfg</span><span class="p">)</span>
+            <span class="nd">@self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">time_ref</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">mixer_pressure_constraint</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Constraint to set the drain mixer pressure to the pressure of</span>
+<span class="sd">                the steam extracted from the turbine. The drain inlet should</span>
+<span class="sd">                always be a higher pressure than the steam inlet.</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="n">steam_state</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">pressure</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">mixed_state</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">pressure</span>
+            <span class="c1"># Connect the mixer to the condensing section inlet</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mix_out_arc</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">outlet</span><span class="p">,</span>
+                                   <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">condense</span><span class="o">.</span><span class="n">inlet_1</span><span class="p">)</span>
+
+        <span class="c1"># Add a desuperheat section before the condensing section</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_desuperheat</span><span class="p">:</span>
+            <span class="n">_set_prop_pack</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">desuperheat</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">desuperheat</span> <span class="o">=</span> <span class="n">HeatExchanger</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">desuperheat</span><span class="p">)</span>
+            <span class="c1"># set default area less than condensing section area, this will</span>
+            <span class="c1"># almost always be overridden by the user fixing an area later</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">desuperheat</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_drain_mixer</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">desuperheat_drain_arc</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                    <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">desuperheat</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">,</span>
+                    <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">steam</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">desuperheat_drain_arc</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                    <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">desuperheat</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">,</span>
+                    <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">condense</span><span class="o">.</span><span class="n">inlet_1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">condense_out2_arc</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">condense</span><span class="o">.</span><span class="n">outlet_2</span><span class="p">,</span>
+                <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">desuperheat</span><span class="o">.</span><span class="n">inlet_2</span><span class="p">)</span>
+
+        <span class="c1"># Add a drain cooling section after the condensing section</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_drain_cooling</span><span class="p">:</span>
+            <span class="n">_set_prop_pack</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">cooling</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cooling</span> <span class="o">=</span> <span class="n">HeatExchanger</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">cooling</span><span class="p">)</span>
+            <span class="c1"># set default area less than condensing section area, this will</span>
+            <span class="c1"># almost always be overridden by the user fixing an area later</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cooling</span><span class="o">.</span><span class="n">area</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cooling_out2_arc</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cooling</span><span class="o">.</span><span class="n">outlet_2</span><span class="p">,</span>
+                <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">condense</span><span class="o">.</span><span class="n">inlet_2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">condense_out1_arc</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">condense</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">,</span>
+                <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cooling</span><span class="o">.</span><span class="n">inlet_1</span><span class="p">)</span>
+
+        <span class="n">TransformationFactory</span><span class="p">(</span><span class="s2">&quot;network.expand_arcs&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FWH0DData.initialize"><a class="viewcode-back" href="../../../../models/power_generation/feedwater_heater_0D.html#idaes.unit_models.power_generation.feedwater_heater_0D.FWH0DData.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="c1"># sorter ref to config for less line splitting</span>
+        <span class="n">sp</span> <span class="o">=</span> <span class="n">StoreSpec</span><span class="o">.</span><span class="n">value_isfixed_isactive</span><span class="p">(</span><span class="n">only_fixed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">istate</span> <span class="o">=</span> <span class="n">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">return_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wts</span><span class="o">=</span><span class="n">sp</span><span class="p">)</span>
+
+        <span class="c1"># the initilization here isn&#39;t straight forward since the heat exchanger</span>
+        <span class="c1"># may have 3 stages and they are countercurrent.  For simplicity each</span>
+        <span class="c1"># stage in initialized with the same cooling water inlet conditions then</span>
+        <span class="c1"># the whole feedwater heater is solved together.  There are more robust</span>
+        <span class="c1"># approaches which can be implimented if the need arises.</span>
+
+        <span class="c1"># initialize desuperheat if include</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_desuperheat</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_drain_cooling</span><span class="p">:</span>
+                <span class="n">_set_port</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desuperheat</span><span class="o">.</span><span class="n">inlet_2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cooling</span><span class="o">.</span><span class="n">inlet_2</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">_set_port</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desuperheat</span><span class="o">.</span><span class="n">inlet_2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">condense</span><span class="o">.</span><span class="n">inlet_2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">desuperheat</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">desuperheat</span><span class="o">.</span><span class="n">inlet_1</span><span class="o">.</span><span class="n">flow_mol</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_drain_mixer</span><span class="p">:</span>
+                <span class="n">_set_port</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">steam</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">desuperheat</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">_set_port</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condense</span><span class="o">.</span><span class="n">inlet_1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">desuperheat</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">)</span>
+        <span class="c1"># initialize mixer if included</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_drain_mixer</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">steam</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">drain</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">outlet</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">_set_port</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condense</span><span class="o">.</span><span class="n">inlet_1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">outlet</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_desuperheat</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">steam</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">drain_mix</span><span class="o">.</span><span class="n">steam</span><span class="o">.</span><span class="n">flow_mol</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+        <span class="c1"># Initialize condense section</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_drain_cooling</span><span class="p">:</span>
+            <span class="n">_set_port</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condense</span><span class="o">.</span><span class="n">inlet_2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cooling</span><span class="o">.</span><span class="n">inlet_2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">condense</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Initialize drain cooling if included</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_drain_cooling</span><span class="p">:</span>
+            <span class="n">_set_port</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cooling</span><span class="o">.</span><span class="n">inlet_1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">condense</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cooling</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Solve all together</span>
+        <span class="n">outlvl</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;outlvl&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">SolverFactory</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;solver&quot;</span><span class="p">,</span> <span class="s2">&quot;ipopt&quot;</span><span class="p">))</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;oparg&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">tee</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">outlvl</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">degrees_of_freedom</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tee</span><span class="o">=</span><span class="n">tee</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">termination_condition</span> <span class="o">==</span> <span class="n">TerminationCondition</span><span class="o">.</span><span class="n">optimal</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">outlvl</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> Initialization Complete.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> Initialization Failed.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="n">from_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">istate</span><span class="p">,</span> <span class="n">wts</span><span class="o">=</span><span class="n">sp</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

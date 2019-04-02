@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Turbine (Multistage) &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Steam/Water Valve" href="steam_valve.html" />
+    <link rel="prev" title="Turbine (Stage)" href="turbine_stage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core/index.html">Core Library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Unit Model Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cstr.html">Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium.html">Equilibrium Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../feed.html">Feed Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../feed_flash.html">Feed Block with Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flash.html">Flash Unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gibbs_reactor.html">Gibbs Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../heater.html">Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../heat_exchanger.html">HeatExchanger (0D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../heat_exchanger_1D.html">Heat Exchangers (1D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mixer.html">Mixer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pressure_changer.html">Pressure Changer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../product.html">Product Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../separator.html">Separator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stoichiometric_reactor.html">Stoichiometric (Yield) Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translator.html">Translator Block</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Power Generation Models</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="feedwater_heater_0D.html">Feedwater Heater (0D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feedwater_heater_condensing_0D.html">Feedwater Heater (Condensing Section 0D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine_inlet.html">Turbine (Inlet Stage)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine_outlet.html">Turbine (Outlet Stage)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine_stage.html">Turbine (Stage)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Turbine (Multistage)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unit-models">Unit Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#turbinemultistage-class">TurbineMultistage Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#turbinemultistagedata-class">TurbineMultistageData Class</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="steam_valve.html">Steam/Water Valve</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/index.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Unit Model Library</a> &raquo;</li>
+        
+          <li><a href="index.html">Power Generation Models</a> &raquo;</li>
+        
+      <li>Turbine (Multistage)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/models/power_generation/turbine_multistage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="turbine-multistage">
+<h1>Turbine (Multistage)<a class="headerlink" href="#turbine-multistage" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-idaes.unit_models.power_generation.turbine_multistage"><span id="index-0"></span></span><p>This is a composite model for a power plant turbine with high, intermediate and
+low pressure sections. This model contains an inlet stage with throttle valves
+for partial arc admission and optional splitters for steam extraction.</p>
+<p>The figure below shows the layout of the mutistage turbine model.  Optional splitters
+provide for steam extraction.  The splitters can have two or more outlets (one being
+the main steam outlet).  The streams that connect one stage to the next can also be
+omitted.  This allows for connecting additional unit models (usually reheaters) between
+stages.</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="../../_images/turbine_multistage.svg"><img alt="../../_images/turbine_multistage.svg" src="../../_images/turbine_multistage.svg" width="800" /></a>
+<p class="caption"><span class="caption-text">MultiStage Turbine Model</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This example sets up a turbine multistage turbine model similar to what could be
+found in a power plant steam cycle.  There are 7 high-pressure stages, 14
+intermediate-pressure stages, and 11 low-pressure stages. Steam extractions
+are provided after stages hp4,  hp7, ip5, ip14, lp4, lp7, lp9, lp11.  The
+extraction at ip14 uses a splitter with three outlets, one for the main steam,
+one for the boiler feed pump, and one for a feedwater heater.  There is a
+disconnection between the HP and IP sections so that steam can be sent to a
+reheater.  In this example, a heater block is a stand-in for a reheater model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyomo.environ</span> <span class="kn">import</span> <span class="p">(</span><span class="n">ConcreteModel</span><span class="p">,</span> <span class="n">SolverFactory</span><span class="p">,</span> <span class="n">TransformationFactory</span><span class="p">,</span>
+                           <span class="n">Constraint</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pyomo.network</span> <span class="kn">import</span> <span class="n">Arc</span>
+
+<span class="kn">from</span> <span class="nn">idaes.core</span> <span class="kn">import</span> <span class="n">FlowsheetBlock</span>
+<span class="kn">from</span> <span class="nn">idaes.unit_models</span> <span class="kn">import</span> <span class="n">Heater</span>
+<span class="kn">from</span> <span class="nn">idaes.unit_models.power_generation</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TurbineMultistage</span><span class="p">,</span> <span class="n">TurbineStage</span><span class="p">,</span> <span class="n">TurbineInletStage</span><span class="p">,</span> <span class="n">TurbineOutletStage</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">idaes.property_models</span> <span class="kn">import</span> <span class="n">iapws95_ph</span>
+
+<span class="n">solver</span> <span class="o">=</span> <span class="n">SolverFactory</span><span class="p">(</span><span class="s1">&#39;ipopt&#39;</span><span class="p">)</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;tol&#39;</span><span class="p">:</span> <span class="mf">1e-6</span><span class="p">}</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">ConcreteModel</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span> <span class="o">=</span> <span class="n">FlowsheetBlock</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dynamic&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">})</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">properties</span> <span class="o">=</span> <span class="n">iapws95_ph</span><span class="o">.</span><span class="n">Iapws95ParameterBlock</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">turb</span> <span class="o">=</span> <span class="n">TurbineMultistage</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">&quot;property_package&quot;</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">properties</span><span class="p">,</span>
+    <span class="s2">&quot;num_hp&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s2">&quot;num_ip&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="s2">&quot;num_lp&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+    <span class="s2">&quot;hp_split_locations&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span>
+    <span class="s2">&quot;ip_split_locations&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">14</span><span class="p">],</span>
+    <span class="s2">&quot;lp_split_locations&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">],</span>
+    <span class="s2">&quot;hp_disconnect&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="c1"># 7 is last stage in hp so disconnect hp from ip</span>
+    <span class="s2">&quot;ip_split_num_outlets&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">14</span><span class="p">:</span><span class="mi">3</span><span class="p">}})</span>
+<span class="c1"># Add reheater (for example using a simple heater block)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">reheat</span> <span class="o">=</span> <span class="n">Heater</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;property_package&quot;</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">properties</span><span class="p">})</span>
+<span class="c1"># Add Arcs (streams) to connect the HP and IP sections through reheater</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">hp_to_reheat</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">turb</span><span class="o">.</span><span class="n">hp_split</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">,</span>
+                        <span class="n">destination</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">reheat</span><span class="o">.</span><span class="n">inlet</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">reheat_to_ip</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">reheat</span><span class="o">.</span><span class="n">outlet</span><span class="p">,</span>
+                        <span class="n">destination</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">turb</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">)</span>
+<span class="c1"># Set the turbine inlet conditions and an initial flow guess</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">2.4233e7</span>
+<span class="n">hin</span> <span class="o">=</span> <span class="n">iapws95_ph</span><span class="o">.</span><span class="n">htpx</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">880</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">turb</span><span class="o">.</span><span class="n">inlet_split</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">enth_mol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">hin</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">turb</span><span class="o">.</span><span class="n">inlet_split</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">flow_mol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mi">26000</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">turb</span><span class="o">.</span><span class="n">inlet_split</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">pressure</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># Set the inlet of the ip section for initialization, since it is disconnected</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">7.802e+06</span>
+<span class="n">hin</span> <span class="o">=</span> <span class="n">iapws95_ph</span><span class="o">.</span><span class="n">htpx</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">880</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">turb</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">enth_mol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">hin</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">turb</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">flow_mol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mf">25220.0</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">turb</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">pressure</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">p</span>
+<span class="c1"># Set the efficency and pressure ratios of stages other than inlet and outlet</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">turb</span><span class="o">.</span><span class="n">hp_stages</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">ratioP</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">0.88</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">efficiency_isentropic</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">turb</span><span class="o">.</span><span class="n">ip_stages</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">ratioP</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">0.85</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">efficiency_isentropic</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">turb</span><span class="o">.</span><span class="n">lp_stages</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">ratioP</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">0.82</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">efficiency_isentropic</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="c1"># Usually these fractions would be determined by the boiler feed water heater</span>
+<span class="c1"># network. Since this example doesn&#39;t include them, just fix split fractions</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">hp_split</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;outlet_2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mf">0.03</span><span class="p">)</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">hp_split</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;outlet_2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mf">0.03</span><span class="p">)</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">ip_split</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;outlet_2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mf">0.04</span><span class="p">)</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">ip_split</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;outlet_2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mf">0.04</span><span class="p">)</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">ip_split</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;outlet_3&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">lp_split</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;outlet_2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mf">0.04</span><span class="p">)</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">lp_split</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;outlet_2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mf">0.04</span><span class="p">)</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">lp_split</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;outlet_2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mf">0.04</span><span class="p">)</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">lp_split</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;outlet_2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mf">0.04</span><span class="p">)</span>
+<span class="c1"># unfix inlet flow for pressure driven simulation</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">inlet_split</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">flow_mol</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+<span class="c1"># Set the inlet steam mixer to use the constraints that the pressures of all</span>
+<span class="c1"># inlet streams are equal</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">inlet_mix</span><span class="o">.</span><span class="n">use_equal_pressure_constraint</span><span class="p">()</span>
+<span class="c1"># Initialize turbine</span>
+<span class="n">turb</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">outlvl</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Copy conditions out of turbine to initialize the reheater</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">time</span><span class="p">:</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">reheat</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">flow_mol</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> \
+        <span class="n">value</span><span class="p">(</span><span class="n">turb</span><span class="o">.</span><span class="n">hp_split</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">outlet_1_state</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">flow_mol</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">reheat</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">enth_mol</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> \
+        <span class="n">value</span><span class="p">(</span><span class="n">turb</span><span class="o">.</span><span class="n">hp_split</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">outlet_1_state</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">enth_mol</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">reheat</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">pressure</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> \
+        <span class="n">value</span><span class="p">(</span><span class="n">turb</span><span class="o">.</span><span class="n">hp_split</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">outlet_1_state</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">pressure</span><span class="p">)</span>
+<span class="c1"># initialize the reheater</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">reheat</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">outlvl</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="c1"># Add constraint to the reheater to result in 880K outlet temperature</span>
+<span class="k">def</span> <span class="nf">reheat_T_rule</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">reheat</span><span class="o">.</span><span class="n">control_volume</span><span class="o">.</span><span class="n">properties_out</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">temperature</span> <span class="o">==</span> <span class="mi">880</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">reheat</span><span class="o">.</span><span class="n">temperature_out_equation</span> <span class="o">=</span> <span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">reheat</span><span class="o">.</span><span class="n">time_ref</span><span class="p">,</span>
+    <span class="n">rule</span><span class="o">=</span><span class="n">reheat_T_rule</span><span class="p">)</span>
+<span class="c1"># Expand the Arcs connecting the turbine to the reheater</span>
+<span class="n">TransformationFactory</span><span class="p">(</span><span class="s2">&quot;network.expand_arcs&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="c1"># Fix the outlet pressure (usually determined by condenser)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">turb</span><span class="o">.</span><span class="n">outlet_stage</span><span class="o">.</span><span class="n">control_volume</span><span class="o">.</span><span class="n">properties_out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pressure</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+
+<span class="c1"># Solve the pressure driven flow model with reheat</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">tee</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="unit-models">
+<h2>Unit Models<a class="headerlink" href="#unit-models" title="Permalink to this headline">¶</a></h2>
+<p>The multistage turbine model contains the models in the table below.  The splitters for steam extraction are not present if a turbine section contains no steam extractions.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 10%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Unit</p></th>
+<th class="head"><p>Index Sets</p></th>
+<th class="head"><p>Doc</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">inlet_split</span></code></p></td>
+<td><p>None</p></td>
+<td><p>Splitter to split the main steam feed into steams for each arc (<a class="reference internal" href="../separator.html#separator"><span class="std std-ref">Separator</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">throttle_valve</span></code></p></td>
+<td><p>Admission Arcs</p></td>
+<td><p>Throttle valves for each admission arc (<a class="reference internal" href="steam_valve.html#steam-water-valve"><span class="std std-ref">SteamValve</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">inlet_stage</span></code></p></td>
+<td><p>Admission Arcs</p></td>
+<td><p>Parallel inlet turbine stages that represent admission arcs (<a class="reference internal" href="turbine_inlet.html#turbine-inlet-stage"><span class="std std-ref">TurbineInlet</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">inlet_mix</span></code></p></td>
+<td><p>None</p></td>
+<td><p>Mixer to combine the streams from each arc back to one stream (<a class="reference internal" href="../mixer.html#mixer"><span class="std std-ref">Mixer</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hp_stages</span></code></p></td>
+<td><p>HP stages</p></td>
+<td><p>Turbine stages in the high-pressure section (<a class="reference internal" href="turbine_stage.html#turbine-stage"><span class="std std-ref">TurbineStage</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ip_stages</span></code></p></td>
+<td><p>IP stages</p></td>
+<td><p>Turbine stages in the intermediate-pressure section (<a class="reference internal" href="turbine_stage.html#turbine-stage"><span class="std std-ref">TurbineStage</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lp_stages</span></code></p></td>
+<td><p>LP stages</p></td>
+<td><p>Turbine stages in the low-pressure section (<a class="reference internal" href="turbine_stage.html#turbine-stage"><span class="std std-ref">TurbineStage</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hp_splits</span></code></p></td>
+<td><p>subset of HP stages</p></td>
+<td><p>Extraction splitters in the high-pressure section (<a class="reference internal" href="../separator.html#separator"><span class="std std-ref">Separator</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ip_splits</span></code></p></td>
+<td><p>subset of IP stages</p></td>
+<td><p>Extraction splitters in the high-pressure section (<a class="reference internal" href="../separator.html#separator"><span class="std std-ref">Separator</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lp_splits</span></code></p></td>
+<td><p>subset of LP stages</p></td>
+<td><p>Extraction splitters in the high-pressure section (<a class="reference internal" href="../separator.html#separator"><span class="std std-ref">Separator</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outlet_stage</span></code></p></td>
+<td><p>None</p></td>
+<td><p>The final stage in the turbine, which calculates exhaust losses (<a class="reference internal" href="turbine_outlet.html#turbine-outlet-stage"><span class="std std-ref">TurbineOutlet</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>The initialization approach is to sequentially initialize each sub-unit using the outlet of the previous
+model. Before initializing the model, the inlet of the turbine, and any stage that is disconnected should
+be given a reasonable guess.  The efficiency and pressure ration of the stages in the HP, IP and LP
+sections should be specified. For the inlet and outlet stages the flow coefficient should be specified.
+Valve coefficients should also be specified.  A reasonable guess for split fractions should also be given
+for any extraction splitters present. The most likely cause of initialization failure is flow coefficients
+in inlet stage, outlet stage, or valves that do not pair well with the specified flow rates.</p>
+</div>
+<div class="section" id="turbinemultistage-class">
+<h2>TurbineMultistage Class<a class="headerlink" href="#turbinemultistage-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.unit_models.power_generation.turbine_multistage.TurbineMultistage">
+<em class="property">class </em><code class="descclassname">idaes.unit_models.power_generation.turbine_multistage.</code><code class="descname">TurbineMultistage</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#idaes.unit_models.power_generation.turbine_multistage.TurbineMultistage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multistage steam turbine with optional reheat and extraction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule</strong> (<em>function</em>) – A rule function or None. Default rule calls build().</p></li>
+<li><p><strong>concrete</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If True, make this a toplevel model. <strong>Default</strong> - False.</p></li>
+<li><p><strong>ctype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Pyomo ctype of the block.  <strong>Default</strong> - “Block”</p></li>
+<li><p><strong>default</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – <p>Default ProcessBlockData config</p>
+<dl class="simple">
+<dt>Keys</dt><dd><dl class="simple">
+<dt>dynamic</dt><dd><p>Indicates whether the model is dynamic.</p>
+</dd>
+<dt>has_holdup</dt><dd><p>Indicates whether holdup terms should be constructed or
+not. Must be True if dynamic = True, <strong>default</strong> - False.
+<strong>Valid values:</strong> { <strong>True</strong> - construct holdup terms,
+<strong>False</strong> - do not construct holdup terms}</p>
+</dd>
+<dt>has_phase_equilibrium</dt><dd><p>Argument indicating whether phase equilibrium should be
+calculated for the resulting mixed stream, <strong>default</strong> -
+False. <strong>Valid values:</strong> { <strong>True</strong> - calculate phase
+equilibrium in mixed stream, <strong>False</strong> - do not calculate
+equilibrium in mixed stream.}</p>
+</dd>
+<dt>property_package</dt><dd><p>Property parameter object used to define property
+calculations, <strong>default</strong> - useDefault. <strong>Valid values:</strong>
+{ <strong>useDefault</strong> - use default package from parent model
+or flowsheet, <strong>PropertyParameterObject</strong> - a
+PropertyParameterBlock object.}</p>
+</dd>
+<dt>property_package_args</dt><dd><p>A ConfigBlock with arguments to be passed to a property
+block(s) and used when constructing these, <strong>default</strong> -
+None. <strong>Valid values:</strong> { see property package for
+documentation.}</p>
+</dd>
+<dt>num_parallel_inlet_stages</dt><dd><p>Number of parallel inlet stages to simulate partial arc
+admission.  Default=4</p>
+</dd>
+<dt>num_hp</dt><dd><p>Number of high pressure stages not including inlet stage</p>
+</dd>
+<dt>num_ip</dt><dd><p>Number of intermediate pressure stages</p>
+</dd>
+<dt>num_lp</dt><dd><p>Number of low pressure stages not including outlet stage</p>
+</dd>
+<dt>hp_split_locations</dt><dd><p>A list of index locations of splitters in the HP section.
+The indexes indicate after which stage to include
+splitters.  0 is between the inlet stage and the first
+regular HP stage.</p>
+</dd>
+<dt>ip_split_locations</dt><dd><p>A list of index locations of splitters in the IP section.
+The indexes indicate after which stage to include
+splitters.</p>
+</dd>
+<dt>lp_split_locations</dt><dd><p>A list of index locations of splitters in the LP section.
+The indexes indicate after which stage to include
+splitters.</p>
+</dd>
+<dt>hp_disconnect</dt><dd><p>HP Turbine stages to not connect to next with an arc. This
+is usually used to insert addtional units between stages
+on a flowsheet, such as a reheater</p>
+</dd>
+<dt>ip_disconnect</dt><dd><p>IP Turbine stages to not connect to next with an arc. This
+is usually used to insert addtional units between stages
+on a flowsheet, such as a reheater</p>
+</dd>
+<dt>lp_disconnect</dt><dd><p>LP Turbine stages to not connect to next with an arc. This
+is usually used to insert addtional units between stages
+on a flowsheet, such as a reheater</p>
+</dd>
+<dt>hp_split_num_outlets</dt><dd><p>Dict, hp split index: number of splitter outlets, if not 2</p>
+</dd>
+<dt>ip_split_num_outlets</dt><dd><p>Dict, ip split index: number of splitter outlets, if not 2</p>
+</dd>
+<dt>lp_split_num_outlets</dt><dd><p>Dict, lp split index: number of splitter outlets, if not 2</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>initialize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – ProcessBlockData config for individual elements. Keys
+are BlockData indexes and values are dictionaries described under the
+“default” argument above.</p></li>
+<li><p><strong>idx_map</strong> (<em>function</em>) – Function to take the index of a BlockData element and
+return the index in the initialize dict from which to read arguments.
+This can be provided to overide the default behavior of matching the
+BlockData index exactly to the index in initialize.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(TurbineMultistage) New instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="turbinemultistagedata-class">
+<h2>TurbineMultistageData Class<a class="headerlink" href="#turbinemultistagedata-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData">
+<em class="property">class </em><code class="descclassname">idaes.unit_models.power_generation.turbine_multistage.</code><code class="descname">TurbineMultistageData</code><span class="sig-paren">(</span><em>component</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/idaes/unit_models/power_generation/turbine_multistage.html#TurbineMultistageData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.build">
+<code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/idaes/unit_models/power_generation/turbine_multistage.html#TurbineMultistageData.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>General build method for UnitModelBlockData. This method calls a number
+of sub-methods which automate the construction of expected attributes
+of unit models.</p>
+<p>Inheriting models should call <cite>super().build</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.initialize">
+<code class="descname">initialize</code><span class="sig-paren">(</span><em>outlvl=0</em>, <em>solver='ipopt'</em>, <em>optarg={'max_iter': 35</em>, <em>'tol': 1e-06}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/idaes/unit_models/power_generation/turbine_multistage.html#TurbineMultistageData.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.throttle_cv_fix">
+<code class="descname">throttle_cv_fix</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/idaes/unit_models/power_generation/turbine_multistage.html#TurbineMultistageData.throttle_cv_fix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.throttle_cv_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fix the thottle valve coefficients.  These are generally the same for
+each of the parallel stages so this provides a convenient way to set
+them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to fix the turbine inlet flow coefficients at</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.turbine_inlet_cf_fix">
+<code class="descname">turbine_inlet_cf_fix</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/idaes/unit_models/power_generation/turbine_multistage.html#TurbineMultistageData.turbine_inlet_cf_fix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.turbine_inlet_cf_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fix the inlet turbine stage flow coefficient.  These are
+generally the same for each of the parallel stages so this provides
+a convenient way to set them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to fix the turbine inlet flow coefficients at</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="steam_valve.html" class="btn btn-neutral float-right" title="Steam/Water Valve" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="turbine_stage.html" class="btn btn-neutral float-left" title="Turbine (Stage)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

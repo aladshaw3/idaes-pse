@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Feedwater Heater (Condensing Section 0D) &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Turbine (Inlet Stage)" href="turbine_inlet.html" />
+    <link rel="prev" title="Feedwater Heater (0D)" href="feedwater_heater_0D.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core/index.html">Core Library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Unit Model Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cstr.html">Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../equilibrium.html">Equilibrium Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../feed.html">Feed Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../feed_flash.html">Feed Block with Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flash.html">Flash Unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gibbs_reactor.html">Gibbs Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../heater.html">Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../heat_exchanger.html">HeatExchanger (0D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../heat_exchanger_1D.html">Heat Exchangers (1D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mixer.html">Mixer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pressure_changer.html">Pressure Changer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../product.html">Product Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../separator.html">Separator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stoichiometric_reactor.html">Stoichiometric (Yield) Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translator.html">Translator Block</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Power Generation Models</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="feedwater_heater_0D.html">Feedwater Heater (0D)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Feedwater Heater (Condensing Section 0D)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#degrees-of-freedom">Degrees of Freedom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#constraints">Constraints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fwhcondensing0d-class">FWHCondensing0D Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fwhcondensing0ddata-class">FWHCondensing0DData Class</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="turbine_inlet.html">Turbine (Inlet Stage)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine_outlet.html">Turbine (Outlet Stage)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine_stage.html">Turbine (Stage)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine_multistage.html">Turbine (Multistage)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steam_valve.html">Steam/Water Valve</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/index.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Unit Model Library</a> &raquo;</li>
+        
+          <li><a href="index.html">Power Generation Models</a> &raquo;</li>
+        
+      <li>Feedwater Heater (Condensing Section 0D)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/models/power_generation/feedwater_heater_condensing_0D.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="feedwater-heater-condensing-section-0d">
+<h1>Feedwater Heater (Condensing Section 0D)<a class="headerlink" href="#feedwater-heater-condensing-section-0d" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-idaes.unit_models.power_generation.feedwater_heater_0D"><span id="index-0"></span></span><p>The condensing feedwater heater is the same as the <a class="reference internal" href="../heat_exchanger.html#heatexchanger-0d"><span class="std std-ref">HeatExchanger</span></a> model with one additional constraint to calculate the inlet flow rate such that all the entering steam is condensed.  This model is suitable for steady state modeling, and is intended to be used with the <a class="reference internal" href="../../property_models/water.html#water-steam"><span class="std std-ref">IAWPS95</span></a> property package.  For dynamic modeling, the 1D feedwater heater models should be used (not yet publicly available).</p>
+<div class="section" id="degrees-of-freedom">
+<h2>Degrees of Freedom<a class="headerlink" href="#degrees-of-freedom" title="Permalink to this headline">¶</a></h2>
+<p>Usually <code class="docutils literal notranslate"><span class="pre">area</span></code> and <code class="docutils literal notranslate"><span class="pre">overall_heat_transfer_coefficient</span></code> are fixed or constraints are provided to calculate <code class="docutils literal notranslate"><span class="pre">overall_heat_transfer_coefficient</span></code>.  If the inlets are also fixed except for the inlet steam flow rate (<code class="docutils literal notranslate"><span class="pre">inlet_1.flow_mol</span></code>), the model will have 0 degrees of freedom.</p>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<p>The variables are the same as <a class="reference internal" href="../heat_exchanger.html#heatexchanger-0d"><span class="std std-ref">HeatExchanger</span></a>.</p>
+</div>
+<div class="section" id="constraints">
+<h2>Constraints<a class="headerlink" href="#constraints" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the <a class="reference internal" href="../heat_exchanger.html#heatexchanger-0d"><span class="std std-ref">HeatExchanger</span></a> constraints, there is one additional constraint to calculate the inlet steam flow such that all steam condenses. The constraint is called <code class="docutils literal notranslate"><span class="pre">extraction_rate_constraint</span></code>, and is defined below.</p>
+<div class="math notranslate nohighlight">
+\[h_{steam, out} = h_{sat, liquid}(P)\]</div>
+<p>Where <span class="math notranslate nohighlight">\(h\)</span> is molar enthalpy, and the saturated liquid enthalpy is a function of pressure.</p>
+</div>
+<div class="section" id="fwhcondensing0d-class">
+<h2>FWHCondensing0D Class<a class="headerlink" href="#fwhcondensing0d-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.unit_models.power_generation.feedwater_heater_0D.FWHCondensing0D">
+<em class="property">class </em><code class="descclassname">idaes.unit_models.power_generation.feedwater_heater_0D.</code><code class="descname">FWHCondensing0D</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#idaes.unit_models.power_generation.feedwater_heater_0D.FWHCondensing0D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feedwater Heater Condensing Section
+The feedwater heater condensing section model is a normal 0D heat exchanger
+model with an added constraint to calculate the steam flow such that the outlet
+of side_1 is a saturated liquid.</p>
+<blockquote>
+<div><dl>
+<dt>Args:</dt><dd><p>rule (function): A rule function or None. Default rule calls build().
+concrete (bool): If True, make this a toplevel model. <strong>Default</strong> - False.
+ctype (str): Pyomo ctype of the block.  <strong>Default</strong> - “Block”
+default (dict): Default ProcessBlockData config</p>
+<blockquote>
+<div><dl>
+<dt>Keys</dt><dd><dl>
+<dt>dynamic</dt><dd><p>Indicates whether this model will be dynamic or not,
+<strong>default</strong> = useDefault. <strong>Valid values:</strong> {
+<strong>useDefault</strong> - get flag from parent (default = False),
+<strong>True</strong> - set as a dynamic model, <strong>False</strong> - set as a
+steady-state model.}</p>
+</dd>
+<dt>has_holdup</dt><dd><p>Indicates whether holdup terms should be constructed or
+not. Must be True if dynamic = True, <strong>default</strong> - False.
+<strong>Valid values:</strong> { <strong>True</strong> - construct holdup terms,
+<strong>False</strong> - do not construct holdup terms}</p>
+</dd>
+<dt>side_1</dt><dd><p>A config block used to construct the side_1 control
+volume.</p>
+<dl class="simple">
+<dt>material_balance_type</dt><dd><p>Indicates what type of mass balance should be
+constructed, <strong>default</strong> -
+MaterialBalanceType.componentPhase. <strong>Valid values:</strong>
+{ <strong>MaterialBalanceType.none</strong> - exclude material
+balances, <strong>MaterialBalanceType.componentPhase</strong> - use
+phase component balances,
+<strong>MaterialBalanceType.componentTotal</strong> - use total
+component balances,
+<strong>MaterialBalanceType.elementTotal</strong> - use total
+element balances, <strong>MaterialBalanceType.total</strong> - use
+total material balance.}</p>
+</dd>
+<dt>energy_balance_type</dt><dd><p>Indicates what type of energy balance should be
+constructed, <strong>default</strong> -
+EnergyBalanceType.enthalpyTotal. <strong>Valid values:</strong> {
+<strong>EnergyBalanceType.none</strong> - exclude energy balances,
+<strong>EnergyBalanceType.enthalpyTotal</strong> - single ethalpy
+balance for material,
+<strong>EnergyBalanceType.enthalpyPhase</strong> - ethalpy balances
+for each phase, <strong>EnergyBalanceType.energyTotal</strong> -
+single energy balance for material,
+<strong>EnergyBalanceType.energyPhase</strong> - energy balances
+for each phase.}</p>
+</dd>
+<dt>momentum_balance_type</dt><dd><p>Indicates what type of momentum balance should be
+constructed, <strong>default</strong> -
+MomentumBalanceType.pressureTotal. <strong>Valid values:</strong> {
+<strong>MomentumBalanceType.none</strong> - exclude momentum
+balances, <strong>MomentumBalanceType.pressureTotal</strong> -
+single pressure balance for material,
+<strong>MomentumBalanceType.pressurePhase</strong> - pressure
+balances for each phase,
+<strong>MomentumBalanceType.momentumTotal</strong> - single
+momentum balance for material,
+<strong>MomentumBalanceType.momentumPhase</strong> - momentum
+balances for each phase.}</p>
+</dd>
+<dt>has_phase_equilibrium</dt><dd><p>Indicates whether terms for phase equilibrium should
+be constructed, <strong>default</strong> = False. <strong>Valid values:</strong>
+{ <strong>True</strong> - include phase equilibrium terms <strong>False</strong>
+- exclude phase equilibrium terms.}</p>
+</dd>
+<dt>has_pressure_change</dt><dd><p>Indicates whether terms for pressure change should be
+constructed, <strong>default</strong> - False. <strong>Valid values:</strong> {
+<strong>True</strong> - include pressure change terms, <strong>False</strong> -
+exclude pressure change terms.}</p>
+</dd>
+<dt>property_package</dt><dd><p>Property parameter object used to define property
+calculations, <strong>default</strong> - useDefault. <strong>Valid
+values:</strong> { <strong>useDefault</strong> - use default package from
+parent model or flowsheet, <strong>PropertyParameterObject</strong>
+- a PropertyParameterBlock object.}</p>
+</dd>
+<dt>property_package_args</dt><dd><p>A ConfigBlock with arguments to be passed to a
+property block(s) and used when constructing these,
+<strong>default</strong> - None. <strong>Valid values:</strong> { see property
+package for documentation.}</p>
+</dd>
+</dl>
+</dd>
+<dt>side_2</dt><dd><p>A config block used to construct the side_2 control
+volume.</p>
+<dl class="simple">
+<dt>material_balance_type</dt><dd><p>Indicates what type of mass balance should be
+constructed, <strong>default</strong> -
+MaterialBalanceType.componentPhase. <strong>Valid values:</strong>
+{ <strong>MaterialBalanceType.none</strong> - exclude material
+balances, <strong>MaterialBalanceType.componentPhase</strong> - use
+phase component balances,
+<strong>MaterialBalanceType.componentTotal</strong> - use total
+component balances,
+<strong>MaterialBalanceType.elementTotal</strong> - use total
+element balances, <strong>MaterialBalanceType.total</strong> - use
+total material balance.}</p>
+</dd>
+<dt>energy_balance_type</dt><dd><p>Indicates what type of energy balance should be
+constructed, <strong>default</strong> -
+EnergyBalanceType.enthalpyTotal. <strong>Valid values:</strong> {
+<strong>EnergyBalanceType.none</strong> - exclude energy balances,
+<strong>EnergyBalanceType.enthalpyTotal</strong> - single ethalpy
+balance for material,
+<strong>EnergyBalanceType.enthalpyPhase</strong> - ethalpy balances
+for each phase, <strong>EnergyBalanceType.energyTotal</strong> -
+single energy balance for material,
+<strong>EnergyBalanceType.energyPhase</strong> - energy balances
+for each phase.}</p>
+</dd>
+<dt>momentum_balance_type</dt><dd><p>Indicates what type of momentum balance should be
+constructed, <strong>default</strong> -
+MomentumBalanceType.pressureTotal. <strong>Valid values:</strong> {
+<strong>MomentumBalanceType.none</strong> - exclude momentum
+balances, <strong>MomentumBalanceType.pressureTotal</strong> -
+single pressure balance for material,
+<strong>MomentumBalanceType.pressurePhase</strong> - pressure
+balances for each phase,
+<strong>MomentumBalanceType.momentumTotal</strong> - single
+momentum balance for material,
+<strong>MomentumBalanceType.momentumPhase</strong> - momentum
+balances for each phase.}</p>
+</dd>
+<dt>has_phase_equilibrium</dt><dd><p>Indicates whether terms for phase equilibrium should
+be constructed, <strong>default</strong> = False. <strong>Valid values:</strong>
+{ <strong>True</strong> - include phase equilibrium terms <strong>False</strong>
+- exclude phase equilibrium terms.}</p>
+</dd>
+<dt>has_pressure_change</dt><dd><p>Indicates whether terms for pressure change should be
+constructed, <strong>default</strong> - False. <strong>Valid values:</strong> {
+<strong>True</strong> - include pressure change terms, <strong>False</strong> -
+exclude pressure change terms.}</p>
+</dd>
+<dt>property_package</dt><dd><p>Property parameter object used to define property
+calculations, <strong>default</strong> - useDefault. <strong>Valid
+values:</strong> { <strong>useDefault</strong> - use default package from
+parent model or flowsheet, <strong>PropertyParameterObject</strong>
+- a PropertyParameterBlock object.}</p>
+</dd>
+<dt>property_package_args</dt><dd><p>A ConfigBlock with arguments to be passed to a
+property block(s) and used when constructing these,
+<strong>default</strong> - None. <strong>Valid values:</strong> { see property
+package for documentation.}</p>
+</dd>
+</dl>
+</dd>
+<dt>delta_temperature_rule</dt><dd><p>Rule for equation for temperature difference</p>
+</dd>
+<dt>flow_pattern</dt><dd><p>Heat exchanger flow pattern, <strong>default</strong> -
+HeatExchangerFlowPattern.countercurrent. <strong>Valid values:</strong>
+{ <strong>HeatExchangerFlowPattern.countercurrent</strong> -
+countercurrent flow,
+<strong>HeatExchangerFlowPattern.cocurrent</strong> - cocurrent flow,
+<strong>HeatExchangerFlowPattern.crossflow</strong> - cross flow,
+factor times countercurrent temperature difference.}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>initialize (dict): ProcessBlockData config for individual elements. Keys</dt><dd><p>are BlockData indexes and values are dictionaries described under the
+“default” argument above.</p>
+</dd>
+<dt>idx_map (function): Function to take the index of a BlockData element and</dt><dd><p>return the index in the initialize dict from which to read arguments.
+This can be provided to overide the default behavior of matching the
+BlockData index exactly to the index in initialize.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>(FWHCondensing0D) New instance</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="fwhcondensing0ddata-class">
+<h2>FWHCondensing0DData Class<a class="headerlink" href="#fwhcondensing0ddata-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.unit_models.power_generation.feedwater_heater_0D.FWHCondensing0DData">
+<em class="property">class </em><code class="descclassname">idaes.unit_models.power_generation.feedwater_heater_0D.</code><code class="descname">FWHCondensing0DData</code><span class="sig-paren">(</span><em>component</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/idaes/unit_models/power_generation/feedwater_heater_0D.html#FWHCondensing0DData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.power_generation.feedwater_heater_0D.FWHCondensing0DData" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="idaes.unit_models.power_generation.feedwater_heater_0D.FWHCondensing0DData.build">
+<code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/idaes/unit_models/power_generation/feedwater_heater_0D.html#FWHCondensing0DData.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.power_generation.feedwater_heater_0D.FWHCondensing0DData.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Building model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="idaes.unit_models.power_generation.feedwater_heater_0D.FWHCondensing0DData.initialize">
+<code class="descname">initialize</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/idaes/unit_models/power_generation/feedwater_heater_0D.html#FWHCondensing0DData.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.power_generation.feedwater_heater_0D.FWHCondensing0DData.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the regular heat exchanger initilization, with the extraction rate
+constraint deactivated; then it activates the constraint and calculates
+a steam inlet flow rate.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="turbine_inlet.html" class="btn btn-neutral float-right" title="Turbine (Inlet Stage)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="feedwater_heater_0D.html" class="btn btn-neutral float-left" title="Feedwater Heater (0D)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

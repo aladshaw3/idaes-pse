@@ -1,0 +1,878 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Water/Steam &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Visualization" href="../vis/index.html" />
+    <link rel="prev" title="Ideal Gas" href="ideal_gas.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/index.html">Unit Model Library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Property Model Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cubic_eos.html">Cubic Equations of State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ideal_gas.html">Ideal Gas</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Water/Steam</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#units">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#external-functions">External Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#idaes-framework-wrappers">IDAES Framework Wrappers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pressure-enthalpy">Pressure-Enthalpy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#temperature-pressure-vapor-fraction">Temperature-Pressure-Vapor Fraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expressions">Expressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#externalfunctions">ExternalFunctions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convenience-functions">Convenience Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iapws95stateblock-class">Iapws95StateBlock Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iapws95stateblockdata-class">Iapws95StateBlockData Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iapws95parameterblock-class">Iapws95ParameterBlock Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iapws95parameterblockdata-class">Iapws95ParameterBlockData Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Property Model Library</a> &raquo;</li>
+        
+      <li>Water/Steam</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/property_models/water.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="water-steam">
+<h1>Water/Steam<a class="headerlink" href="#water-steam" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-idaes.property_models.iapws95.iapws95_wrap_ph"><span id="index-0"></span></span><p>Two property modules are available for pure water and steam properties.  The
+property modules use the same calculations and yield consistent results, but one
+uses pressure and molar enthalpy as state variables and the other uses
+temperature, pressure, and vapor fraction as the state variables.</p>
+<p>Theses modules can be imported as:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">idaes.property_models</span> <span class="k">import</span> <span class="n">iapws95_ph</span>
+</pre></div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>The Heater unit model <a class="reference internal" href="../models/heater.html#example"><span class="std std-ref">example</span></a>, provides a simple
+example for using water properties.</p>
+<p>Since all properties except the state variables are Pyomo Expressions in the
+water properties module, after solving the problem any property can be
+calculated in any state block after the problem is solved. To get the viscosity
+of the water at the heater outlet, for example the line below could be added.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyomo.environ</span> <span class="k">as</span> <span class="nn">pe</span>
+<span class="n">mu_l</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">control_volume</span><span class="o">.</span><span class="n">properties_out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">visc_d_phase</span><span class="p">[</span><span class="s2">&quot;Liq&quot;</span><span class="p">])</span>
+<span class="n">mu_v</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">control_volume</span><span class="o">.</span><span class="n">properties_out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">visc_d_phase</span><span class="p">[</span><span class="s2">&quot;Vap&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>For more information about how StateBlocks and PropertyParameterBlocks
+work see the <a class="reference internal" href="../core/state_block.html#physical-property-package-classes"><span class="std std-ref">StateBlock documentation</span></a>.</p>
+</div>
+<div class="section" id="units">
+<h2>Units<a class="headerlink" href="#units" title="Permalink to this headline">¶</a></h2>
+<p>The water property modules are in SI units (m, kg, s, mol). Temperature is in K.</p>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<p>These methods use the IAPWS-95 formulation for scientific use for thermodynamic
+properties (<a class="reference internal" href="#wagner-2002"><span class="std std-ref">Wagner and Pruss, 2002</span></a>; <a class="reference internal" href="#iapws-2016"><span class="std std-ref">IAPWS, 2016</span></a>). To solve the phase equilibrium, the method of <a class="reference internal" href="#akasaka-2008"><span class="std std-ref">Akasaka
+(2008)</span></a> was used. For solving these equations, some relations from
+the IAPWS-97 formulation for industrial use are used as initial values
+(<a class="reference internal" href="#wagner-2002"><span class="std std-ref">Wagner et al., 2002</span></a>). The industrial formulation is
+slightly discontinuous between different regions, so it may not be suitable for
+optimization. In addition to thermodynamic quantities, viscosity and thermal
+conductivity are calculated (<a class="reference internal" href="#iapws-2008"><span class="std std-ref">IAPWS, 2008</span></a>;
+<a class="reference internal" href="#iapws-2011"><span class="std std-ref">IAPWS, 2011</span></a>).</p>
+</div>
+<div class="section" id="external-functions">
+<h2>External Functions<a class="headerlink" href="#external-functions" title="Permalink to this headline">¶</a></h2>
+<p>The IAPWS-95 formulation uses density and temperature as state variables. For
+most applications those sate variables are not the most convenient choices. Using
+other state variables requires solving an equation or two to get density and
+temperature from the chosen state variables. This can have numerous solutions
+only one of which is physically meaningful. Rather than solve these equations as
+part of the full process simulation, external functions were developed that can
+solve the equations required to change state variables and guarantee the correct
+roots.</p>
+<p>The external property functions are written in C++ and complied such that they
+can be called by AMPL solvers.  See the <a class="reference internal" href="../install.html#installation"><span class="std std-ref">installation instructions</span></a> for information about compiling these
+functions. The external functions provide both first and second derivatives for
+all property function calls, however at phase transitions some of these functions
+may be non-smooth.</p>
+</div>
+<div class="section" id="idaes-framework-wrappers">
+<h2>IDAES Framework Wrappers<a class="headerlink" href="#idaes-framework-wrappers" title="Permalink to this headline">¶</a></h2>
+<p>Wrappers for these function are provided for compatibility with the IDAES
+framework. Some methods for dealing with non-smoothness may also be included in
+the IDAES wrappers. The wrappers provide most properties in the form of Pyomo
+Expressions, with only the chosen set of state variables being Pyomo Vars. The
+expressions pass the state variables to the external functions and do unit
+conversion to put the results in SI units. This means that only the state
+variables can be fixed and other quantities cannot be fixed, but constraints
+can be added to set them to a specific value.</p>
+<p>Since state variables are calculated when solving a model, and the rest of the
+properties are Expressions, any property available can be easily calculated
+after the model is solved, whether is was needed in the model or not.</p>
+<p>Although not generally used the wrappers provide direct access to the
+ExternalFunctions also. For more information see section <a class="reference internal" href="#externalfunctions"><span class="std std-ref">ExternalFunctions</span></a></p>
+<div class="section" id="pressure-enthalpy">
+<h3>Pressure-Enthalpy<a class="headerlink" href="#pressure-enthalpy" title="Permalink to this headline">¶</a></h3>
+<p>Although Expressions for properties of different phases are available, the
+pressure-enthalpy formulation treats the fluid as a single mixed phase with a
+vapor fraction.  This bypasses some of the IDAES framework phase equilibrium
+mechanisms and phase equilibrium is always calculated.</p>
+<p>The advantage of this choice of state variables is that it is very robust when
+phase changes occur, and is especially useful when it is not known if a phase
+change will occur.  The disadvantage of this choice of state variables is that
+for equations like heat transfer equations that are highly dependent on
+temperature, a model could be harder to solve near regions with phase change.
+Temperature is a non-smooth function with a zero derivative with respect to
+enthalpy in the two-phase region.</p>
+<p>The variables for this form are <code class="docutils literal notranslate"><span class="pre">flow_mol</span></code> (mol/s), <code class="docutils literal notranslate"><span class="pre">pressure</span></code> (Pa), and
+<code class="docutils literal notranslate"><span class="pre">enth_mol</span></code> (J/mol).</p>
+<p>Since temperature and vapor fraction are not state variables in this formulation,
+they are provided by expressions, and cannot be fixed.  For example, to set a
+temperature to a specific value, a constraint could be added which says the
+temperature expression equals a fixed value.</p>
+<p>These expressions are specific to the P-H formulation:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">temperature</span></code></dt><dd><p>Expression that calculates temperature by calling an ExternalFunction of
+enthalpy and pressure. This expression is non-smooth in the transition from
+single-phase to two-phase and has a zero derivative with respect to enthalpy
+in the two-phase region.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">vapor_frac</span></code></dt><dd><p>Expression that calculates vapor fraction by calling an ExternalFunction of
+enthalpy and pressure. This expression is non-smooth in the transition from
+single-phase to two-phase and has a zero derivative with respect to enthalpy
+in the single-phase region, where the value is 0 (liquid) or 1 (vapor).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="temperature-pressure-vapor-fraction">
+<h3>Temperature-Pressure-Vapor Fraction<a class="headerlink" href="#temperature-pressure-vapor-fraction" title="Permalink to this headline">¶</a></h3>
+<p>Coming soon.</p>
+</div>
+<div class="section" id="expressions">
+<h3>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline">¶</a></h3>
+<p>Unless otherwise noted above, the property expressions are common to both the
+T-P-x and P-H formulations. For phase specific properties, valid phase indexes
+are <code class="docutils literal notranslate"><span class="pre">&quot;Liq&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;Vap&quot;</span></code></p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Expression</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mw</span></code></p></td>
+<td><p>Molecular weight (kg/mol)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tau</span></code></p></td>
+<td><p>Critical temperature divided by temperature (unitless)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">temperature_red</span></code></p></td>
+<td><p>Reduced temperature, temperature divided by critical temperature (unitless)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">temperature_sat</span></code></p></td>
+<td><p>Saturation temperature (K)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tau_sat</span></code></p></td>
+<td><p>Critical temperature divided by saturation temperature (unitless)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pressure_sat</span></code></p></td>
+<td><p>Saturation pressure (Pa)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dens_mass_phase[phase]</span></code></p></td>
+<td><p>Density phase (kg/m<sup>3</sup>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dens_phase_red[phase]</span></code></p></td>
+<td><p>Phase reduced density (<span class="math notranslate nohighlight">\(\delta\)</span>), mass density divided by critical density (unitless)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dens_mass</span></code></p></td>
+<td><p>Total mixed phase mass density (kg/m<sup>3</sup>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dens_mol</span></code></p></td>
+<td><p>Total mixed phase mole density (kg/m<sup>3</sup>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">flow_vol</span></code></p></td>
+<td><p>Total volumetric flow rate (m<sup>3</sup>/s)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">enth_mass</span></code></p></td>
+<td><p>Mass enthalpy (kJ/kg)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">enth_mol_sat_phase[phase]</span></code></p></td>
+<td><p>Saturation enthalpy of phase, enthalpy at P and T<sub>sat</sub> (kJ/mol)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">enth_mol_phase[phase]</span></code></p></td>
+<td><p>Molar enthalpy of phase (kJ/mol)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">entr_mol_phase</span></code></p></td>
+<td><p>Molar entropy of phase (kJ/mol/K)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">entr_mol</span></code></p></td>
+<td><p>Total mixed phase entropy (kJ/mol/K)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cp_mol_phase[phase]</span></code></p></td>
+<td><p>Constant pressure molar heat capacity of phase (kJ/mol/K)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cv_mol_phase[phase]</span></code></p></td>
+<td><p>Constant pressure volume heat capacity of phase (kJ/mol/K)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cp_mol</span></code></p></td>
+<td><p>Total mixed phase constant pressure heat capacity (kJ/mol/K)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cv_mol</span></code></p></td>
+<td><p>Total mixed phase constant volume heat capacity (kJ/mol/K)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">heat_capacity_ratio</span></code></p></td>
+<td><p><code class="code docutils literal notranslate"><span class="pre">cp_mol/cv_mol</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">speed_sound_phase[phase]</span></code></p></td>
+<td><p>Speed of sound in phase (m/s)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dens_mol_phase[phase]</span></code></p></td>
+<td><p>Mole density of phase (mol/m<sup>3</sup>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">therm_cond_phase[phase]</span></code></p></td>
+<td><p>Thermal conductivity of phase (W/K/m)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">visc_d_phase[phase]</span></code></p></td>
+<td><p>Viscosity of phase (Pa/s)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">visc_k_phase[phase]</span></code></p></td>
+<td><p>Kinimatic viscosity of phase (m<sup>2</sup>/s)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">phase_frac[phase]</span></code></p></td>
+<td><p>Phase fraction</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">flow_mol_comp[&quot;H2O&quot;]</span></code></p></td>
+<td><p>Same as total flow since only water (mol/s)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="externalfunctions">
+<h3>ExternalFunctions<a class="headerlink" href="#externalfunctions" title="Permalink to this headline">¶</a></h3>
+<p>This provides a list of ExternalFuctions available in the wrappers.  These
+functions do not use SI units and are not usually called directly.  If these
+functions are needed, they should be used with caution. Some of these are used
+in the property expressions, some are just provided to allow easier testing with
+a Python framework.</p>
+<p>All of these functions provide first and second derivative and are generally
+suited to optimization. Some functions may have non-smoothness at phase
+transitions.  The delta_vap and delta_liq functions return the same values in
+the critical region.  They will also return real values when a phase doesn’t
+exist, but those values do not necessarily have physical meaning.</p>
+<p>There are a few variables that are common to a lot of these functions, so they
+are summarized here <span class="math notranslate nohighlight">\(tau\)</span> is the critical temperature divided by the
+temperature <span class="math notranslate nohighlight">\(\frac{T_c}{T}\)</span>, <span class="math notranslate nohighlight">\(\delta\)</span> is density divided by the
+critical density <span class="math notranslate nohighlight">\(\frac{\rho}{\rho_c}\)</span>, and <span class="math notranslate nohighlight">\(\phi\)</span> is Helmholtz free
+energy divided by the ideal gas constant and temperature <span class="math notranslate nohighlight">\(\frac{f}{RT}\)</span>.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 11%" />
+<col style="width: 51%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pyomo Function</p></th>
+<th class="head"><p>C Function</p></th>
+<th class="head"><p>Returns</p></th>
+<th class="head"><p>Arguments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>func_p</p></td>
+<td><p>p</p></td>
+<td><p>pressure (kPa)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_u</p></td>
+<td><p>u</p></td>
+<td><p>internal energy (kJ/kg)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_s</p></td>
+<td><p>s</p></td>
+<td><p>entropy (kJ/K/kg)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_h</p></td>
+<td><p>h</p></td>
+<td><p>enthalpy (kJ/kg)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_hvpt</p></td>
+<td><p>hvpt</p></td>
+<td><p>vapor enthalpy (kJ/kg)</p></td>
+<td><p>P (kPa), <span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_hlpt</p></td>
+<td><p>hlpt</p></td>
+<td><p>liquid enthalpy (kJ/kg)</p></td>
+<td><p>P (kPa), <span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_tau</p></td>
+<td><p>tau</p></td>
+<td><p><span class="math notranslate nohighlight">\(\tau\)</span> (unitless)</p></td>
+<td><p>h (kJ/kg), P (kPa)</p></td>
+</tr>
+<tr class="row-odd"><td><p>func_vf</p></td>
+<td><p>vf</p></td>
+<td><p>vapor fraction (unitless)</p></td>
+<td><p>h (kJ/kg), P (kPa)</p></td>
+</tr>
+<tr class="row-even"><td><p>func_g</p></td>
+<td><p>g</p></td>
+<td><p>Gibbs free energy (kJ/kg)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_f</p></td>
+<td><p>f</p></td>
+<td><p>Helmholtz free energy (kJ/kg)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_cv</p></td>
+<td><p>cv</p></td>
+<td><p>const. volume heat capacity (kJ/K/kg)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_cp</p></td>
+<td><p>cp</p></td>
+<td><p>const. pressure heat capacity (kJ/K/kg)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_w</p></td>
+<td><p>w</p></td>
+<td><p>speed of sound (m/s)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_delta_liq</p></td>
+<td><p>delta_liq</p></td>
+<td><p>liquid <span class="math notranslate nohighlight">\(\delta\)</span> (unitless)</p></td>
+<td><p>P (kPa), <span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_delta_vap</p></td>
+<td><p>delta_vap</p></td>
+<td><p>vapor <span class="math notranslate nohighlight">\(\delta\)</span> (unitless)</p></td>
+<td><p>P (kPa), <span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_delta_sat_l</p></td>
+<td><p>delta_sat_l</p></td>
+<td><p>sat. liquid <span class="math notranslate nohighlight">\(\delta\)</span> (unitless)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_delta_sat_v</p></td>
+<td><p>delta_sat_v</p></td>
+<td><p>sat. vapor <span class="math notranslate nohighlight">\(\delta\)</span> (unitless)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_p_sat</p></td>
+<td><p>p_sat</p></td>
+<td><p>sat. pressure (kPa)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_tau_sat</p></td>
+<td><p>tau_sat</p></td>
+<td><p>sat. <span class="math notranslate nohighlight">\(\tau\)</span> (unitless)</p></td>
+<td><p>P (kPa)</p></td>
+</tr>
+<tr class="row-odd"><td><p>func_phi0</p></td>
+<td><p>phi0</p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi\)</span> idaes gas part (unitless)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_phi0_delta</p></td>
+<td><p>phi0_delta</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial \phi_0}{\partial \delta}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_phi0_delta2</p></td>
+<td><p>phi0_delta2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial^2 \phi_0}{\partial \delta^2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_phi0_tau</p></td>
+<td><p>phi0_tau</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial \phi_0}{\partial \tau}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_phi0_tau2</p></td>
+<td><p>phi0_tau2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial^2 \phi_0}{\partial \tau^2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_phir</p></td>
+<td><p>phir</p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi\)</span> real gas part (unitless)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_phir_delta</p></td>
+<td><p>phir_delta</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial \phi_r}{\partial \delta}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_phir_delta2</p></td>
+<td><p>phir_delta2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial^2 \phi_r}{\partial \delta^2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_phir_tau</p></td>
+<td><p>phir_tau</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial \phi_r}{\partial \tau}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>func_phir_tau2</p></td>
+<td><p>phir_tau2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial^2 \phi_r}{\partial \tau^2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>func_phir_delta_tau</p></td>
+<td><p>phir_delta_tau</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial^2 \phi_r}{\partial \delta \partial \tau}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta, \tau\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>The IAPWS-95 property functions do provide initilaization functions for general
+compatibility with the IDAES framework, but as long as the state variables are
+specified to some resonalbe value, initialization is not required. All required
+solves are handled by external functions.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="iapws-2016">International Association for the Properties of Water and Steam (2016).
+IAPWS R6-95 (2016), “Revised Release on the IAPWS Formulation 1995 for
+the Properties of Ordinary Water Substance for General Scientific Use,”
+URL: <a class="reference external" href="http://iapws.org/relguide/IAPWS95-2016.pdf">http://iapws.org/relguide/IAPWS95-2016.pdf</a></p>
+<p id="wagner-2002">Wagner, W.,  A. Pruss (2002). “The IAPWS Formulation 1995 for the
+Thermodynamic Properties of Ordinary Water Substance for General and
+Scientific Use.” J. Phys. Chem. Ref. Data, 31, 387-535.</p>
+<p id="wagner-2000">Wagner, W. et al. (2000). “The IAPWS Industrial Formulation 1997 for the
+Thermodynamic Properties of Water and Steam,” ASME J. Eng. Gas Turbines
+and Power, 122, 150-182.</p>
+<p id="akasaka-2008">Akasaka, R. (2008). “A Reliable and Useful Method to Determine the Saturation
+State from Helmholtz Energy Equations of State.” Journal of Thermal
+Science and Technology, 3(3), 442-451.</p>
+<p id="iapws-2011">International Association for the Properties of Water and Steam (2011).
+IAPWS R15-11, “Release on the IAPWS Formulation 2011 for the
+Thermal Conductivity of Ordinary Water Substance,”
+URL: <a class="reference external" href="http://iapws.org/relguide/ThCond.pdf">http://iapws.org/relguide/ThCond.pdf</a>.</p>
+<p id="iapws-2008">International Association for the Properties of Water and Steam (2008).
+IAPWS R12-08, “Release on the IAPWS Formulation 2008 for the Viscosity of
+Ordinary Water Substance,”
+URL: <a class="reference external" href="http://iapws.org/relguide/visc.pdf">http://iapws.org/relguide/visc.pdf</a>.</p>
+</div>
+<div class="section" id="convenience-functions">
+<h2>Convenience Functions<a class="headerlink" href="#convenience-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.htpx">
+<code class="descclassname">idaes.property_models.iapws95.iapws95_wrap_ph.</code><code class="descname">htpx</code><span class="sig-paren">(</span><em>T</em>, <em>P=None</em>, <em>x=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/property_models/iapws95/iapws95_wrap_ph.html#htpx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.htpx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conveneince function to calculate steam enthalpy from temperature and
+either pressure or vapor fraction. This function can be used for inlet
+streams and initialization where temperature is known instread of enthalpy.
+:param T: Temperature [K]
+:param P: Pressure [Pa], None if saturated steam
+:param x: Vapor fraction [mol vapor/mol total], None if superheated or subcooled</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Molar enthalpy [J/mol].</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="iapws95stateblock-class">
+<h2>Iapws95StateBlock Class<a class="headerlink" href="#iapws95stateblock-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlock">
+<em class="property">class </em><code class="descclassname">idaes.property_models.iapws95.iapws95_wrap_ph.</code><code class="descname">Iapws95StateBlock</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is some placeholder doc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule</strong> (<em>function</em>) – A rule function or None. Default rule calls build().</p></li>
+<li><p><strong>concrete</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If True, make this a toplevel model. <strong>Default</strong> - False.</p></li>
+<li><p><strong>ctype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Pyomo ctype of the block.  <strong>Default</strong> - “Block”</p></li>
+<li><p><strong>default</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – <p>Default ProcessBlockData config</p>
+<dl class="simple">
+<dt>Keys</dt><dd><dl class="simple">
+<dt>parameters</dt><dd><p>A reference to an instance of the Property Parameter Block
+associated with this property package.</p>
+</dd>
+<dt>defined_state</dt><dd><p>Flag indicating whether the state should be considered
+fully defined, and thus whether constraints such as sum of
+mass/mole fractions should be included, <strong>default</strong> -
+False. <strong>Valid values:</strong> { <strong>True</strong> - state variables will
+be fully defined, <strong>False</strong> - state variables will not be
+fully defined.}</p>
+</dd>
+<dt>has_phase_equilibrium</dt><dd><p>Flag indicating whether phase equilibrium constraints
+should be constructed in this state block, <strong>default</strong> -
+True. <strong>Valid values:</strong> { <strong>True</strong> - StateBlock should
+calculate phase equilibrium, <strong>False</strong> - StateBlock should
+not calculate phase equilibrium.}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>initialize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – ProcessBlockData config for individual elements. Keys
+are BlockData indexes and values are dictionaries described under the
+“default” argument above.</p></li>
+<li><p><strong>idx_map</strong> (<em>function</em>) – Function to take the index of a BlockData element and
+return the index in the initialize dict from which to read arguments.
+This can be provided to overide the default behavior of matching the
+BlockData index exactly to the index in initialize.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(Iapws95StateBlock) New instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="iapws95stateblockdata-class">
+<h2>Iapws95StateBlockData Class<a class="headerlink" href="#iapws95stateblockdata-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData">
+<em class="property">class </em><code class="descclassname">idaes.property_models.iapws95.iapws95_wrap_ph.</code><code class="descname">Iapws95StateBlockData</code><span class="sig-paren">(</span><em>component</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/property_models/iapws95/iapws95_wrap_ph.html#Iapws95StateBlockData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a property package for calcuating thermophysical properties of water</p>
+<dl class="method">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.build">
+<code class="descname">build</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/property_models/iapws95/iapws95_wrap_ph.html#Iapws95StateBlockData.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callable method for Block construction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.define_state_vars">
+<code class="descname">define_state_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/property_models/iapws95/iapws95_wrap_ph.html#Iapws95StateBlockData.define_state_vars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.define_state_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns a dictionary of state variables used in property
+package. Implement a placeholder method which returns an Exception to
+force users to overload this.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.get_enthalpy_density_terms">
+<code class="descname">get_enthalpy_density_terms</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/property_models/iapws95/iapws95_wrap_ph.html#Iapws95StateBlockData.get_enthalpy_density_terms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.get_enthalpy_density_terms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method which returns a tuple containing a valid expression to use in
+the energy balances and a constant indicating the basis of this
+expression (mass, mole or None).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.get_enthalpy_flow_terms">
+<code class="descname">get_enthalpy_flow_terms</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/property_models/iapws95/iapws95_wrap_ph.html#Iapws95StateBlockData.get_enthalpy_flow_terms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.get_enthalpy_flow_terms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method which returns a tuple containing a valid expression to use in
+the energy balances and a constant indicating the basis of this
+expression (mass, mole or None).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.get_material_density_terms">
+<code class="descname">get_material_density_terms</code><span class="sig-paren">(</span><em>p</em>, <em>j</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/property_models/iapws95/iapws95_wrap_ph.html#Iapws95StateBlockData.get_material_density_terms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.get_material_density_terms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method which returns a tuple containing a valid expression to use in
+the material balances and a constant indicating the basis of this
+expression (mass, mole or None).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.get_material_flow_terms">
+<code class="descname">get_material_flow_terms</code><span class="sig-paren">(</span><em>p</em>, <em>j</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/property_models/iapws95/iapws95_wrap_ph.html#Iapws95StateBlockData.get_material_flow_terms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95StateBlockData.get_material_flow_terms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method which returns a tuple containing a valid expression to use in
+the material balances and a constant indicating the basis of this
+expression (mass, mole or None).</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="iapws95parameterblock-class">
+<h2>Iapws95ParameterBlock Class<a class="headerlink" href="#iapws95parameterblock-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95ParameterBlock">
+<em class="property">class </em><code class="descclassname">idaes.property_models.iapws95.iapws95_wrap_ph.</code><code class="descname">Iapws95ParameterBlock</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95ParameterBlock" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule</strong> (<em>function</em>) – A rule function or None. Default rule calls build().</p></li>
+<li><p><strong>concrete</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If True, make this a toplevel model. <strong>Default</strong> - False.</p></li>
+<li><p><strong>ctype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Pyomo ctype of the block.  <strong>Default</strong> - “Block”</p></li>
+<li><p><strong>default</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – <p>Default ProcessBlockData config</p>
+<dl class="simple">
+<dt>Keys</dt><dd><dl class="simple">
+<dt>default_arguments</dt><dd><p>Default arguments to use with Property Package</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>initialize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – ProcessBlockData config for individual elements. Keys
+are BlockData indexes and values are dictionaries described under the
+“default” argument above.</p></li>
+<li><p><strong>idx_map</strong> (<em>function</em>) – Function to take the index of a BlockData element and
+return the index in the initialize dict from which to read arguments.
+This can be provided to overide the default behavior of matching the
+BlockData index exactly to the index in initialize.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(Iapws95ParameterBlock) New instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="iapws95parameterblockdata-class">
+<h2>Iapws95ParameterBlockData Class<a class="headerlink" href="#iapws95parameterblockdata-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95ParameterBlockData">
+<em class="property">class </em><code class="descclassname">idaes.property_models.iapws95.iapws95_wrap_ph.</code><code class="descname">Iapws95ParameterBlockData</code><span class="sig-paren">(</span><em>component</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/property_models/iapws95/iapws95_wrap_ph.html#Iapws95ParameterBlockData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95ParameterBlockData" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95ParameterBlockData.build">
+<code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/property_models/iapws95/iapws95_wrap_ph.html#Iapws95ParameterBlockData.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95ParameterBlockData.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>General build method for PropertyParameterBlocks. Inheriting models
+should call super().build.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95ParameterBlockData.define_metadata">
+<em class="property">classmethod </em><code class="descname">define_metadata</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/property_models/iapws95/iapws95_wrap_ph.html#Iapws95ParameterBlockData.define_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.property_models.iapws95.iapws95_wrap_ph.Iapws95ParameterBlockData.define_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set all the metadata for properties and units.</p>
+<p>This method should be implemented by subclasses.
+In the implementation, they should set information into the
+object provided as an argument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pcm</strong> (<em>PropertyClassMetadata</em>) – Add metadata to this object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../vis/index.html" class="btn btn-neutral float-right" title="Visualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ideal_gas.html" class="btn btn-neutral float-left" title="Ideal Gas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,702 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IDAES Modeling Standards &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Core Library" href="core/index.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">IDAES Modeling Standards</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#model-formatting-and-general-standards">Model Formatting and General Standards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#headers-and-meta-data">Headers and Meta-data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coding-standard">Coding Standard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-organization">Model Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commenting">Commenting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#units-of-measurement-and-reference-states">Units of Measurement and Reference States</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#standard-variable-names">Standard Variable Names</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#standard-naming-format">Standard Naming Format</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basis-qualifier">Basis Qualifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#state-qualifier">State Qualifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#condition-qualifier">Condition Qualifier</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#constants">Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thermophysical-and-transport-properties">Thermophysical and Transport Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reaction-properties">Reaction Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solid-properties">Solid Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#naming-examples">Naming Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="core/index.html">Core Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/index.html">Unit Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer/index.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>IDAES Modeling Standards</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/standards.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="standards">
+<span id="idaes-modeling-standards"></span><h1><a class="toc-backref" href="#id1">IDAES Modeling Standards</a><a class="headerlink" href="#standards" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#standards" id="id1">IDAES Modeling Standards</a></p>
+<ul>
+<li><p><a class="reference internal" href="#model-formatting-and-general-standards" id="id2">Model Formatting and General Standards</a></p>
+<ul>
+<li><p><a class="reference internal" href="#headers-and-meta-data" id="id3">Headers and Meta-data</a></p></li>
+<li><p><a class="reference internal" href="#coding-standard" id="id4">Coding Standard</a></p></li>
+<li><p><a class="reference internal" href="#model-organization" id="id5">Model Organization</a></p></li>
+<li><p><a class="reference internal" href="#commenting" id="id6">Commenting</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#units-of-measurement-and-reference-states" id="id7">Units of Measurement and Reference States</a></p></li>
+<li><p><a class="reference internal" href="#standard-variable-names" id="id8">Standard Variable Names</a></p>
+<ul>
+<li><p><a class="reference internal" href="#standard-naming-format" id="id9">Standard Naming Format</a></p></li>
+<li><p><a class="reference internal" href="#constants" id="id10">Constants</a></p></li>
+<li><p><a class="reference internal" href="#thermophysical-and-transport-properties" id="id11">Thermophysical and Transport Properties</a></p></li>
+<li><p><a class="reference internal" href="#reaction-properties" id="id12">Reaction Properties</a></p></li>
+<li><p><a class="reference internal" href="#solid-properties" id="id13">Solid Properties</a></p></li>
+<li><p><a class="reference internal" href="#naming-examples" id="id14">Naming Examples</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="model-formatting-and-general-standards">
+<h2><a class="toc-backref" href="#id2">Model Formatting and General Standards</a><a class="headerlink" href="#model-formatting-and-general-standards" title="Permalink to this headline">¶</a></h2>
+<p>The section describes the recommended formatting used within the IDAES framework. Users are strongly encouraged to follow these standards in developing their models in order to improve readability of their code.</p>
+<div class="section" id="headers-and-meta-data">
+<h3><a class="toc-backref" href="#id3">Headers and Meta-data</a><a class="headerlink" href="#headers-and-meta-data" title="Permalink to this headline">¶</a></h3>
+<p>Model developers are encouraged to include some documentation in the header of their model files which provides a brief description of the purpose of the model and how it was developed. Some suggested information to include is:</p>
+<ul class="simple">
+<li><p>Model name,</p></li>
+<li><p>Model publication date,</p></li>
+<li><p>Model author</p></li>
+<li><p>Any necessary licensing and disclaimer information (see below).</p></li>
+<li><p>Any additional information the modeler feels should be included.</p></li>
+</ul>
+</div>
+<div class="section" id="coding-standard">
+<h3><a class="toc-backref" href="#id4">Coding Standard</a><a class="headerlink" href="#coding-standard" title="Permalink to this headline">¶</a></h3>
+<p>All code developed as part of IDAES should conform to the PEP-8 standard.</p>
+</div>
+<div class="section" id="model-organization">
+<h3><a class="toc-backref" href="#id5">Model Organization</a><a class="headerlink" href="#model-organization" title="Permalink to this headline">¶</a></h3>
+<p>Whilst the overall IDAES modeling framework enforces a hierarchical structure on models, model developers are still encouraged to arrange their models in a logical fashion to aid other users in understanding the model. Model constraints should be grouped with similar constraints, and each grouping of constraints should be clearly commented.</p>
+<p>For property packages, it is recommended that all the equations necessary for calculating a given property be grouped together, clearly separated and identified by using comments.</p>
+<p>Additionally, model developers are encouraged to consider breaking their model up into a number of smaller methods where this makes sense. This can facilitate modification of the code by allowing future users to inherit from the base model and selectively overload sub-methods where desired.</p>
+</div>
+<div class="section" id="commenting">
+<h3><a class="toc-backref" href="#id6">Commenting</a><a class="headerlink" href="#commenting" title="Permalink to this headline">¶</a></h3>
+<p>To help other modelers and users understand the how a model works, model builders are strongly encouraged to comment their code. It is suggested that every constraint should be commented with a description of the purpose of the constraint, and if possible/necessary a reference to a source or more detailed explanation. Any deviations from standard units or formatting should be clearly identified here. Any initialization procedures, or other procedures required to get the model to converge should be clearly commented and explained where they appear in the code. Additionally, modelers are strongly encouraged to add additional comments explaining how their model works to aid others in understanding the model.</p>
+</div>
+</div>
+<div class="section" id="units-of-measurement-and-reference-states">
+<h2><a class="toc-backref" href="#id7">Units of Measurement and Reference States</a><a class="headerlink" href="#units-of-measurement-and-reference-states" title="Permalink to this headline">¶</a></h2>
+<p>Due to the flexibility provided by the IDAES modeling framework, there is no standard set of units of measurement or standard reference state that should be used in models. This places the onus on the user to understand the units of measurement being used within their models and to ensure that they are consistent.</p>
+<p>The IDAES developers have generally used SI units without prefixes (i.e. Pa, not kPa) within models developed by the institute, with a default thermodynamic reference state of 298.15 K and 101325 Pa. Supercritical fluids have been consider to be part of the liquid phase, as they will be handled via pumps rather than compressors.</p>
+</div>
+<div class="section" id="standard-variable-names">
+<h2><a class="toc-backref" href="#id8">Standard Variable Names</a><a class="headerlink" href="#standard-variable-names" title="Permalink to this headline">¶</a></h2>
+<p>In order for different models to communicate information effectively, it is necessary to have a standard naming convention for any variable that may need to be shared between different models. Within the IDAES modeling framework, this occurs most frequently with information regarding the state and properties of the material within the system, which is calculated in specialized property blocks, and then used in others parts of the model. This section of the documentation discusses the standard naming conventions used within the IDAES modeling framework.</p>
+<div class="section" id="standard-naming-format">
+<h3><a class="toc-backref" href="#id9">Standard Naming Format</a><a class="headerlink" href="#standard-naming-format" title="Permalink to this headline">¶</a></h3>
+<p>There are a wide range of different variables which may be of interest to modelers, and a number of different ways in which these quantities can be expressed. In order to facilitate communication between different parts of models, a naming convention has been established to standardize the naming of variables across models. Variable names within IDAES follow to the format below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">property_name</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">basis</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">state</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">condition</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, property_name is the name of the quantity in question, and should be drawn from the list of standard variable names given later in this document. If a particular quantity is not included in the list of standard names, users are encouraged to contact the IDAES developers so that it can be included in a future release. This is followed by a number of qualifiers which further indicate the specific conditions under which the quantity is being calculated. These qualifiers are described below, and some examples are given at the end of this document.</p>
+<div class="section" id="basis-qualifier">
+<h4>Basis Qualifier<a class="headerlink" href="#basis-qualifier" title="Permalink to this headline">¶</a></h4>
+<p>Many properties of interest to modelers are most conveniently represented on an intensive basis, that is quantity per unit amount of material. There are a number of different bases that can be used when expressing intensive quantities, and a list of standard basis qualifiers are given below.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Basis</p></th>
+<th class="head"><p>Standard Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mass Basis</p></td>
+<td><p>mass</p></td>
+</tr>
+<tr class="row-odd"><td><p>Molar Basis</p></td>
+<td><p>mol</p></td>
+</tr>
+<tr class="row-even"><td><p>Volume Basis</p></td>
+<td><p>vol</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="state-qualifier">
+<h4>State Qualifier<a class="headerlink" href="#state-qualifier" title="Permalink to this headline">¶</a></h4>
+<p>Many quantities can be calculated either for the whole or a part of a mixture. In these cases, a qualifier is added to the quantity to indicate which part of the mixture the quantity applies to. In these cases, quantities may also be indexed by a Pyomo Set.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 20%" />
+<col style="width: 54%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Basis</p></th>
+<th class="head"><p>Standard Name</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Component</p></td>
+<td><p>comp</p></td>
+<td><p>Indexed by component list</p></td>
+</tr>
+<tr class="row-odd"><td><p>Phase</p></td>
+<td><p>phase</p></td>
+<td><p>Indexed by phase list</p></td>
+</tr>
+<tr class="row-even"><td><p>Phase &amp; Component</p></td>
+<td><p>phase_comp</p></td>
+<td><p>Indexed by phase and component list</p></td>
+</tr>
+<tr class="row-odd"><td><p>Total Mixture</p></td>
+<td></td>
+<td><p>No state qualifier</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 59%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Phase</p></th>
+<th class="head"><p>Standard Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Supercritical Fluid</p></td>
+<td><p>liq</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ionic Species</p></td>
+<td><p>ion</p></td>
+</tr>
+<tr class="row-even"><td><p>Liquid Phase</p></td>
+<td><p>liq</p></td>
+</tr>
+<tr class="row-odd"><td><p>Solid Phase</p></td>
+<td><p>sol</p></td>
+</tr>
+<tr class="row-even"><td><p>Vapor Phase</p></td>
+<td><p>vap</p></td>
+</tr>
+<tr class="row-odd"><td><p>Multiple Phases</p></td>
+<td><p>e.g. liq1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="condition-qualifier">
+<h4>Condition Qualifier<a class="headerlink" href="#condition-qualifier" title="Permalink to this headline">¶</a></h4>
+<p>There are also cases where a modeler may want to calculate a quantity at some state other than the actual state of the system (e.g. at the critical point, or at equilibrium).</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 58%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Basis</p></th>
+<th class="head"><p>Standard Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Critical Point</p></td>
+<td><p>crit</p></td>
+</tr>
+<tr class="row-odd"><td><p>Equilibrium State</p></td>
+<td><p>equil</p></td>
+</tr>
+<tr class="row-even"><td><p>Ideal Gas</p></td>
+<td><p>ideal</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reduced Properties</p></td>
+<td><p>red</p></td>
+</tr>
+<tr class="row-even"><td><p>Reference State</p></td>
+<td><p>ref</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="constants">
+<h3><a class="toc-backref" href="#id10">Constants</a><a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 70%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Constant</p></th>
+<th class="head"><p>Standard Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Gas Constant</p></td>
+<td><p>gas_const</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="thermophysical-and-transport-properties">
+<h3><a class="toc-backref" href="#id11">Thermophysical and Transport Properties</a><a class="headerlink" href="#thermophysical-and-transport-properties" title="Permalink to this headline">¶</a></h3>
+<p>Below is a list of all the thermophysical properties which currently have a standard name associated with them in the IDAES framework.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 60%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Standard Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Activity</p></td>
+<td><p>act</p></td>
+</tr>
+<tr class="row-odd"><td><p>Activity Coefficient</p></td>
+<td><p>act_coeff</p></td>
+</tr>
+<tr class="row-even"><td><p>Bubble Temperature</p></td>
+<td><p>t_bub</p></td>
+</tr>
+<tr class="row-odd"><td><p>Compressibility Factor</p></td>
+<td><p>compress_fact</p></td>
+</tr>
+<tr class="row-even"><td><p>Concentration</p></td>
+<td><p>conc</p></td>
+</tr>
+<tr class="row-odd"><td><p>Density</p></td>
+<td><p>dens</p></td>
+</tr>
+<tr class="row-even"><td><p>Dew Temperature</p></td>
+<td><p>temperature_dew</p></td>
+</tr>
+<tr class="row-odd"><td><p>Diffusivity</p></td>
+<td><p>diffus</p></td>
+</tr>
+<tr class="row-even"><td><p>Diffusion Coefficient (binary)</p></td>
+<td><p>diffus_binary</p></td>
+</tr>
+<tr class="row-odd"><td><p>Enthalpy</p></td>
+<td><p>enth</p></td>
+</tr>
+<tr class="row-even"><td><p>Entropy</p></td>
+<td><p>entr</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fugacity</p></td>
+<td><p>fug</p></td>
+</tr>
+<tr class="row-even"><td><p>Fugacity Coefficient</p></td>
+<td><p>fug_coeff</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gibbs Energy</p></td>
+<td><p>energy_gibbs</p></td>
+</tr>
+<tr class="row-even"><td><p>Heat Capacity (const. P)</p></td>
+<td><p>cp</p></td>
+</tr>
+<tr class="row-odd"><td><p>Heat Capacity (const. V)</p></td>
+<td><p>cv</p></td>
+</tr>
+<tr class="row-even"><td><p>Heat Capacity Ratio</p></td>
+<td><p>heat_capacity_ratio</p></td>
+</tr>
+<tr class="row-odd"><td><p>Helmholtz Energy</p></td>
+<td><p>energy_helmholtz</p></td>
+</tr>
+<tr class="row-even"><td><p>Henry’s Constant</p></td>
+<td><p>henry</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mass Fraction</p></td>
+<td><p>mass_frac</p></td>
+</tr>
+<tr class="row-even"><td><p>Material Flow</p></td>
+<td><p>flow</p></td>
+</tr>
+<tr class="row-odd"><td><p>Molecular Weight</p></td>
+<td><p>mw</p></td>
+</tr>
+<tr class="row-even"><td><p>Mole Fraction</p></td>
+<td><p>mole_frac</p></td>
+</tr>
+<tr class="row-odd"><td><p>pH</p></td>
+<td><p>pH</p></td>
+</tr>
+<tr class="row-even"><td><p>Pressure</p></td>
+<td><p>pressure</p></td>
+</tr>
+<tr class="row-odd"><td><p>Speed of Sound</p></td>
+<td><p>speed_sound</p></td>
+</tr>
+<tr class="row-even"><td><p>Surface Tension</p></td>
+<td><p>surf_tens</p></td>
+</tr>
+<tr class="row-odd"><td><p>Temperature</p></td>
+<td><p>temperature</p></td>
+</tr>
+<tr class="row-even"><td><p>Thermal Conductivity</p></td>
+<td><p>therm_cond</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vapor Pressure</p></td>
+<td><p>pressure_sat</p></td>
+</tr>
+<tr class="row-even"><td><p>Viscosity (dynamic)</p></td>
+<td><p>visc_d</p></td>
+</tr>
+<tr class="row-odd"><td><p>Viscosity (kinematic)</p></td>
+<td><p>visc_k</p></td>
+</tr>
+<tr class="row-even"><td><p>Vapor Fraction</p></td>
+<td><p>vap_frac</p></td>
+</tr>
+<tr class="row-odd"><td><p>Volume Fraction</p></td>
+<td><p>vol_frac</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="reaction-properties">
+<h3><a class="toc-backref" href="#id12">Reaction Properties</a><a class="headerlink" href="#reaction-properties" title="Permalink to this headline">¶</a></h3>
+<p>Below is a list of all the reaction properties which currently have a standard name associated with them in the IDAES framework.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 58%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Standard Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Activation Energy</p></td>
+<td><p>energy_activation</p></td>
+</tr>
+<tr class="row-odd"><td><p>Arrhenius Coefficient</p></td>
+<td><p>arrhenius</p></td>
+</tr>
+<tr class="row-even"><td><p>Heat of Reaction</p></td>
+<td><p>dh_rxn</p></td>
+</tr>
+<tr class="row-odd"><td><p>Entropy of Reaction</p></td>
+<td><p>ds_rxn</p></td>
+</tr>
+<tr class="row-even"><td><p>Equilibrium Constant</p></td>
+<td><p>k_eq</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reaction Rate</p></td>
+<td><p>reaction_rate</p></td>
+</tr>
+<tr class="row-even"><td><p>Rate constant</p></td>
+<td><p>k_rxn</p></td>
+</tr>
+<tr class="row-odd"><td><p>Solubility Constant</p></td>
+<td><p>k_sol</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="solid-properties">
+<h3><a class="toc-backref" href="#id13">Solid Properties</a><a class="headerlink" href="#solid-properties" title="Permalink to this headline">¶</a></h3>
+<p>Below is a list of all the properties of solid materials which currently have a standard name associated with them in the IDAES framework.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 62%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Standard Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Min. Fluidization Velocity</p></td>
+<td><p>velocity_mf</p></td>
+</tr>
+<tr class="row-odd"><td><p>Min. Fluidization Voidage</p></td>
+<td><p>voidage_mf</p></td>
+</tr>
+<tr class="row-even"><td><p>Particle Size</p></td>
+<td><p>particle_dia</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pore Size</p></td>
+<td><p>pore_dia</p></td>
+</tr>
+<tr class="row-even"><td><p>Porosity</p></td>
+<td><p>particle_porosity</p></td>
+</tr>
+<tr class="row-odd"><td><p>Specific Surface Area</p></td>
+<td><p>area_{basis}</p></td>
+</tr>
+<tr class="row-even"><td><p>Sphericity</p></td>
+<td><p>sphericity</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tortuosity</p></td>
+<td><p>tort</p></td>
+</tr>
+<tr class="row-even"><td><p>Voidage</p></td>
+<td><p>bulk_voidage</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="naming-examples">
+<h3><a class="toc-backref" href="#id14">Naming Examples</a><a class="headerlink" href="#naming-examples" title="Permalink to this headline">¶</a></h3>
+<p>Below are some examples of the IDAES naming convention in use.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable Name</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>enth</p></td>
+<td><p>Specific enthalpy of the entire mixture (across all phases)</p></td>
+</tr>
+<tr class="row-odd"><td><p>flow_comp[“H2O”]</p></td>
+<td><p>Total flow of H2O (across all phases)</p></td>
+</tr>
+<tr class="row-even"><td><p>entr_phase[“liq”]</p></td>
+<td><p>Specific entropy of the liquid phase mixture</p></td>
+</tr>
+<tr class="row-odd"><td><p>conc_phase_comp[“liq”, “H2O”]</p></td>
+<td><p>Concentration of H2O in the liquid phase</p></td>
+</tr>
+<tr class="row-even"><td><p>temperature_red</p></td>
+<td><p>Reduced temperature</p></td>
+</tr>
+<tr class="row-odd"><td><p>pressure_crit</p></td>
+<td><p>Critical pressure</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="core/index.html" class="btn btn-neutral float-right" title="Core Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

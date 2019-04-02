@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>idaes.unit_models.power_generation.turbine_stage &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../../../../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core/index.html">Core Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../models/index.html">Unit Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer/index.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>idaes.unit_models.power_generation.turbine_stage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for idaes.unit_models.power_generation.turbine_stage</h1><div class="highlight"><pre>
+<span></span><span class="c1">##############################################################################</span>
+<span class="c1"># Institute for the Design of Advanced Energy Systems Process Systems</span>
+<span class="c1"># Engineering Framework (IDAES PSE Framework) Copyright (c) 2018-2019, by the</span>
+<span class="c1"># software owners: The Regents of the University of California, through</span>
+<span class="c1"># Lawrence Berkeley National Laboratory,  National Technology &amp; Engineering</span>
+<span class="c1"># Solutions of Sandia, LLC, Carnegie Mellon University, West Virginia</span>
+<span class="c1"># University Research Corporation, et al. All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Please see the files COPYRIGHT.txt and LICENSE.txt for full copyright and</span>
+<span class="c1"># license information, respectively. Both files are also available online</span>
+<span class="c1"># at the URL &quot;https://github.com/IDAES/idaes-pse&quot;.</span>
+<span class="c1">##############################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Steam turbine stage model. This is a standard isentropic turbine. Under off-design</span>
+<span class="sd">conditions the base efficiency and pressure ratio do not change much for the stages</span>
+<span class="sd">between the inlet and outlet. This model is based on:</span>
+
+<span class="sd">Liese, (2014). &quot;Modeling of a Steam Turbine Including Partial Arc Admission</span>
+<span class="sd">    for Use in a Process Simulation Software Environment.&quot; Journal of Engineering</span>
+<span class="sd">    for Gas Turbines and Power. v136.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+
+<span class="n">__Author__</span> <span class="o">=</span> <span class="s2">&quot;John Eslick&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">pyomo.common.config</span> <span class="k">import</span> <span class="n">In</span>
+<span class="kn">from</span> <span class="nn">pyomo.environ</span> <span class="k">import</span> <span class="n">Var</span><span class="p">,</span> <span class="n">Expression</span><span class="p">,</span> <span class="n">SolverFactory</span><span class="p">,</span> <span class="n">value</span>
+<span class="kn">from</span> <span class="nn">pyomo.opt</span> <span class="k">import</span> <span class="n">TerminationCondition</span>
+
+<span class="kn">from</span> <span class="nn">idaes.core</span> <span class="k">import</span> <span class="n">declare_process_block_class</span>
+<span class="kn">from</span> <span class="nn">idaes.unit_models.pressure_changer</span> <span class="k">import</span> <span class="n">PressureChangerData</span>
+<span class="kn">from</span> <span class="nn">idaes.core.util</span> <span class="k">import</span> <span class="n">from_json</span><span class="p">,</span> <span class="n">to_json</span><span class="p">,</span> <span class="n">StoreSpec</span>
+<span class="kn">from</span> <span class="nn">idaes.ui.report</span> <span class="k">import</span> <span class="n">degrees_of_freedom</span>
+
+
+<div class="viewcode-block" id="TurbineStageData"><a class="viewcode-back" href="../../../../models/power_generation/turbine_stage.html#idaes.unit_models.power_generation.turbine_stage.TurbineStageData">[docs]</a><span class="nd">@declare_process_block_class</span><span class="p">(</span><span class="s2">&quot;TurbineStage&quot;</span><span class="p">,</span>
+    <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Basic steam turbine model&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">TurbineStageData</span><span class="p">(</span><span class="n">PressureChangerData</span><span class="p">):</span>
+    <span class="c1"># Same settings as the default pressure changer, but force to expander with</span>
+    <span class="c1"># isentropic efficiency</span>
+    <span class="n">CONFIG</span> <span class="o">=</span> <span class="n">PressureChangerData</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">()</span>
+    <span class="n">CONFIG</span><span class="o">.</span><span class="n">compressor</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">CONFIG</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;compressor&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">_default</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">CONFIG</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;compressor&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">_domain</span> <span class="o">=</span> <span class="n">In</span><span class="p">([</span><span class="kc">False</span><span class="p">])</span>
+    <span class="n">CONFIG</span><span class="o">.</span><span class="n">thermodynamic_assumption</span> <span class="o">=</span> <span class="s1">&#39;isentropic&#39;</span>
+    <span class="n">CONFIG</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;thermodynamic_assumption&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">_default</span> <span class="o">=</span> <span class="s1">&#39;isentropic&#39;</span>
+    <span class="n">CONFIG</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;thermodynamic_assumption&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">_domain</span> <span class="o">=</span> <span class="n">In</span><span class="p">([</span><span class="s1">&#39;isentropic&#39;</span><span class="p">])</span>
+<div class="viewcode-block" id="TurbineStageData.build"><a class="viewcode-back" href="../../../../models/power_generation/turbine_stage.html#idaes.unit_models.power_generation.turbine_stage.TurbineStageData.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TurbineStageData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_mech</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mf">0.98</span><span class="p">,</span>
+            <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Turbine mechanical efficiency&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_mech</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ratioP</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">0.8</span> <span class="c1"># make sure these have a number value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deltaP</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#   to avoid an error later in initialize</span>
+
+        <span class="nd">@self</span><span class="o">.</span><span class="n">Expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_ref</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Thermodynamic power [J/s]&quot;</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">power_thermo</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="n">control_volume</span><span class="o">.</span><span class="n">work</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+
+        <span class="nd">@self</span><span class="o">.</span><span class="n">Expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_ref</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Shaft power [J/s]&quot;</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">power_shaft</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="n">power_thermo</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="o">.</span><span class="n">efficiency_mech</span></div>
+
+<div class="viewcode-block" id="TurbineStageData.initialize"><a class="viewcode-back" href="../../../../models/power_generation/turbine_stage.html#idaes.unit_models.power_generation.turbine_stage.TurbineStageData.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_args</span><span class="o">=</span><span class="p">{},</span> <span class="n">outlvl</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;ipopt&#39;</span><span class="p">,</span>
+        <span class="n">optarg</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;tol&#39;</span><span class="p">:</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">}):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the turbine stage model.  This deactivates the</span>
+<span class="sd">        specialized constraints, then does the isentropic turbine initialization,</span>
+<span class="sd">        then reactivates the constraints and solves.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            state_args (dict): Initial state for property initialization</span>
+<span class="sd">            outlvl (int): Amount of output (0 to 3) 0 is lowest</span>
+<span class="sd">            solver (str): Solver to use for initialization</span>
+<span class="sd">            optarg (dict): Solver arguments dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stee</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">outlvl</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="c1"># sp is what to save to make sure state after init is same as the start</span>
+        <span class="c1">#   saves value, fixed, and active state, doesn&#39;t load originally free</span>
+        <span class="c1">#   values, this makes sure original problem spec is same but initializes</span>
+        <span class="c1">#   the values of free vars</span>
+        <span class="n">sp</span> <span class="o">=</span> <span class="n">StoreSpec</span><span class="o">.</span><span class="n">value_isfixed_isactive</span><span class="p">(</span><span class="n">only_fixed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">istate</span> <span class="o">=</span> <span class="n">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">return_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wts</span><span class="o">=</span><span class="n">sp</span><span class="p">)</span>
+
+        <span class="c1"># fix inlet and free outlet</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_ref</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">vars</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">v</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outlet</span><span class="o">.</span><span class="n">vars</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">v</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+            <span class="c1"># If there isn&#39;t a good guess for efficiency or outlet pressure</span>
+            <span class="c1"># provide something reasonable.</span>
+            <span class="n">eff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_isentropic</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+            <span class="n">eff</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">eff</span><span class="o">.</span><span class="n">value</span> <span class="k">if</span> <span class="n">value</span><span class="p">(</span><span class="n">eff</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.3</span> <span class="ow">and</span> <span class="n">value</span><span class="p">(</span><span class="n">eff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">0.8</span><span class="p">)</span>
+            <span class="c1"># for outlet pressure try outlet pressure, pressure ratio, delta P,</span>
+            <span class="c1"># then if none of those look reasonable use a pressure ratio of 0.8</span>
+            <span class="c1"># to calculate outlet pressure</span>
+            <span class="n">Pout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outlet</span><span class="o">.</span><span class="n">pressure</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+            <span class="n">Pin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">pressure</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+            <span class="n">prdp</span> <span class="o">=</span> <span class="n">value</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">deltaP</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="n">Pin</span><span class="p">)</span><span class="o">/</span><span class="n">Pin</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deltaP</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">fixed</span><span class="p">:</span>
+                <span class="n">Pout</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="n">Pin</span> <span class="o">-</span> <span class="n">Pout</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ratioP</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">fixed</span><span class="p">:</span>
+                <span class="n">Pout</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ratioP</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">*</span><span class="n">Pin</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span><span class="p">(</span><span class="n">Pout</span><span class="o">/</span><span class="n">Pin</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.99</span> <span class="ow">or</span> <span class="n">value</span><span class="p">(</span><span class="n">Pout</span><span class="o">/</span><span class="n">Pin</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ratioP</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">0.99</span> <span class="ow">and</span> <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ratioP</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+                    <span class="n">Pout</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">value</span><span class="p">(</span><span class="n">Pin</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ratioP</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
+                <span class="k">elif</span> <span class="n">prdp</span> <span class="o">&lt;</span> <span class="mf">0.99</span> <span class="ow">and</span> <span class="n">prdp</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+                    <span class="n">Pout</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">value</span><span class="p">(</span><span class="n">prdp</span><span class="o">*</span><span class="n">Pin</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">Pout</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">value</span><span class="p">(</span><span class="n">Pin</span><span class="o">*</span><span class="mf">0.8</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Pout</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deltaP</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="n">Pout</span> <span class="o">-</span> <span class="n">Pin</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ratioP</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="n">Pout</span><span class="o">/</span><span class="n">Pin</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">deltaP</span><span class="p">[:]</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ratioP</span><span class="p">[:]</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_ref</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">properties_isentropic</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">pressure</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> \
+                <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outlet</span><span class="o">.</span><span class="n">pressure</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">properties_isentropic</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">flow_mol</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> \
+                <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">flow_mol</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">properties_isentropic</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">enth_mol</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> \
+                <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">enth_mol</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">*</span><span class="mf">0.95</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">outlet</span><span class="o">.</span><span class="n">flow_mol</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> \
+                <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">flow_mol</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">outlet</span><span class="o">.</span><span class="n">enth_mol</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> \
+                <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">enth_mol</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">*</span><span class="mf">0.95</span><span class="p">)</span>
+
+        <span class="c1"># Make sure the initialization problem has no degrees of freedom</span>
+        <span class="c1"># This shouldn&#39;t happen here unless there is a bug in this</span>
+        <span class="n">dof</span> <span class="o">=</span> <span class="n">degrees_of_freedom</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">assert</span><span class="p">(</span><span class="n">dof</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">_log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;degrees_of_freedom = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dof</span><span class="p">))</span>
+            <span class="k">raise</span>
+
+        <span class="c1"># one bad thing about reusing this is that the log messages aren&#39;t</span>
+        <span class="c1"># really compatible with being nested inside another initialization</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TurbineStageData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">state_args</span><span class="o">=</span><span class="n">state_args</span><span class="p">,</span>
+            <span class="n">outlvl</span><span class="o">=</span><span class="n">outlvl</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span> <span class="n">optarg</span><span class="o">=</span><span class="n">optarg</span><span class="p">)</span>
+
+        <span class="c1"># reload original spec</span>
+        <span class="n">from_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">istate</span><span class="p">,</span> <span class="n">wts</span><span class="o">=</span><span class="n">sp</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,613 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>idaes.unit_models.power_generation.turbine_multistage &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../../../../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core/index.html">Core Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../models/index.html">Unit Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer/index.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>idaes.unit_models.power_generation.turbine_multistage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for idaes.unit_models.power_generation.turbine_multistage</h1><div class="highlight"><pre>
+<span></span><span class="c1">##############################################################################</span>
+<span class="c1"># Institute for the Design of Advanced Energy Systems Process Systems</span>
+<span class="c1"># Engineering Framework (IDAES PSE Framework) Copyright (c) 2018-2019, by the</span>
+<span class="c1"># software owners: The Regents of the University of California, through</span>
+<span class="c1"># Lawrence Berkeley National Laboratory,  National Technology &amp; Engineering</span>
+<span class="c1"># Solutions of Sandia, LLC, Carnegie Mellon University, West Virginia</span>
+<span class="c1"># University Research Corporation, et al. All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Please see the files COPYRIGHT.txt and LICENSE.txt for full copyright and</span>
+<span class="c1"># license information, respectively. Both files are also available online</span>
+<span class="c1"># at the URL &quot;https://github.com/IDAES/idaes-pse&quot;.</span>
+<span class="c1">##############################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Multistage steam turbine for power generation.</span>
+
+<span class="sd">Liese, (2014). &quot;Modeling of a Steam Turbine Including Partial Arc Admission</span>
+<span class="sd">    for Use in a Process Simulation Software Environment.&quot; Journal of Engineering</span>
+<span class="sd">    for Gas Turbines and Power. v136, November</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="kn">from</span> <span class="nn">pyomo.environ</span> <span class="k">import</span> <span class="n">RangeSet</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">TransformationFactory</span><span class="p">,</span> <span class="n">Var</span><span class="p">,</span> <span class="n">value</span>
+<span class="kn">from</span> <span class="nn">pyomo.network</span> <span class="k">import</span> <span class="n">Arc</span>
+<span class="kn">from</span> <span class="nn">pyomo.common.config</span> <span class="k">import</span> <span class="n">ConfigBlock</span><span class="p">,</span> <span class="n">ConfigValue</span><span class="p">,</span> <span class="n">In</span>
+
+<span class="kn">from</span> <span class="nn">idaes.core</span> <span class="k">import</span> <span class="n">declare_process_block_class</span><span class="p">,</span> <span class="n">UnitModelBlockData</span>
+<span class="kn">from</span> <span class="nn">idaes.unit_models</span> <span class="k">import</span> <span class="p">(</span><span class="n">Separator</span><span class="p">,</span> <span class="n">Mixer</span><span class="p">,</span> <span class="n">SplittingType</span><span class="p">,</span>
+    <span class="n">EnergySplittingType</span><span class="p">,</span> <span class="n">MomentumMixingType</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">idaes.unit_models.power_generation</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">TurbineInletStage</span><span class="p">,</span> <span class="n">TurbineStage</span><span class="p">,</span> <span class="n">TurbineOutletStage</span><span class="p">,</span> <span class="n">SteamValve</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">idaes.core.util.config</span> <span class="k">import</span> <span class="n">is_physical_parameter_block</span>
+<span class="kn">from</span> <span class="nn">idaes.core.util</span> <span class="k">import</span> <span class="n">from_json</span><span class="p">,</span> <span class="n">to_json</span><span class="p">,</span> <span class="n">StoreSpec</span>
+<span class="kn">from</span> <span class="nn">.turbine_multistage_config</span> <span class="k">import</span> <span class="n">_define_turbine_multistage_config</span>
+<span class="kn">from</span> <span class="nn">idaes.ui.report</span> <span class="k">import</span> <span class="n">degrees_of_freedom</span>
+
+<span class="k">def</span> <span class="nf">_set_port</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">p1</span><span class="o">.</span><span class="n">vars</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Var</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+                <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="n">p2</span><span class="o">.</span><span class="n">vars</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+<div class="viewcode-block" id="TurbineMultistageData"><a class="viewcode-back" href="../../../../models/power_generation/turbine_multistage.html#idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData">[docs]</a><span class="nd">@declare_process_block_class</span><span class="p">(</span><span class="s2">&quot;TurbineMultistage&quot;</span><span class="p">,</span>
+    <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Multistage steam turbine with optional reheat and extraction&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">TurbineMultistageData</span><span class="p">(</span><span class="n">UnitModelBlockData</span><span class="p">):</span>
+
+    <span class="n">CONFIG</span> <span class="o">=</span> <span class="n">ConfigBlock</span><span class="p">()</span>
+    <span class="n">_define_turbine_multistage_config</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TurbineMultistageData.build"><a class="viewcode-back" href="../../../../models/power_generation/turbine_multistage.html#idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TurbineMultistageData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span>
+        <span class="n">unit_cfg</span> <span class="o">=</span> <span class="p">{</span> <span class="c1"># general unit model config</span>
+            <span class="s2">&quot;dynamic&quot;</span><span class="p">:</span><span class="n">config</span><span class="o">.</span><span class="n">dynamic</span><span class="p">,</span>
+            <span class="s2">&quot;has_holdup&quot;</span><span class="p">:</span><span class="n">config</span><span class="o">.</span><span class="n">has_holdup</span><span class="p">,</span>
+            <span class="s2">&quot;has_phase_equilibrium&quot;</span><span class="p">:</span><span class="n">config</span><span class="o">.</span><span class="n">has_phase_equilibrium</span><span class="p">,</span>
+            <span class="s2">&quot;property_package&quot;</span><span class="p">:</span><span class="n">config</span><span class="o">.</span><span class="n">property_package</span><span class="p">,</span>
+            <span class="s2">&quot;property_package_args&quot;</span><span class="p">:</span><span class="n">config</span><span class="o">.</span><span class="n">property_package_args</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">ni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">num_parallel_inlet_stages</span>
+        <span class="n">inlet_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage_idx</span> <span class="o">=</span> <span class="n">RangeSet</span><span class="p">(</span><span class="n">ni</span><span class="p">)</span>
+
+        <span class="c1"># Adding unit models</span>
+        <span class="c1">#------------------------</span>
+
+        <span class="c1"># Splitter to inlet that splits main flow into parallel flows for</span>
+        <span class="c1"># paritial arc admission to the turbine</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_split</span> <span class="o">=</span> <span class="n">Separator</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_split_cfg</span><span class="p">(</span><span class="n">unit_cfg</span><span class="p">,</span> <span class="n">ni</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">throttle_valve</span> <span class="o">=</span> <span class="n">SteamValve</span><span class="p">(</span><span class="n">inlet_idx</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">unit_cfg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage</span> <span class="o">=</span> <span class="n">TurbineInletStage</span><span class="p">(</span><span class="n">inlet_idx</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">unit_cfg</span><span class="p">)</span>
+        <span class="c1"># mixer to combine the parallel flows back together</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_mix</span> <span class="o">=</span> <span class="n">Mixer</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_mix_cfg</span><span class="p">(</span><span class="n">unit_cfg</span><span class="p">,</span> <span class="n">ni</span><span class="p">))</span>
+        <span class="c1"># add turbine sections.</span>
+        <span class="c1"># inlet stage -&gt; hp stages -&gt; ip stages -&gt; lp stages -&gt; outlet stage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hp_stages</span> <span class="o">=</span> <span class="n">TurbineStage</span><span class="p">(</span><span class="n">RangeSet</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">num_hp</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="n">unit_cfg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span> <span class="o">=</span> <span class="n">TurbineStage</span><span class="p">(</span><span class="n">RangeSet</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">num_ip</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="n">unit_cfg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lp_stages</span> <span class="o">=</span> <span class="n">TurbineStage</span><span class="p">(</span><span class="n">RangeSet</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">num_lp</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="n">unit_cfg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outlet_stage</span> <span class="o">=</span> <span class="n">TurbineOutletStage</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">unit_cfg</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hp_stages</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hp_stages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ratioP</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hp_stages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">efficiency_isentropic</span><span class="p">[:]</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ratioP</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">efficiency_isentropic</span><span class="p">[:]</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lp_stages</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lp_stages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ratioP</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lp_stages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">efficiency_isentropic</span><span class="p">[:]</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+
+        <span class="c1"># Then make splitter config.  If number of outlets is specified</span>
+        <span class="c1"># make a specific config, otherwise use default with 2 outlets</span>
+        <span class="n">s_sfg_default</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_cfg</span><span class="p">(</span><span class="n">unit_cfg</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">hp_splt_cfg</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">ip_splt_cfg</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">lp_splt_cfg</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># Now to finish up if there are more than two outlets, set that</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">hp_split_num_outlets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">hp_splt_cfg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_cfg</span><span class="p">(</span><span class="n">unit_cfg</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">ip_split_num_outlets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">ip_splt_cfg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_cfg</span><span class="p">(</span><span class="n">unit_cfg</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">lp_split_num_outlets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">lp_splt_cfg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_cfg</span><span class="p">(</span><span class="n">unit_cfg</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="c1"># put in splitters for turbine steam extractions</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">hp_split_locations</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hp_split</span> <span class="o">=</span> <span class="n">Separator</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">hp_split_locations</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">s_sfg_default</span><span class="p">,</span> <span class="n">initialize</span><span class="o">=</span><span class="n">hp_splt_cfg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">ip_split_locations</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ip_split</span> <span class="o">=</span> <span class="n">Separator</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">ip_split_locations</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">s_sfg_default</span><span class="p">,</span> <span class="n">initialize</span><span class="o">=</span><span class="n">ip_splt_cfg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">lp_split_locations</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lp_split</span> <span class="o">=</span> <span class="n">Separator</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">lp_split_locations</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">s_sfg_default</span><span class="p">,</span> <span class="n">initialize</span><span class="o">=</span><span class="n">lp_splt_cfg</span><span class="p">)</span>
+
+        <span class="c1"># Done with unit models.  Adding Arcs (streams).</span>
+        <span class="c1">#------------------------------------------------</span>
+
+        <span class="c1"># First up add streams in the inlet section</span>
+        <span class="k">def</span> <span class="nf">_split_to_rule</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_split</span><span class="p">,</span> <span class="s2">&quot;outlet_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)),</span>
+                    <span class="s2">&quot;destination&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">throttle_valve</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">}</span>
+        <span class="k">def</span> <span class="nf">_valve_to_rule</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">throttle_valve</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">outlet</span><span class="p">,</span>
+                    <span class="s2">&quot;destination&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">}</span>
+        <span class="k">def</span> <span class="nf">_inlet_to_rule</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">outlet</span><span class="p">,</span>
+                    <span class="s2">&quot;destination&quot;</span><span class="p">:</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_mix</span><span class="p">,</span> <span class="s2">&quot;inlet_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">split_to_valve_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span><span class="n">inlet_idx</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="n">_split_to_rule</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valve_to_inlet_stage_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span><span class="n">inlet_idx</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="n">_valve_to_rule</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage_to_mix</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span><span class="n">inlet_idx</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="n">_inlet_to_rule</span><span class="p">)</span>
+
+        <span class="c1"># There are three sections HP, IP, and LP which all have the same sort</span>
+        <span class="c1"># of internal connctions, so the functions below provide some generic</span>
+        <span class="c1"># capcbilities for adding the internal Arcs (streams).</span>
+        <span class="k">def</span> <span class="nf">_arc_indexes</span><span class="p">(</span><span class="n">nstages</span><span class="p">,</span> <span class="n">index_set</span><span class="p">,</span> <span class="n">discon</span><span class="p">,</span> <span class="n">splits</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            This takes the index set of all possible streams in a turbine</span>
+<span class="sd">            section and throws out arc indexes for stages that are disconnected</span>
+<span class="sd">            and arc indexes that are not needed because there is no splitter</span>
+<span class="sd">            after a stage.</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                nstages (int): Number of stages in section</span>
+<span class="sd">                index_set (Set): Index set for arcs in the section</span>
+<span class="sd">                discon (list): Disconnected stages in the section</span>
+<span class="sd">                splits (list): Spliter locations</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">sr</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> <span class="c1"># set of things to remove from the Arc index set</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index_set</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">discon</span> <span class="ow">or</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">nstages</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">splits</span><span class="p">:</span>
+                    <span class="c1"># don&#39;t connect stage i to next remove stream after split</span>
+                    <span class="n">sr</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">discon</span> <span class="ow">or</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">nstages</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">splits</span><span class="p">:</span>
+                    <span class="c1"># no splitter and disconnect so remove both streams</span>
+                    <span class="n">sr</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+                    <span class="n">sr</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">splits</span><span class="p">:</span>
+                    <span class="c1"># no splitter and not disconnected so just second stream</span>
+                    <span class="n">sr</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># has splitter so need both streams don&#39;t remove anything</span>
+                    <span class="k">pass</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sr</span><span class="p">:</span> <span class="c1"># remove the unneeded Arc indexes</span>
+                <span class="n">index_set</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">_arc_rule</span><span class="p">(</span><span class="n">turbines</span><span class="p">,</span> <span class="n">splitters</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            This creates a rule function for arcs in a turbine section. When</span>
+<span class="sd">            this is used the indexes for nonexistant stream will have already</span>
+<span class="sd">            been removed, so any indexes the rule will get should have a stream</span>
+<span class="sd">            associated.</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                turbines (TurbineStage): Indexed block with turbine section stages</span>
+<span class="sd">                splitters (Separator): Indexed block of splitters</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">def</span> <span class="nf">_rule</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">splitters</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span><span class="n">turbines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">outlet</span><span class="p">,</span>
+                            <span class="s2">&quot;destination&quot;</span><span class="p">:</span><span class="n">splitters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">}</span>
+                <span class="k">elif</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span><span class="n">splitters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">,</span>
+                            <span class="s2">&quot;destination&quot;</span><span class="p">:</span><span class="n">turbines</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">}</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span><span class="n">turbines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">outlet</span><span class="p">,</span>
+                            <span class="s2">&quot;destination&quot;</span><span class="p">:</span><span class="n">turbines</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">}</span>
+            <span class="k">return</span> <span class="n">_rule</span>
+
+        <span class="c1"># Create initial arcs index sets with all possible streams</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hp_stream_idx</span> <span class="o">=</span> <span class="n">Set</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hp_stages</span><span class="o">.</span><span class="n">index_set</span><span class="p">()</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ip_stream_idx</span> <span class="o">=</span> <span class="n">Set</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span><span class="o">.</span><span class="n">index_set</span><span class="p">()</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lp_stream_idx</span> <span class="o">=</span> <span class="n">Set</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lp_stages</span><span class="o">.</span><span class="n">index_set</span><span class="p">()</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="c1"># Throw out unneeded streams</span>
+        <span class="n">_arc_indexes</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">num_hp</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hp_stream_idx</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">hp_disconnect</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">hp_split_locations</span><span class="p">)</span>
+        <span class="n">_arc_indexes</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">num_ip</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ip_stream_idx</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">ip_disconnect</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">ip_split_locations</span><span class="p">)</span>
+        <span class="n">_arc_indexes</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">num_lp</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lp_stream_idx</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">lp_disconnect</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">lp_split_locations</span><span class="p">)</span>
+
+        <span class="c1"># Create connections internal to each turbine section (hp, ip, and lp)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hp_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hp_stream_idx</span><span class="p">,</span>
+            <span class="n">rule</span><span class="o">=</span><span class="n">_arc_rule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hp_stages</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hp_split</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ip_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ip_stream_idx</span><span class="p">,</span>
+            <span class="n">rule</span><span class="o">=</span><span class="n">_arc_rule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ip_split</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lp_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lp_stream_idx</span><span class="p">,</span>
+            <span class="n">rule</span><span class="o">=</span><span class="n">_arc_rule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lp_stages</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lp_split</span><span class="p">))</span>
+
+        <span class="c1"># Connect hp section to ip section unless its a disconnect location</span>
+        <span class="n">last_hp</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">num_hp</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">ip_disconnect</span> <span class="ow">and</span> <span class="n">last_hp</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">hp_disconnect</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">last_hp</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">hp_split_locations</span><span class="p">:</span> <span class="c1"># connect splitter to ip</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hp_to_ip_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                    <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hp_split</span><span class="p">[</span><span class="n">last_hp</span><span class="p">]</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">,</span>
+                    <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span> <span class="c1"># connect last hp to ip</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hp_to_ip_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                    <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hp_stages</span><span class="p">[</span><span class="n">last_hp</span><span class="p">]</span><span class="o">.</span><span class="n">outlet</span><span class="p">,</span>
+                    <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">)</span>
+        <span class="c1"># Connect ip section to lp section unless its a disconnect location</span>
+        <span class="n">last_ip</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">num_ip</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">lp_disconnect</span> <span class="ow">and</span> <span class="n">last_ip</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">ip_disconnect</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">last_ip</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">ip_split_locations</span><span class="p">:</span> <span class="c1"># connect splitter to ip</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ip_to_lp_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                    <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ip_split</span><span class="p">[</span><span class="n">last_ip</span><span class="p">]</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">,</span>
+                    <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lp_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span> <span class="c1"># connect last hp to ip</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ip_to_lp_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                    <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">[</span><span class="n">last_ip</span><span class="p">]</span><span class="o">.</span><span class="n">outlet</span><span class="p">,</span>
+                    <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lp_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">)</span>
+        <span class="c1"># Connect inlet stage to hp section</span>
+        <span class="c1">#   not allowing disconnection of inlet and first regular hp stage</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">hp_split_locations</span><span class="p">:</span>
+            <span class="c1"># connect inlet mix to splitter and splitter to hp section</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inlet_to_splitter_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_mix</span><span class="o">.</span><span class="n">outlet</span><span class="p">,</span>
+                <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hp_split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">splitter_to_hp_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hp_split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">,</span>
+                <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hp_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># connect mixer to first hp turbine stage</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inlet_to_hp_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_mix</span><span class="o">.</span><span class="n">outlet</span><span class="p">,</span>
+                <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hp_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">)</span>
+
+        <span class="c1"># Connect inlet stage to hp section</span>
+        <span class="c1">#   not allowing disconnection of inlet and first regular hp stage</span>
+        <span class="n">last_lp</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">num_lp</span>
+        <span class="k">if</span> <span class="n">last_lp</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">lp_split_locations</span><span class="p">:</span> <span class="c1"># connect splitter to outlet</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lp_to_outlet_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lp_split</span><span class="p">[</span><span class="n">last_lp</span><span class="p">]</span><span class="o">.</span><span class="n">outlet_1</span><span class="p">,</span>
+                <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">outlet_stage</span><span class="o">.</span><span class="n">inlet</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># connect last lpstage to outlet</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lp_to_outlet_stream</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lp_stages</span><span class="p">[</span><span class="n">last_lp</span><span class="p">]</span><span class="o">.</span><span class="n">outlet</span><span class="p">,</span>
+                <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">outlet_stage</span><span class="o">.</span><span class="n">inlet</span><span class="p">)</span>
+        <span class="n">TransformationFactory</span><span class="p">(</span><span class="s2">&quot;network.expand_arcs&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_split_cfg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_cfg</span><span class="p">,</span> <span class="n">no</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This creates a configuration dictionary for a splitter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            unit_cfg: The base unit config dict.</span>
+<span class="sd">            no: Number of outlets, default=2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create a dict for splitter config args</span>
+        <span class="n">s_cfg</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">unit_cfg</span><span class="p">)</span> <span class="c1"># splitter config based on unit_cfg</span>
+        <span class="n">s_cfg</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">split_basis</span><span class="o">=</span><span class="n">SplittingType</span><span class="o">.</span><span class="n">totalFlow</span><span class="p">,</span>
+            <span class="n">ideal_separation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">num_outlets</span><span class="o">=</span><span class="n">no</span><span class="p">,</span>
+            <span class="n">energy_split_basis</span><span class="o">=</span><span class="n">EnergySplittingType</span><span class="o">.</span><span class="n">equal_molar_enthalpy</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">s_cfg</span><span class="p">[</span><span class="s2">&quot;has_phase_equilibrium&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">s_cfg</span>
+
+    <span class="k">def</span> <span class="nf">_mix_cfg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_cfg</span><span class="p">,</span> <span class="n">ni</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This creates a configuration dictionary for a mixer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            unit_cfg: The base unit config dict.</span>
+<span class="sd">            ni: Number of inlets, default=2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">m_cfg</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">unit_cfg</span><span class="p">)</span> <span class="c1"># splitter config based on unit_cfg</span>
+        <span class="n">m_cfg</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">num_inlets</span><span class="o">=</span><span class="n">ni</span><span class="p">,</span>
+            <span class="n">momentum_mixing_type</span><span class="o">=</span><span class="n">MomentumMixingType</span><span class="o">.</span><span class="n">minimize_and_equality</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">m_cfg</span><span class="p">[</span><span class="s2">&quot;has_phase_equilibrium&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">m_cfg</span>
+
+<div class="viewcode-block" id="TurbineMultistageData.throttle_cv_fix"><a class="viewcode-back" href="../../../../models/power_generation/turbine_multistage.html#idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.throttle_cv_fix">[docs]</a>    <span class="k">def</span> <span class="nf">throttle_cv_fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fix the thottle valve coefficients.  These are generally the same for</span>
+<span class="sd">        each of the parallel stages so this provides a convenient way to set</span>
+<span class="sd">        them.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value: The value to fix the turbine inlet flow coefficients at</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">throttle_valve</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">throttle_valve</span><span class="o">.</span><span class="n">Cv</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TurbineMultistageData.turbine_inlet_cf_fix"><a class="viewcode-back" href="../../../../models/power_generation/turbine_multistage.html#idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.turbine_inlet_cf_fix">[docs]</a>    <span class="k">def</span> <span class="nf">turbine_inlet_cf_fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fix the inlet turbine stage flow coefficient.  These are</span>
+<span class="sd">        generally the same for each of the parallel stages so this provides</span>
+<span class="sd">        a convenient way to set them.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value: The value to fix the turbine inlet flow coefficients at</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">throttle_valve</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage</span><span class="o">.</span><span class="n">flow_coeff</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TurbineMultistageData.initialize"><a class="viewcode-back" href="../../../../models/power_generation/turbine_multistage.html#idaes.unit_models.power_generation.turbine_multistage.TurbineMultistageData.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outlvl</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;ipopt&#39;</span><span class="p">,</span>
+        <span class="n">optarg</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;tol&#39;</span><span class="p">:</span><span class="mf">1e-6</span><span class="p">,</span> <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span><span class="mi">35</span><span class="p">}):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stee</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">outlvl</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="c1"># sp is what to save to make sure state after init is same as the start</span>
+        <span class="c1">#   saves value, fixed, and active state, doesn&#39;t load originally free</span>
+        <span class="c1">#   values, this makes sure original problem spec is same but initializes</span>
+        <span class="c1">#   the values of free vars</span>
+        <span class="n">sp</span> <span class="o">=</span> <span class="n">StoreSpec</span><span class="o">.</span><span class="n">value_isfixed_isactive</span><span class="p">(</span><span class="n">only_fixed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">istate</span> <span class="o">=</span> <span class="n">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">return_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wts</span><span class="o">=</span><span class="n">sp</span><span class="p">)</span>
+
+
+        <span class="n">ni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">num_parallel_inlet_stages</span>
+
+        <span class="c1"># Initialize Splitter</span>
+        <span class="c1"># Fix n - 1 split fractions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_split</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;outlet_1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">ni</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage_idx</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1">#fix rest of splits at leaving first one free</span>
+                <span class="k">continue</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inlet_split</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;outlet_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">ni</span><span class="p">)</span>
+        <span class="c1"># fix inlet and free outlet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_split</span><span class="o">.</span><span class="n">inlet</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage_idx</span><span class="p">:</span>
+            <span class="n">ol</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_split</span><span class="p">,</span> <span class="s2">&quot;outlet_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="n">ol</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_split</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">outlvl</span><span class="o">=</span><span class="n">outlvl</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span> <span class="n">optarg</span><span class="o">=</span><span class="n">optarg</span><span class="p">)</span>
+        <span class="c1"># free split fractions</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage_idx</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inlet_split</span><span class="o">.</span><span class="n">split_fraction</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;outlet_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+
+        <span class="c1"># Initialize valves</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage_idx</span><span class="p">:</span>
+            <span class="n">_set_port</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">throttle_valve</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">,</span>
+                      <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_split</span><span class="p">,</span> <span class="s2">&quot;outlet_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">throttle_valve</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">outlvl</span><span class="o">=</span><span class="n">outlvl</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span>
+                <span class="n">optarg</span><span class="o">=</span><span class="n">optarg</span><span class="p">)</span>
+
+        <span class="c1"># Initialize turbine</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage_idx</span><span class="p">:</span>
+            <span class="n">_set_port</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">throttle_valve</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">outlet</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">outlvl</span><span class="o">=</span><span class="n">outlvl</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span>
+                <span class="n">optarg</span><span class="o">=</span><span class="n">optarg</span><span class="p">)</span>
+
+        <span class="c1"># Initialize Mixer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_mix</span><span class="o">.</span><span class="n">use_minimum_inlet_pressure_constraint</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage_idx</span><span class="p">:</span>
+            <span class="n">_set_port</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_mix</span><span class="p">,</span> <span class="s2">&quot;inlet_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)),</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">outlet</span><span class="p">)</span>
+            <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_mix</span><span class="p">,</span> <span class="s2">&quot;inlet_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_mix</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">outlvl</span><span class="o">=</span><span class="n">outlvl</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span> <span class="n">optarg</span><span class="o">=</span><span class="n">optarg</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlet_stage_idx</span><span class="p">:</span>
+            <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_mix</span><span class="p">,</span> <span class="s2">&quot;inlet_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">unfix</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_mix</span><span class="o">.</span><span class="n">use_equal_pressure_constraint</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">init_section</span><span class="p">(</span><span class="n">stages</span><span class="p">,</span> <span class="n">splits</span><span class="p">,</span> <span class="n">disconnects</span><span class="p">,</span> <span class="n">prev_port</span><span class="p">):</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">splits</span><span class="p">:</span>
+                <span class="n">_set_port</span><span class="p">(</span><span class="n">splits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">,</span> <span class="n">prev_port</span><span class="p">)</span>
+                <span class="n">splits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">outlvl</span><span class="o">=</span><span class="n">outlvl</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span> <span class="n">optarg</span><span class="o">=</span><span class="n">optarg</span><span class="p">)</span>
+                <span class="n">prev_port</span> <span class="o">=</span> <span class="n">splits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">outlet_1</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">stages</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">disconnects</span><span class="p">:</span>
+                    <span class="n">_set_port</span><span class="p">(</span><span class="n">stages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">,</span> <span class="n">prev_port</span><span class="p">)</span>
+                <span class="n">stages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+                    <span class="n">outlvl</span><span class="o">=</span><span class="n">outlvl</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span> <span class="n">optarg</span><span class="o">=</span><span class="n">optarg</span><span class="p">)</span>
+                <span class="n">prev_port</span> <span class="o">=</span> <span class="n">stages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">outlet</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">splits</span><span class="p">:</span>
+                    <span class="n">_set_port</span><span class="p">(</span><span class="n">splits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span><span class="p">,</span> <span class="n">prev_port</span><span class="p">)</span>
+                    <span class="n">splits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+                        <span class="n">outlvl</span><span class="o">=</span><span class="n">outlvl</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span> <span class="n">optarg</span><span class="o">=</span><span class="n">optarg</span><span class="p">)</span>
+                    <span class="n">prev_port</span> <span class="o">=</span> <span class="n">splits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">outlet_1</span>
+            <span class="k">return</span> <span class="n">prev_port</span>
+
+        <span class="n">prev_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlet_mix</span><span class="o">.</span><span class="n">outlet</span>
+        <span class="n">prev_port</span> <span class="o">=</span> <span class="n">init_section</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hp_stages</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hp_split</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">hp_disconnect</span><span class="p">,</span> <span class="n">prev_port</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hp_stages</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">hp_disconnect</span><span class="p">:</span>
+            <span class="n">prev_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span>
+        <span class="n">prev_port</span> <span class="o">=</span> <span class="n">init_section</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ip_split</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">ip_disconnect</span><span class="p">,</span> <span class="n">prev_port</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ip_stages</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">ip_disconnect</span><span class="p">:</span>
+            <span class="n">prev_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lp_stages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">inlet</span>
+        <span class="n">prev_port</span> <span class="o">=</span> <span class="n">init_section</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lp_stages</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lp_split</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">lp_disconnect</span><span class="p">,</span> <span class="n">prev_port</span><span class="p">)</span>
+
+        <span class="n">_set_port</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outlet_stage</span><span class="o">.</span><span class="n">inlet</span><span class="p">,</span> <span class="n">prev_port</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outlet_stage</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">outlvl</span><span class="o">=</span><span class="n">outlvl</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span> <span class="n">optarg</span><span class="o">=</span><span class="n">optarg</span><span class="p">)</span>
+
+        <span class="n">from_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">istate</span><span class="p">,</span> <span class="n">wts</span><span class="o">=</span><span class="n">sp</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

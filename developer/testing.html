@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Testing &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Code Review" href="codereview.html" />
+    <link rel="prev" title="Collaborative software development" href="devsw.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/index.html">Unit Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#developer-contents">Developer Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="devintro.html">Developer introductory material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="repos.html">Github repository overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devsw.html">Collaborative software development</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Testing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#unit-tests">Unit tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#integration-tests">Integration tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#code-coverage">Code coverage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="codereview.html">Code Review</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html">Docker container</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Documentation</a> &raquo;</li>
+        
+      <li>Testing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developer/testing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="testing">
+<span id="tst-top"></span><h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<p>Testing is essential to the process of creating software.
+“If it isn’t tested, it doesn’t work” is a good rule of thumb.</p>
+<p>There are different kinds of tests: functional, acceptance, performance, usability.
+We will primarily concern ourselves with <em>functional</em> testing here, i.e. whether the
+thing being tested produces correct outputs for expected inputs, and gracefully handles
+everything else. Within functional testing, we can classify
+the testing according to the axes of <em>time</em>,
+i.e. how long the test takes to run, and <em>scope</em>, i.e. the amount of the total
+functionality being tested. Along these two axes we will pick out just two
+points, as depicted in Figure 1. The main tests you will write are “unit tests”,
+which run very quickly and test a focused amount of functionality. But sometimes
+you need something more involved (e.g. running solvers, using data on disk), and here
+we will label that kind of test “integration tests”.</p>
+<div class="figure align-right" id="id1">
+<a class="reference internal image-reference" href="../_images/testing-conceptual.png"><img alt="../_images/testing-conceptual.png" src="../_images/testing-conceptual.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1. Conceptual space of functional testing</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="unit-tests">
+<span id="tst-unit"></span><h2>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h2>
+<p>Testing individual pieces of functionality, including the
+ability to report the correct kind of errors from bad inputs. Unit tests
+must always run quickly. If it takes more than 10 seconds, it is not a unit
+test, and it is expected that most unit tests take well under 1 second.
+The reason for this is that the entire unit test suite is run on every
+change in a Pull Request, and should also be run relatively frequently
+on local developer machines. If this suite of hundreds of tests takes
+more than a couple of minutes to run, it will introduce a significant
+bottleneck in the development workflow.</p>
+<p>For Python code, we use the <a class="reference external" href="pytest.org">pytest</a> testing framework. This is
+compatible with the built-in Python <a class="reference external" href="https://docs.python.org/3.7/library/unittest.html">unittest</a>
+framework, but has many nice features that make it easier and more powerful.</p>
+<p>The best way to learn how to use pytest is to look at existing unit tests, e.g.
+the file “idaes/core/tests/test_process_block.py”. Test files are
+found in a directory named “test/” in every Python package (directory with an “__init__.py”).
+The tests are named “test_{something}.py”; this naming convention is important so
+pytest can automatically find all the tests.</p>
+<p>When writing your own tests, make sure to remember to keep each test
+focused on a single piece of functionality. If a unit test
+fails, it should be obvious which code is causing the problem.</p>
+<div class="section" id="mocking">
+<h3>Mocking<a class="headerlink" href="#mocking" title="Permalink to this headline">¶</a></h3>
+<p>Mocking is a common, but important, technique for avoiding dependencies that make your tests
+slow, fragile, and harder to understand. The basic idea is to
+replace dependencies with fake, or “mock”, versions of them that will provide just
+enough realism for the test. Python provides a library, <a class="reference external" href="https://docs.python.org/dev/library/unittest.mock.html">unittest.mock</a>,
+to help with this process by providing objects that can report how they were used,
+and easily pretend to have certain functionality (returning, for example, fixed values).
+To make this all more concrete, consider a simple problem where you want to test
+a function that makes a system call (in this case, <code class="docutils literal notranslate"><span class="pre">os.remove</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># file: mymodule.py</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">def</span> <span class="nf">rm</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Normally, to test this you would create a temporary file, and then see if it got
+removed. However, with mocking you can take a different approach entirely:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># file: test_mymodule.py</span>
+<span class="kn">from</span> <span class="nn">mymodule</span> <span class="kn">import</span> <span class="n">rm</span>
+<span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">mock</span>
+
+<span class="nd">@mock.patch</span><span class="p">(</span><span class="s1">&#39;mymodule.os&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_rm</span><span class="p">(</span><span class="n">mock_os</span><span class="p">):</span>
+    <span class="n">rm</span><span class="p">(</span><span class="s2">&quot;any path&quot;</span><span class="p">)</span>
+    <span class="c1"># test that rm called os.remove with the right parameters</span>
+    <span class="n">mock_os</span><span class="o">.</span><span class="n">remove</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="s2">&quot;any path&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, we have “patched” the <code class="docutils literal notranslate"><span class="pre">os</span></code> module that got imported into “mymodule” (note: had
+to do <code class="docutils literal notranslate"><span class="pre">mymodule.os</span></code> instead of simply <code class="docutils literal notranslate"><span class="pre">os</span></code>, or the one mymodule uses would not get patched)
+so that when <code class="docutils literal notranslate"><span class="pre">rm</span></code> calls <code class="docutils literal notranslate"><span class="pre">os.remove</span></code>, it is really calling a fake method in <code class="docutils literal notranslate"><span class="pre">mock_os</span></code>
+that does nothing but record how it was called. The patched module is passed in to
+the test as an argument so you can examine it. So, now, you are not doing any OS
+operations at all! You can imagine how this is very useful with large files or
+external services.</p>
+</div>
+</div>
+<div class="section" id="integration-tests">
+<h2>Integration tests<a class="headerlink" href="#integration-tests" title="Permalink to this headline">¶</a></h2>
+<p>Integration tests exercise an end-to-end slice of the overall functionality. At this
+time, the integration tests are all housed in Jupyter Notebooks, which serve
+double-duty as examples and tutorials for end users. We execute these notebooks
+and verify that they run correctly to completion at least once before each new
+release of the software.</p>
+</div>
+<div class="section" id="code-coverage">
+<span id="tst-coverage"></span><h2>Code coverage<a class="headerlink" href="#code-coverage" title="Permalink to this headline">¶</a></h2>
+<p>The “coverage” of the code refers to what percentage of
+the code (“lines covered” divided by total lines) is executed by the
+automated tests. This is important because passing automated tests is
+only meaningful if the automated tests cover the majority of the code’s
+behavior. This is not a perfect measure, of course, since simply
+executing a line of code under one condition does not mean it would
+execute correctly under all conditions. The code coverage is evaluated
+locally and then integrated with Github through a tool called <a class="reference external" href="https://coveralls.io">Coveralls</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="codereview.html" class="btn btn-neutral float-right" title="Code Review" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="devsw.html" class="btn btn-neutral float-left" title="Collaborative software development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

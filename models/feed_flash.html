@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Feed Block with Flash &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Flash Unit" href="flash.html" />
+    <link rel="prev" title="Feed Block" href="feed.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core Library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Unit Model Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cstr.html">Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium.html">Equilibrium Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feed.html">Feed Block</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Feed Block with Flash</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#degrees-of-freedom">Degrees of Freedom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-structure">Model Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-constraints">Additional Constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#feedflash-class">FeedFlash Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#feedflashdata-class">FeedFlashData Class</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="flash.html">Flash Unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gibbs_reactor.html">Gibbs Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heater.html">Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heat_exchanger.html">HeatExchanger (0D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heat_exchanger_1D.html">Heat Exchangers (1D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixer.html">Mixer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pressure_changer.html">Pressure Changer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="product.html">Product Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="separator.html">Separator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stoichiometric_reactor.html">Stoichiometric (Yield) Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translator.html">Translator Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="power_generation/index.html">Power Generation Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Unit Model Library</a> &raquo;</li>
+        
+      <li>Feed Block with Flash</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/models/feed_flash.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="feed-block-with-flash">
+<h1>Feed Block with Flash<a class="headerlink" href="#feed-block-with-flash" title="Permalink to this headline">¶</a></h1>
+<p>Feed Blocks are used to represent sources of material in Flowsheets. In some cases, users may have a situation where a feed stream may be in a multi-phase state, but may not know the full details of the equilibrium state. The IDAES Feed Block with Flash (FeedFlash) allows users to define a feed block where the outlet is in phase equilibrium based on calculations from the chosen property package and a sufficient set of state variables prior to being passed to the first unit operation. The phase equilibrium is performed assuming an isobaric and isothermal flash operation.</p>
+<p>A Feed Block with Flash is only required in cases where the feed may be in phase equilibrium AND the chosen property package uses a state definition that includes phase separations. Some property packages support phase equilibrium, but use a state definition that involves only total flows - in these cases a flash calculation is performed at the inlet of every unit and thus it is not necessary to perform a flash calculation at the feed block.</p>
+<div class="section" id="degrees-of-freedom">
+<h2>Degrees of Freedom<a class="headerlink" href="#degrees-of-freedom" title="Permalink to this headline">¶</a></h2>
+<p>The degrees of freedom of FeedFlash blocks depends on the property package being used and the number of state variables necessary to fully define the system. Users should refer to documentation on the property package they are using.</p>
+</div>
+<div class="section" id="model-structure">
+<h2>Model Structure<a class="headerlink" href="#model-structure" title="Permalink to this headline">¶</a></h2>
+<p>FeedFlash Blocks contain a single <code class="docutils literal notranslate"><span class="pre">ControlVolume0D</span></code> (named <code class="docutils literal notranslate"><span class="pre">control_volume</span></code>) with one Outlet Port (named <code class="docutils literal notranslate"><span class="pre">outlet</span></code>). FeedFlash Blocks also contain References to the state variables defined within the inlet StateBlock of the ControlVolume (representing the unflashed state of the feed).</p>
+<p>FeedFlash Blocks do not write a set of energy balances within the Control Volume - instead a constraint is written which enforces an isothermal flash.</p>
+</div>
+<div class="section" id="additional-constraints">
+<h2>Additional Constraints<a class="headerlink" href="#additional-constraints" title="Permalink to this headline">¶</a></h2>
+<p>The FeedFlash Block writes one additional constraint to enforce isothermal behavior.</p>
+<div class="math notranslate nohighlight">
+\[T_{in, t} = T_{out, t}\]</div>
+<p>where <span class="math notranslate nohighlight">\(T_{in, t}\)</span> and <span class="math notranslate nohighlight">\(T_{out, t}\)</span> are the temperatures of the material before and after the flash operation.</p>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<p>FeedFlash blocks add no additional Variables.</p>
+<span class="target" id="module-idaes.unit_models.feed_flash"></span></div>
+<div class="section" id="feedflash-class">
+<h2>FeedFlash Class<a class="headerlink" href="#feedflash-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.unit_models.feed_flash.FeedFlash">
+<em class="property">class </em><code class="descclassname">idaes.unit_models.feed_flash.</code><code class="descname">FeedFlash</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#idaes.unit_models.feed_flash.FeedFlash" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule</strong> (<em>function</em>) – A rule function or None. Default rule calls build().</p></li>
+<li><p><strong>concrete</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If True, make this a toplevel model. <strong>Default</strong> - False.</p></li>
+<li><p><strong>ctype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Pyomo ctype of the block.  <strong>Default</strong> - “Block”</p></li>
+<li><p><strong>default</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – <p>Default ProcessBlockData config</p>
+<dl class="simple">
+<dt>Keys</dt><dd><dl class="simple">
+<dt>dynamic</dt><dd><p>Feed units do not support dynamic behavior.</p>
+</dd>
+<dt>has_holdup</dt><dd><p>Feed units do not have defined volume, thus this must be
+False.</p>
+</dd>
+<dt>material_balance_type</dt><dd><p>Indicates what type of material balance should be
+constructed, <strong>default</strong> -
+MaterialBalanceType.componentPhase. <strong>Valid values:</strong> {
+<strong>MaterialBalanceType.none</strong> - exclude material balances,
+<strong>MaterialBalanceType.componentPhase</strong> - use phase
+component balances, <strong>MaterialBalanceType.componentTotal</strong>
+- use total component balances,
+<strong>MaterialBalanceType.elementTotal</strong> - use total element
+balances, <strong>MaterialBalanceType.total</strong> - use total
+material balance.}</p>
+</dd>
+<dt>property_package</dt><dd><p>Property parameter object used to define property
+calculations, <strong>default</strong> - useDefault. <strong>Valid values:</strong>
+{ <strong>useDefault</strong> - use default package from parent model
+or flowsheet, <strong>PhysicalParameterObject</strong> - a
+PhysicalParameterBlock object.}</p>
+</dd>
+<dt>property_package_args</dt><dd><p>A ConfigBlock with arguments to be passed to a property
+block(s) and used when constructing these, <strong>default</strong> -
+None. <strong>Valid values:</strong> { see property package for
+documentation.}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>initialize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – ProcessBlockData config for individual elements. Keys
+are BlockData indexes and values are dictionaries described under the
+“default” argument above.</p></li>
+<li><p><strong>idx_map</strong> (<em>function</em>) – Function to take the index of a BlockData element and
+return the index in the initialize dict from which to read arguments.
+This can be provided to overide the default behavior of matching the
+BlockData index exactly to the index in initialize.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FeedFlash) New instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="feedflashdata-class">
+<h2>FeedFlashData Class<a class="headerlink" href="#feedflashdata-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.unit_models.feed_flash.FeedFlashData">
+<em class="property">class </em><code class="descclassname">idaes.unit_models.feed_flash.</code><code class="descname">FeedFlashData</code><span class="sig-paren">(</span><em>component</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/unit_models/feed_flash.html#FeedFlashData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.feed_flash.FeedFlashData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard Feed block with phase equilibrium</p>
+<dl class="method">
+<dt id="idaes.unit_models.feed_flash.FeedFlashData.build">
+<code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/unit_models/feed_flash.html#FeedFlashData.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.feed_flash.FeedFlashData.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin building model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="flash.html" class="btn btn-neutral float-right" title="Flash Unit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="feed.html" class="btn btn-neutral float-left" title="Feed Block" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

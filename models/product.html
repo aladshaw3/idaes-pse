@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Product Block &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Separator" href="separator.html" />
+    <link rel="prev" title="Pressure Changer" href="pressure_changer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core Library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Unit Model Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cstr.html">Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium.html">Equilibrium Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feed.html">Feed Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feed_flash.html">Feed Block with Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash.html">Flash Unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gibbs_reactor.html">Gibbs Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heater.html">Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heat_exchanger.html">HeatExchanger (0D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heat_exchanger_1D.html">Heat Exchangers (1D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixer.html">Mixer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pressure_changer.html">Pressure Changer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Product Block</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#degrees-of-freedom">Degrees of Freedom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-structure">Model Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-constraints">Additional Constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#product-class">Product Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#productdata-class">ProductData Class</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="separator.html">Separator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stoichiometric_reactor.html">Stoichiometric (Yield) Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translator.html">Translator Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="power_generation/index.html">Power Generation Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Unit Model Library</a> &raquo;</li>
+        
+      <li>Product Block</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/models/product.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="product-block">
+<h1>Product Block<a class="headerlink" href="#product-block" title="Permalink to this headline">¶</a></h1>
+<p>Product Blocks are used to represent sinks of material in Flowsheets. These can be used as a conventient way to mark the final destination of a material stream and to view the state of that material.</p>
+<div class="section" id="degrees-of-freedom">
+<h2>Degrees of Freedom<a class="headerlink" href="#degrees-of-freedom" title="Permalink to this headline">¶</a></h2>
+<p>Product blocks generally have zero degrees of freedom.</p>
+</div>
+<div class="section" id="model-structure">
+<h2>Model Structure<a class="headerlink" href="#model-structure" title="Permalink to this headline">¶</a></h2>
+<p>Product Blocks consists of a single StateBlock (named properties), each with one Inlet Port (named inlet). Product Blocks also contain References to the state variables defined within the StateBlock</p>
+</div>
+<div class="section" id="additional-constraints">
+<h2>Additional Constraints<a class="headerlink" href="#additional-constraints" title="Permalink to this headline">¶</a></h2>
+<p>Product Blocks write no additional constraints to the model.</p>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<p>Product blocks add no additional Variables.</p>
+<span class="target" id="module-idaes.unit_models.product"></span></div>
+<div class="section" id="product-class">
+<h2>Product Class<a class="headerlink" href="#product-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.unit_models.product.Product">
+<em class="property">class </em><code class="descclassname">idaes.unit_models.product.</code><code class="descname">Product</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#idaes.unit_models.product.Product" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule</strong> (<em>function</em>) – A rule function or None. Default rule calls build().</p></li>
+<li><p><strong>concrete</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If True, make this a toplevel model. <strong>Default</strong> - False.</p></li>
+<li><p><strong>ctype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Pyomo ctype of the block.  <strong>Default</strong> - “Block”</p></li>
+<li><p><strong>default</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – <p>Default ProcessBlockData config</p>
+<dl class="simple">
+<dt>Keys</dt><dd><dl class="simple">
+<dt>dynamic</dt><dd><p>Indicates whether this model will be dynamic or not,
+<strong>default</strong> = False. Product blocks are always steady-
+state.</p>
+</dd>
+<dt>has_holdup</dt><dd><p>Product blocks do not contain holdup, thus this must be
+False.</p>
+</dd>
+<dt>property_package</dt><dd><p>Property parameter object used to define property
+calculations, <strong>default</strong> - useDefault. <strong>Valid values:</strong>
+{ <strong>useDefault</strong> - use default package from parent model
+or flowsheet, <strong>PhysicalParameterObject</strong> - a
+PhysicalParameterBlock object.}</p>
+</dd>
+<dt>property_package_args</dt><dd><p>A ConfigBlock with arguments to be passed to a property
+block(s) and used when constructing these, <strong>default</strong> -
+None. <strong>Valid values:</strong> { see property package for
+documentation.}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>initialize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – ProcessBlockData config for individual elements. Keys
+are BlockData indexes and values are dictionaries described under the
+“default” argument above.</p></li>
+<li><p><strong>idx_map</strong> (<em>function</em>) – Function to take the index of a BlockData element and
+return the index in the initialize dict from which to read arguments.
+This can be provided to overide the default behavior of matching the
+BlockData index exactly to the index in initialize.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(Product) New instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="productdata-class">
+<h2>ProductData Class<a class="headerlink" href="#productdata-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.unit_models.product.ProductData">
+<em class="property">class </em><code class="descclassname">idaes.unit_models.product.</code><code class="descname">ProductData</code><span class="sig-paren">(</span><em>component</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/unit_models/product.html#ProductData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.product.ProductData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard Product Block Class</p>
+<dl class="method">
+<dt id="idaes.unit_models.product.ProductData.build">
+<code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/unit_models/product.html#ProductData.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.product.ProductData.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin building model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="idaes.unit_models.product.ProductData.initialize">
+<code class="descname">initialize</code><span class="sig-paren">(</span><em>state_args={}</em>, <em>outlvl=0</em>, <em>solver='ipopt'</em>, <em>optarg={'tol': 1e-06}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/unit_models/product.html#ProductData.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.product.ProductData.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method calls the initialization method of the state block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state_args</strong> – a dict of arguments to be passed to the property
+package(s) to provide an initial state for
+initialization (see documentation of the specific
+property package) (default = {}).</p></li>
+<li><p><strong>outlvl</strong> – <p>sets output level of initialisation routine</p>
+<ul>
+<li><p>0 = no output (default)</p></li>
+<li><p>1 = return solver state for each step in routine</p></li>
+<li><p>2 = return solver state for each step in subroutines</p></li>
+<li><p>3 = include solver output infomation (tee=True)</p></li>
+</ul>
+</p></li>
+<li><p><strong>optarg</strong> – solver options dictionary object (default={‘tol’: 1e-6})</p></li>
+<li><p><strong>solver</strong> – str indicating which solver to use during
+initialization (default = ‘ipopt’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="separator.html" class="btn btn-neutral float-right" title="Separator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pressure_changer.html" class="btn btn-neutral float-left" title="Pressure Changer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

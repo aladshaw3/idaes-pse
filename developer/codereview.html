@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Code Review &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Docker container" href="docker.html" />
+    <link rel="prev" title="Testing" href="testing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/index.html">Unit Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#developer-contents">Developer Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="devintro.html">Developer introductory material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="repos.html">Github repository overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devsw.html">Collaborative software development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Code Review</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html">Docker container</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Documentation</a> &raquo;</li>
+        
+      <li>Code Review</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developer/codereview.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="code-review">
+<span id="sw-code-review"></span><h1>Code Review<a class="headerlink" href="#code-review" title="Permalink to this headline">¶</a></h1>
+<p><em>“It’s a simple 3-step process. Step one: Fix! Step two: It! Step three:
+Fix it!” – Oscar Rogers (Kenan Thompson), Saturday Night Live, 2/2009</em></p>
+<p>Code review is the last line of defense between a mistake that the IDAES
+team will see and a mistake the whole world will see. In the case of
+that mistake being a leak of proprietary information, the entire project
+is jeopardized, so we need to take this process seriously.</p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This section is an incomplete set of notes</p>
+</div>
+<p>Every piece of code must be reviewed by at least two people.</p>
+<p>In every case, one of those people will be a designated “gatekeeper” and
+the one or more others will be “technical reviewers”.</p>
+<p>The technical reviewers are expected to consider various aspects of the
+proposed changes (details below), and engage the author in a discussion
+on any aspects that are deemed lacking or missing.</p>
+<p>The gatekeeper is expected to make sure all criteria have been met, and
+actually merge the PR.</p>
+<p>Assigning Roles</p>
+<p>The gatekeeper is a designated person, who will always be added to
+review a Pull Request (PR)</p>
+<p>Gatekeeper is a role that will be one (?) person for some period like a
+week or two weeks</p>
+<p>The role should rotate around the team, it’s expected to be a fair
+amount of work and should be aligned with availability and paper
+deadlines, etc.</p>
+<p>The originator of the PR will add as reviewers the gatekeeper and 1+
+technical reviewers.</p>
+<p>Originator responsibilities</p>
+<p>The originator of the PR should include in the PR itself information
+about where to find:</p>
+<p>Changes to code/data</p>
+<p>Tests of the changes</p>
+<p>Documentation of the changes</p>
+<p>The originator should be responsive to the reviewers</p>
+<p>Technical reviewer responsibilities</p>
+<p>The technical reviewer(s) should look at the proposed changes for</p>
+<p>Technical correctness (runs properly, good style, internal code
+documentation, etc.)</p>
+<p>Tests</p>
+<p>Documentation</p>
+<p>No proprietary / sensitive information</p>
+<p>Until they approve, the conversation in the PR is between the technical
+reviewers and the originator (the gatekeeper is not required to
+participate, assuming they have many PRs to worry about)</p>
+<p>Gatekeeper responsibilities</p>
+<p>The gatekeeper does not need to engage until there is at least one
+approving technical review.</p>
+<p>Once there is, they should verify that:</p>
+<p>Changes do not contain proprietary data</p>
+<p>Tests are adequate and do not fail</p>
+<p>Documentation is adequate</p>
+<p>Once everything is verified, the gatekeeper merges the PR</p>
+<div class="section" id="automated-checks">
+<h3>Automated Checks<a class="headerlink" href="#automated-checks" title="Permalink to this headline">¶</a></h3>
+<p>The first level of code review is a set of automated checks that <em>must</em> pass
+before the code is ready for people to review it. These checks will run
+on the initiation of a <a class="reference internal" href="devintro.html#devterm-pr"><span class="std std-ref">pull request</span></a> and on every new commit to that pull
+request that is pushed to Github (thus the name “continuous
+integration”).</p>
+<p>The “continuous integration” of the code is hosted by an online service
+– we use <a class="reference external" href="https://circleci.com">CircleCI</a> – that can automatically
+rerun the tests after every change (in this case, every new Pull Request
+or update to the code in an existing Pull Request) and report the
+results back to Github for display in the web pages. This status
+information can then be used as an automatic gatekeeper on whether the
+code can be merged into the master branch – if tests fail, then no merge
+is allowed. Following this procedure, it is not possible for the master
+branch to ever be failing its own tests.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="docker.html" class="btn btn-neutral float-right" title="Docker container" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="testing.html" class="btn btn-neutral float-left" title="Testing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

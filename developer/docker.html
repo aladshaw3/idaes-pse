@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Docker container &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Glossary" href="../glossary.html" />
+    <link rel="prev" title="Code Review" href="codereview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/index.html">Unit Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#developer-contents">Developer Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="devintro.html">Developer introductory material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="repos.html">Github repository overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devsw.html">Collaborative software development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="codereview.html">Code Review</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Docker container</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#docker-idaes-script">docker-idaes script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pushing-an-image-to-s3">Pushing an image to S3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Documentation</a> &raquo;</li>
+        
+      <li>Docker container</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developer/docker.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="docker-container">
+<h1>Docker container<a class="headerlink" href="#docker-container" title="Permalink to this headline">¶</a></h1>
+<p>This page documents information needed by developers for working with the IDAES
+docker container.</p>
+<p>As is expected by Docker, the main file for creating the Docker
+image is the “Dockerfile” in the top-level directory.</p>
+<div class="section" id="docker-idaes-script">
+<h2>docker-idaes script<a class="headerlink" href="#docker-idaes-script" title="Permalink to this headline">¶</a></h2>
+<p>You can build new Docker images using the <code class="docutils literal notranslate"><span class="pre">create</span></code> option to the
+<cite>docker-idaes</cite> script. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">docker</span><span class="o">-</span><span class="n">idaes</span> <span class="n">create</span>
+</pre></div>
+</div>
+<p>You need to have the IDAES installation activated. The script will automatically
+find the current version and attempt to build a Docker image with the same version.
+If it detects an existing image, it will skip the image build. Next, the script will
+try to use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">save</span></code> to save the image as a compressed archive. This will
+also be skipped if an existing image file, with the same version as the “idaes”
+Python package, is detected.</p>
+</div>
+<div class="section" id="pushing-an-image-to-s3">
+<h2>Pushing an image to S3<a class="headerlink" href="#pushing-an-image-to-s3" title="Permalink to this headline">¶</a></h2>
+<p>The Docker images are stored on Amazon S3. Before you can upload a new image,
+you need to be part of the “IDAES-admin” group that is part of Amazon’s
+IAM (Identity Access Management) system. Please contact one of the core
+developers to learn how to join this IAM group.</p>
+<p>Once you have the IAM keys, you need to create a file <code class="docutils literal notranslate"><span class="pre">~/.aws/credentials</span></code>
+that has the access key id and key from the IAM account. It will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">default</span><span class="p">]</span>
+<span class="n">aws_access_key_id</span> <span class="o">=</span> <span class="n">IDGOESHERE</span>
+<span class="n">aws_secret_access_key</span> <span class="o">=</span> <span class="n">accesskeygoeshere</span>
+</pre></div>
+</div>
+<p>The values for the ID and Access key are available from the AWS “IAM”
+service console.</p>
+<p>Next you need to use the AWS command-line tools to copy the local image
+up to Amazon S3. For example, if the image was version “1.0.1”, you would
+use the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aws</span> <span class="n">s3</span> <span class="n">cp</span> <span class="n">idaes</span><span class="o">-</span><span class="n">pse</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="mf">1.</span><span class="n">tgz</span> \
+       <span class="n">s3</span><span class="p">:</span><span class="o">//</span><span class="n">idaes</span><span class="o">/</span><span class="n">idaes</span><span class="o">-</span><span class="n">pse</span><span class="o">/</span><span class="n">idaes</span><span class="o">-</span><span class="n">pse</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="mf">1.</span><span class="n">tgz</span>
+</pre></div>
+</div>
+<p>If the new image should be the latest, you also need to do an S3 -&gt; S3 copy to
+create a new latest image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aws</span> <span class="n">s3</span> <span class="n">cp</span> <span class="n">s3</span><span class="p">:</span><span class="o">//</span><span class="n">idaes</span><span class="o">/</span><span class="n">idaes</span><span class="o">-</span><span class="n">pse</span><span class="o">/</span><span class="n">idaes</span><span class="o">-</span><span class="n">pse</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="mf">1.</span><span class="n">tgz</span> \
+          <span class="n">s3</span><span class="p">:</span><span class="o">//</span><span class="n">idaes</span><span class="o">/</span><span class="n">idaes</span><span class="o">-</span><span class="n">pse</span><span class="o">/</span><span class="n">idaes</span><span class="o">-</span><span class="n">pse</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">latest</span><span class="o">.</span><span class="n">tgz</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="codereview.html" class="btn btn-neutral float-left" title="Code Review" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

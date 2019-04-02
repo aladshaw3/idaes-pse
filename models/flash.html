@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Flash Unit &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gibbs Reactor" href="gibbs_reactor.html" />
+    <link rel="prev" title="Feed Block with Flash" href="feed_flash.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core Library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Unit Model Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cstr.html">Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium.html">Equilibrium Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feed.html">Feed Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feed_flash.html">Feed Block with Flash</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Flash Unit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#degrees-of-freedom">Degrees of Freedom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-structure">Model Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#construction-arguments">Construction Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-constraints">Additional Constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-idaes.unit_models.flash">Flash Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flashdata-class">FlashData Class</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gibbs_reactor.html">Gibbs Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heater.html">Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heat_exchanger.html">HeatExchanger (0D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heat_exchanger_1D.html">Heat Exchangers (1D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixer.html">Mixer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pfr.html">Plug Flow Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pressure_changer.html">Pressure Changer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="product.html">Product Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="separator.html">Separator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stoichiometric_reactor.html">Stoichiometric (Yield) Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translator.html">Translator Block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="power_generation/index.html">Power Generation Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Unit Model Library</a> &raquo;</li>
+        
+      <li>Flash Unit</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/models/flash.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="flash-unit">
+<h1>Flash Unit<a class="headerlink" href="#flash-unit" title="Permalink to this headline">¶</a></h1>
+<p>The IDAES Flash model represents a unit operation where a single stream undergoes a flash separation into two phases. The Flash model supports mutile types of flash operations, including pressure changes and addition or removal of heat.</p>
+<div class="section" id="degrees-of-freedom">
+<h2>Degrees of Freedom<a class="headerlink" href="#degrees-of-freedom" title="Permalink to this headline">¶</a></h2>
+<p>Flash units generally have 2 degrees of freedom.</p>
+<p>Typical fixed variables are:</p>
+<ul class="simple">
+<li><p>heat duty or outlet temperature (see note),</p></li>
+<li><p>pressure change or outlet pressure.</p></li>
+</ul>
+<p>Note: When setting the outlet temeprature of a Flash unit, it is best to set control_volume.properties_out[t].temperature. Setting the temperature in one of the outlet streams directly results in a much harder problme ot solve, and may be degenerate in some cases.</p>
+</div>
+<div class="section" id="model-structure">
+<h2>Model Structure<a class="headerlink" href="#model-structure" title="Permalink to this headline">¶</a></h2>
+<p>The core Flash unit model consists of a single ControlVolume0DBlock (named control_volume) with one Inlet Port (named inlet) and one Outlet Port (named outlet, default with two indexes (‘vap_outlet’ and ‘liq_outlet’)). The Flash model utilizes the separator unit model in IDAES to split the outlets by phase flows to the liquid and vapor outlets respectively.</p>
+<p>The state variables used by the assoicated property package should meet specific requirements in order that the Flash model can find the necessary information for splitting the outlet flows. To support direct splitting, the property package must use one of a specified set of state variables and support a certain set of property calacuations, as outlined in the table below.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 51%" />
+<col style="width: 49%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>State Variables</p></th>
+<th class="head"><p>Required Properties</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td colspan="2"><p><strong>Material flow and composition</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>flow_mol  &amp;  mole_frac</p></td>
+<td><p>flow_mol_phase  &amp;  mole_frac_phase</p></td>
+</tr>
+<tr class="row-even"><td><p>flow_mol_phase  &amp;  mole_frac_phase</p></td>
+<td><p>flow_mol_phase  &amp;  mole_frac_phase</p></td>
+</tr>
+<tr class="row-odd"><td><p>flow_mol_comp</p></td>
+<td><p>flow_mol_phase_comp</p></td>
+</tr>
+<tr class="row-even"><td><p>flow_mol_phase_comp</p></td>
+<td><p>flow_mol_phase_comp</p></td>
+</tr>
+<tr class="row-odd"><td><p>flow_mass  &amp;  mass_frac</p></td>
+<td><p>flow_mass_phase  &amp;  mass_frac_phase</p></td>
+</tr>
+<tr class="row-even"><td><p>flow_mass_phase  &amp;  mass_frac_phase</p></td>
+<td><p>flow_mass_phase  &amp;  mass_frac_phase</p></td>
+</tr>
+<tr class="row-odd"><td><p>flow_mass_comp</p></td>
+<td><p>flow_mass_phase_comp</p></td>
+</tr>
+<tr class="row-even"><td><p>flow_mass_phase_comp</p></td>
+<td><p>flow_mass_phase_comp</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Energy state</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>temperature</p></td>
+<td><p>temperature</p></td>
+</tr>
+<tr class="row-odd"><td><p>enth_mol</p></td>
+<td><p>enth_mol_phase</p></td>
+</tr>
+<tr class="row-even"><td><p>enth_mol_phase</p></td>
+<td><p>enth_mol_phase</p></td>
+</tr>
+<tr class="row-odd"><td><p>enth_mass</p></td>
+<td><p>enth_mass_phase</p></td>
+</tr>
+<tr class="row-even"><td><p>enth_mass_phase</p></td>
+<td><p>enth_mass_phase</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Pressure state</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>pressure</p></td>
+<td><p>pressure</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="construction-arguments">
+<h2>Construction Arguments<a class="headerlink" href="#construction-arguments" title="Permalink to this headline">¶</a></h2>
+<p>Flash units have the following construction arguments:</p>
+<ul class="simple">
+<li><p>property_package - property package to use when constructing Property Blocks (default = ‘use_parent_value’). This is provided as a Property Parameter Block by the Flowsheet when creating the model. If a value is not provided, the Holdup Block will try to use the default property package if one is defined.</p></li>
+<li><p>property_package_args - set of arguments to be passed to the Property Blocks when they are created.</p></li>
+</ul>
+<p>Additionally, Flash units have the following construction arguments which are passed to the Holdup Block for determining which terms to construct in the balance equations.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dynamic</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>include_holdup</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-even"><td><p>material_balance_type</p></td>
+<td><p>MaterialBalanceType.componentPhase</p></td>
+</tr>
+<tr class="row-odd"><td><p>energy_balance_type</p></td>
+<td><p>EnergyBalanceType.enthalpyTotal</p></td>
+</tr>
+<tr class="row-even"><td><p>momentum_balance_type</p></td>
+<td><p>MomentumBalanceType.pressureTotal</p></td>
+</tr>
+<tr class="row-odd"><td><p>has_phase_equilibrium</p></td>
+<td><p>True</p></td>
+</tr>
+<tr class="row-even"><td><p>has_heat_transfer</p></td>
+<td><p>True</p></td>
+</tr>
+<tr class="row-odd"><td><p>has_pressure_change</p></td>
+<td><p>True</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="additional-constraints">
+<h2>Additional Constraints<a class="headerlink" href="#additional-constraints" title="Permalink to this headline">¶</a></h2>
+<p>Flash units write no additional Constraints beyond those written by the ControlVolume0DBlock and the Separator block.</p>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>heat_duty</p></td>
+<td><p>Reference to control_volume.heat</p></td>
+</tr>
+<tr class="row-odd"><td><p>deltaP</p></td>
+<td><p>Reference to control_volume.deltaP</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-idaes.unit_models.flash">
+<span id="flash-class"></span><h2>Flash Class<a class="headerlink" href="#module-idaes.unit_models.flash" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.unit_models.flash.Flash">
+<em class="property">class </em><code class="descclassname">idaes.unit_models.flash.</code><code class="descname">Flash</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#idaes.unit_models.flash.Flash" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule</strong> (<em>function</em>) – A rule function or None. Default rule calls build().</p></li>
+<li><p><strong>concrete</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If True, make this a toplevel model. <strong>Default</strong> - False.</p></li>
+<li><p><strong>ctype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Pyomo ctype of the block.  <strong>Default</strong> - “Block”</p></li>
+<li><p><strong>default</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – <p>Default ProcessBlockData config</p>
+<dl class="simple">
+<dt>Keys</dt><dd><dl class="simple">
+<dt>dynamic</dt><dd><p>Indicates whether the model is dynamic</p>
+</dd>
+<dt>has_holdup</dt><dd><p>Indicates whether holdup terms should be constructed or
+not. Must be True if dynamic = True, <strong>default</strong> - False.
+<strong>Valid values:</strong> { <strong>True</strong> - construct holdup terms,
+<strong>False</strong> - do not construct holdup terms}</p>
+</dd>
+<dt>material_balance_type</dt><dd><p>Indicates what type of mass balance should be constructed,
+<strong>default</strong> - MaterialBalanceType.componentPhase. <strong>Valid
+values:</strong> { <strong>MaterialBalanceType.none</strong> - exclude
+material balances, <strong>MaterialBalanceType.componentPhase</strong>
+- use phase component balances,
+<strong>MaterialBalanceType.componentTotal</strong> - use total
+component balances, <strong>MaterialBalanceType.elementTotal</strong> -
+use total element balances, <strong>MaterialBalanceType.total</strong>
+- use total material balance.}</p>
+</dd>
+<dt>energy_balance_type</dt><dd><p>Indicates what type of energy balance should be
+constructed, <strong>default</strong> -
+EnergyBalanceType.enthalpyTotal. <strong>Valid values:</strong> {
+<strong>EnergyBalanceType.none</strong> - exclude energy balances,
+<strong>EnergyBalanceType.enthalpyTotal</strong> - single ethalpy
+balance for material, <strong>EnergyBalanceType.enthalpyPhase</strong>
+- ethalpy balances for each phase,
+<strong>EnergyBalanceType.energyTotal</strong> - single energy balance
+for material, <strong>EnergyBalanceType.energyPhase</strong> - energy
+balances for each phase.}</p>
+</dd>
+<dt>momentum_balance_type</dt><dd><p>Indicates what type of momentum balance should be
+constructed, <strong>default</strong> -
+MomentumBalanceType.pressureTotal. <strong>Valid values:</strong> {
+<strong>MomentumBalanceType.none</strong> - exclude momentum balances,
+<strong>MomentumBalanceType.pressureTotal</strong> - single pressure
+balance for material,
+<strong>MomentumBalanceType.pressurePhase</strong> - pressure balances
+for each phase, <strong>MomentumBalanceType.momentumTotal</strong> -
+single momentum balance for material,
+<strong>MomentumBalanceType.momentumPhase</strong> - momentum balances
+for each phase.}</p>
+</dd>
+<dt>has_phase_equilibrium</dt><dd><p>Indicates whether terms for phase equilibrium should be
+constructed, <strong>default</strong> - True. <strong>Valid values:</strong> {
+<strong>True</strong> - include phase equilibrium term, <strong>False</strong> -
+exclude phase equlibirum terms.}</p>
+</dd>
+<dt>has_heat_transfer</dt><dd><p>Indicates whether terms for heat transfer should be
+constructed, <strong>default</strong> - False. <strong>Valid values:</strong> {
+<strong>True</strong> - include heat transfer terms, <strong>False</strong> -
+exclude heat transfer terms.}</p>
+</dd>
+<dt>has_pressure_change</dt><dd><p>Indicates whether terms for pressure change should be
+constructed, <strong>default</strong> - True. <strong>Valid values:</strong> {
+<strong>True</strong> - include pressure change terms, <strong>False</strong> -
+exclude pressure change terms.}</p>
+</dd>
+<dt>property_package</dt><dd><p>Property parameter object used to define property
+calculations, <strong>default</strong> - useDefault. <strong>Valid values:</strong>
+{ <strong>useDefault</strong> - use default package from parent model
+or flowsheet, <strong>PropertyParameterObject</strong> - a
+PropertyParameterBlock object.}</p>
+</dd>
+<dt>property_package_args</dt><dd><p>A ConfigBlock with arguments to be passed to a property
+block(s) and used when constructing these, <strong>default</strong> -
+None. <strong>Valid values:</strong> { see property package for
+documentation.}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>initialize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – ProcessBlockData config for individual elements. Keys
+are BlockData indexes and values are dictionaries described under the
+“default” argument above.</p></li>
+<li><p><strong>idx_map</strong> (<em>function</em>) – Function to take the index of a BlockData element and
+return the index in the initialize dict from which to read arguments.
+This can be provided to overide the default behavior of matching the
+BlockData index exactly to the index in initialize.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(Flash) New instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="flashdata-class">
+<h2>FlashData Class<a class="headerlink" href="#flashdata-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="idaes.unit_models.flash.FlashData">
+<em class="property">class </em><code class="descclassname">idaes.unit_models.flash.</code><code class="descname">FlashData</code><span class="sig-paren">(</span><em>component</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/unit_models/flash.html#FlashData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.flash.FlashData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard Flash Unit Model Class</p>
+<dl class="method">
+<dt id="idaes.unit_models.flash.FlashData.build">
+<code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/idaes/unit_models/flash.html#FlashData.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#idaes.unit_models.flash.FlashData.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin building model (pre-DAE transformation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gibbs_reactor.html" class="btn btn-neutral float-right" title="Gibbs Reactor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="feed_flash.html" class="btn btn-neutral float-left" title="Feed Block with Flash" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

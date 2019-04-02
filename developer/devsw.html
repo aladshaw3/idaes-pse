@@ -1,0 +1,669 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Collaborative software development &mdash; IDAES v1.0.1</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/idaes-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/theme_and_schema.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Testing" href="testing.html" />
+    <link rel="prev" title="Github repository overview" href="repos.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> IDAES
+          
+
+          
+            
+            <img src="../_static/idaes-logo-100x100.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards.html">IDAES Modeling Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/index.html">Unit Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../property_models/index.html">Property Model Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vis/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmf/index.html">Data Management Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version.html">IDAES Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#developer-contents">Developer Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="devintro.html">Developer introductory material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="repos.html">Github repository overview</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Collaborative software development</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#developing-software-with-proprietary-content">Developing Software with Proprietary Content</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#developing-software-for-internal-use">Developing Software for Internal Use</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#developing-software-for-open-source-release">Developing software for Open-source Release</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="codereview.html">Code Review</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docker.html">Docker container</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IDAES</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Documentation</a> &raquo;</li>
+        
+      <li>Collaborative software development</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developer/devsw.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="collaborative-software-development">
+<span id="sw-top"></span><h1>Collaborative software development<a class="headerlink" href="#collaborative-software-development" title="Permalink to this headline">¶</a></h1>
+<p>This page gives guidance for all developers on the project.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Many details here are targeted at members of the IDAES project team.
+However, we strongly believe in the importance of transparency in the
+project’s software practices and approaches. Also, understanding how we
+develop the software internally should be generally useful to understand
+the review process to expect for external contributors.</p>
+</div>
+<p>Although the main focus of this project is developing open source software (OSS),
+it is also true that some of the software may be developed internally or in
+coordination with industry under a <a class="reference internal" href="../glossary.html#term-crada"><span class="xref std std-term">CRADA</span></a> or <a class="reference internal" href="../glossary.html#term-nda"><span class="xref std std-term">NDA</span></a>.</p>
+<p><em>It is the developer’s responsibility</em>, for a given development effort,
+to keep in mind what role you must assume and thus which set of procedures
+must be followed.</p>
+<dl class="simple">
+<dt>CRADA/NDA</dt><dd><p>If you are developing software covered by a CRADA, NDA, or other legal
+agreement that does not explicitly allow the data and/or code to be
+released as open-source under the IDAES license, then you must follow
+procedures under <a class="reference internal" href="#sw-nda"><span class="std std-ref">Developing Software with Proprietary Content</span></a>.</p>
+</dd>
+<dt>Internal</dt><dd><p>If you are developing non-CRADA/NDA software, which is not intended to be
+part of the core framework or (ever) released as open-source then follow procedures
+under <a class="reference internal" href="#sw-int"><span class="std std-ref">Developing Software for Internal Use</span></a>.</p>
+</dd>
+<dt>Core/open-source</dt><dd><p>If you are developing software with no proprietary data or code, which
+is intended to be released as open-source with the core framework, then follow
+procedures under <a class="reference internal" href="#sw-oss"><span class="std std-ref">Developing software for Open-source Release</span></a>.</p>
+</dd>
+</dl>
+<div class="section" id="developing-software-with-proprietary-content">
+<span id="sw-nda"></span><h2>Developing Software with Proprietary Content<a class="headerlink" href="#developing-software-with-proprietary-content" title="Permalink to this headline">¶</a></h2>
+<p>Proprietary content is not currently being kept on Github, or any other collaborative
+version control platform. When this changes, this section will be updated.</p>
+</div>
+<div class="section" id="developing-software-for-internal-use">
+<span id="sw-int"></span><h2>Developing Software for Internal Use<a class="headerlink" href="#developing-software-for-internal-use" title="Permalink to this headline">¶</a></h2>
+<p>Software for internal use should be developed in the <code class="docutils literal notranslate"><span class="pre">workspace</span></code> repository of the
+IDAES github organization. The requirements for reviews and testing of this code are
+not as strict as for the <code class="docutils literal notranslate"><span class="pre">idaes-dev</span></code> repository, but otherwise the procedures are
+the same as outlined for <a class="reference internal" href="#sw-oss"><span class="std std-ref">open-source development</span></a>.</p>
+</div>
+<div class="section" id="developing-software-for-open-source-release">
+<span id="sw-oss"></span><h2>Developing software for Open-source Release<a class="headerlink" href="#developing-software-for-open-source-release" title="Permalink to this headline">¶</a></h2>
+<p>We can break the software development process into five distinct phases, illustrated in Figure 1
+and summarized below:</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sw-wf-setup"><span class="std std-ref">1. Setup</span></a>: Prepare your local system for collaborative development</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#sw-wf-initiate"><span class="std std-ref">2. Initiate</span></a>: Notify collaborators of intent to make some changes</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sw-wf-develop"><span class="std std-ref">3. Develop</span></a>: Make local changes</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#sw-wf-collaborate"><span class="std std-ref">4. Collaborate</span></a>: Push the changes to Github, get feedback and merge</p></td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/sw-overview-workflow.png"><img alt="../_images/sw-overview-workflow.png" src="../_images/sw-overview-workflow.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1. Overview of software development workflow</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>The rest of this page describes the what and how of each of these phases.</p>
+<div class="section" id="setup">
+<span id="sw-wf-setup"></span><h3>1. Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>Before you can start developing software collaboratively,
+you need to make sure you are set up in Github and set up your local development environment.</p>
+<div class="section" id="github-setup">
+<h4>Github setup<a class="headerlink" href="#github-setup" title="Permalink to this headline">¶</a></h4>
+<p>To work within the project, you need to create a login on <a class="reference external" href="https://github.com/">Github</a>. You also
+need to make sure that this login has been added to the IDAES organization by
+contacting one of the core developers.</p>
+<p>If these steps are successful, you should be able to login to Github, visit the
+<a class="reference external" href="https://github.com/IDAES/">IDAES Github organization</a>, and see “Private” repositories
+such as <cite>idaes-dev</cite> and <cite>workspace</cite>.</p>
+</div>
+<div class="section" id="fork-the-repo">
+<h4>Fork the repo<a class="headerlink" href="#fork-the-repo" title="Permalink to this headline">¶</a></h4>
+<p>You use a “fork” of a repository (or “repo” for short) to create a space where you
+can save changes without directly affecting the main repository. Then, as we will see,
+you <em>request</em> that these changes be incorporated (after review).</p>
+<p>This section assumes that the repository in question is <code class="docutils literal notranslate"><span class="pre">idaes-dev</span></code>,
+but the idea is the same for any other repo.</p>
+<p>You should first visit the repo on Github
+by pointing your browser to <a class="reference external" href="https://github.com/IDAES/idaes-dev/">https://github.com/IDAES/idaes-dev/</a>. Then you should
+fork the repo into a repo of the same name under your name.</p>
+<div class="figure align-right" id="id3">
+<a class="reference internal image-reference" href="../_images/github-fork-repo.png"><img alt="../_images/github-fork-repo.png" src="../_images/github-fork-repo.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-text">Figure 2. Screenshot showing where to click to fork the Github repo</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="clone-your-fork">
+<h4>Clone your fork<a class="headerlink" href="#clone-your-fork" title="Permalink to this headline">¶</a></h4>
+<p>A “clone” is a copy of a Github repository on your local machine. This is what
+you need to do in order to actually edit and change the files.
+To make a clone of the fork you created in the previous step,
+change to a directory where you want to put the source code and run the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">MYNAME</span><span class="o">/</span><span class="n">idaes</span><span class="o">-</span><span class="n">dev</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">idaes</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+<p>Of course, replace MYNAME with your login name. This will download all the files in
+the latest version of the repository onto your local disk.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code>, subsequent git commands should be performed from
+the “idaes-dev” directory.</p>
+</div>
+</div>
+<div class="section" id="add-upstream-remote">
+<span id="sw-add-upstream"></span><h4>Add upstream remote<a class="headerlink" href="#add-upstream-remote" title="Permalink to this headline">¶</a></h4>
+<p>In order to guarantee that your fork can be synchronized with the “main” idaes-dev
+repo in the Github IDAES organization, you need to add a pointer to that repository
+as a <em>remote</em>. This repository is called <em>upstream</em> (changes made there
+by the whole team flow down to your fork), so we will use that name for it in our
+command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">IDAES</span><span class="o">/</span><span class="n">idaes</span><span class="o">-</span><span class="n">dev</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-the-python-environment">
+<h4>Create the Python environment<a class="headerlink" href="#create-the-python-environment" title="Permalink to this headline">¶</a></h4>
+<p>Once you have the repo cloned, you can change into that directory (by default, it
+will be called “idaes-dev” like the repo) and install the Python packages.</p>
+<p>But before you do that, you need to get the Python package manager fully up and
+running. We use a Python packaging system called <a class="reference external" href="https://conda.io/">Conda</a>.
+Below are instructions for installing a minimal version of Conda, called <a class="reference external" href="https://conda.io/en/latest/miniconda.html">Miniconda</a>.
+The full version installs a large number of scientific analysis and visualization libraries
+that are not required by the IDAES framework.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+</pre></div>
+</div>
+<p>Create and activate a conda environment (along with its own copy of <code class="docutils literal notranslate"><span class="pre">pip</span></code>)
+for the new IDAES installation <strong>(you will need to</strong> <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">idaes</span></code>
+<strong>when you open a fresh terminal window and wish to use IDAES)</strong>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda create -n idaes pip
+conda activate idaes
+</pre></div>
+</div>
+<p>Now that conda and pip are installed, and you are in the “idaes” conda environment,
+you can run the standard steps for installing a Python package in development mode:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
+python setup.py develop
+</pre></div>
+</div>
+<p>You can test that everything is installed properly by running the tests with
+<a class="reference external" href="https://pytest.org/">Pytest</a>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="initiate">
+<span id="sw-wf-initiate"></span><h3>2. Initiate<a class="headerlink" href="#initiate" title="Permalink to this headline">¶</a></h3>
+<p>We will call a set of changes that belong together, e.g. because they depend on
+each other to work, a “topic”. This section describes how to start work on a new
+topic. The workflow for initiating a topic is shown in Figure 3 below.</p>
+<div class="figure align-right" id="id4">
+<a class="reference internal image-reference" href="../_images/sw-init-workflow.png"><img alt="../_images/sw-init-workflow.png" src="../_images/sw-init-workflow.png" style="height: 400px;" /></a>
+<p class="caption"><span class="caption-text">Figure 3. Initiate topic workflow</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="create-an-issue-on-github">
+<h4>Create an issue on Github<a class="headerlink" href="#create-an-issue-on-github" title="Permalink to this headline">¶</a></h4>
+<p>To create an issue on Github, simply navigate to the repository page and click on
+the “Issues” tab. Then click on the “Issues” button and fill in a title and brief
+description of the issue. You do not need to list details about sub-steps required
+for the issue, as this sort of information is better put in the (related) pull
+request that you will create later. Assign the issue to the appropriate people,
+which is often yourself.</p>
+<p>There is one more important step to take, that will allow the rest of the project
+to easily notice your issue: add the issue to the “Priorities” project. The screenshot
+below shows where you need to click to do this.</p>
+<div class="figure align-right" id="id5">
+<a class="reference internal image-reference" href="../_images/github-issue-priority.png"><img alt="../_images/github-issue-priority.png" src="../_images/github-issue-priority.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-text">Figure 4. Screenshot for creating an issue on Github</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="create-a-branch-on-your-fork">
+<h4>Create a branch on your fork<a class="headerlink" href="#create-a-branch-on-your-fork" title="Permalink to this headline">¶</a></h4>
+<p>It is certainly possible to do your work on your fork in the “master”
+branch. The problem that can arise here is if you need to do two unrelated
+things at the same time, for example working on a new feature and fixing
+a bug in the current code. This can be quite tricky to manage as a single set
+of changes, but very easy to handle by putting each new set of changes in
+its own branch, which we call a <em>topic</em> branch.
+When all the changes in the branch are done and merged, you can delete it
+both locally and in your fork so you don’t end up with a bunch of old branches
+cluttering up your git history.</p>
+<p>The command for doing this is simple:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git checkout -b &lt;BRANCH-NAME&gt;
+</pre></div>
+</div>
+<p>The branch name should be one word, with dashes or underscores as needed.
+One convention for the name that can be helpful is to include the Issue number
+at the end, e.g. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">co</span> <span class="pre">-b</span> <span class="pre">mytopic-issue42</span></code>. This is especially useful later
+when you are cleaning up old branches, and you can quickly see which branches
+are related to issues that are completed.</p>
+</div>
+<div class="section" id="make-local-edits-and-push-changes">
+<h4>Make local edits and push changes<a class="headerlink" href="#make-local-edits-and-push-changes" title="Permalink to this headline">¶</a></h4>
+<p>A new branch, while it feels like a change, is not really a change in the
+eyes of Git or Github, and by itself will not allow you to start a new pull
+request (which is the goal of this whole phase). The easiest thing to do is
+a special “empty” commit:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">empty</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;Empty commit so I can open a PR&#39;</span>
+</pre></div>
+</div>
+<p>Since this is your first “push” to this branch, you are going to need to set an upstream
+branch on the remote that should receive the changes. If this sounds complicated,
+it’s OK because git actually gives you cut-and-paste instructions. Just run
+the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> command with no other arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git push
+fatal: The current branch mybranch-issue3000 has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin mybranch-issue3000
+</pre></div>
+</div>
+<p>Cut and paste the suggested command, and you’re ready to go. Subsequent
+calls to “push” will not require any additional arguments to work.</p>
+</div>
+<div class="section" id="start-a-new-pull-request-on-github">
+<h4>Start a new Pull Request on Github<a class="headerlink" href="#start-a-new-pull-request-on-github" title="Permalink to this headline">¶</a></h4>
+<p>Finally, you are ready to initiate the pull request. Right after you perform the
+<code class="docutils literal notranslate"><span class="pre">push</span></code> command above, head to the repository
+URL in Github (<a class="reference external" href="https://github.com/IDAES/idaes-dev">https://github.com/IDAES/idaes-dev</a>) and you should see a highlighted
+bar below the tabs, as in Figure 5 below, asking if you want to start a pull-request.</p>
+<div class="figure align-right" id="id6">
+<a class="reference internal image-reference" href="../_images/github-start-pullrequest.png"><img alt="../_images/github-start-pullrequest.png" src="../_images/github-start-pullrequest.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-text">Figure 5. Screenshot for starting a Pull Request on Github</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>Click on this and fill in the requested information. Remember to link to the issue
+you created earlier.</p>
+<p>Depending on the Github plan, there may be a pull-down menu for creating the pull
+request that lets you create a “draft” pull request. If that is not present, you
+can signal this the old-fashioned way by adding “[WIP]” (for Work-in-Progress) at
+the beginning of the pull request title.</p>
+<p>Either way, create the pull request. Do <em>not</em> assign reviewers until you are done
+making your changes (which is probably not now). This way the assigning of reviewers
+becomes an unambiguous signal that the PR is actually ready for review.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Avoid having pull requests that take months to complete. It is
+better to divide up the work, even artificially, into a piece that
+can be reviewed and merged into the main repository within a week or two.</p>
+</div>
+</div>
+</div>
+<div class="section" id="develop">
+<span id="sw-wf-develop"></span><h3>3. Develop<a class="headerlink" href="#develop" title="Permalink to this headline">¶</a></h3>
+<p>The development process is a loop of adding code, testing and
+debugging, and committing and pushing to Github. You may go through many (many!)
+iterations of this loop before the code is ready for review. This workflow is
+illustrated in Figure 6.</p>
+<div class="figure align-right" id="id7">
+<a class="reference internal image-reference" href="../_images/sw-dev-workflow.png"><img alt="../_images/sw-dev-workflow.png" src="../_images/sw-dev-workflow.png" style="height: 400px;" /></a>
+<p class="caption"><span class="caption-text">Figure 6. Software development workflow</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="running-tests">
+<h4>Running tests<a class="headerlink" href="#running-tests" title="Permalink to this headline">¶</a></h4>
+<p>After significant edits, you should make sure you have tests
+for the new/changed functionality. This involves writing <a class="reference internal" href="testing.html#tst-unit"><span class="std std-ref">Unit tests</span></a> as
+well as running the test suite and examining the results of the <a class="reference internal" href="testing.html#tst-coverage"><span class="std std-ref">Code coverage</span></a>.</p>
+<p>This project uses <a class="reference external" href="https://pytest.org/">Pytest</a> to help with running the unit tests. From the
+top-level directory of the working tree, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span>
+</pre></div>
+</div>
+<p>Alternatively users of an IDE like PyCharm can run the tests from within the IDE.</p>
+</div>
+<div class="section" id="commit-changes">
+<span id="git-commit"></span><h4>Commit changes<a class="headerlink" href="#commit-changes" title="Permalink to this headline">¶</a></h4>
+<p>The commands: git add, git status, and git commit are all used in combination to
+save a snapshot of a Git project’s current state. <a class="footnote-reference brackets" href="#f-stash" id="id1">1</a>.</p>
+<p>The <em>commit</em> command is the equivalent of “saving” your changes. But unlike editing
+a document, the set of changes may cover multiple files, including newly created
+files. To allow the user flexibility in specifying exactly which changes to save
+with each commit, the <em>add</em> command is used first to indicate files to “stage” for
+the next commit command. The <em>status</em> command is used to show the current status
+of the working tree.</p>
+<p>A typical workflow goes like this:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ ls
+file1  file2
+$ <span class="nb">echo</span> <span class="s1">&#39;a&#39;</span> &gt; file1 <span class="c1"># edit existing file</span>
+$ <span class="nb">echo</span> <span class="s1">&#39;1&#39;</span> &gt; file3 <span class="c1"># create new file</span>
+$ git status --short <span class="c1"># shows changed/unstaged and unknown file</span>
+ M file1
+?? file3
+$ git add file1 file3 <span class="c1"># stage file1, file3 for commit</span>
+$ git status --short <span class="c1"># M=modified, A=added</span>
+M  file1
+A  file3
+$ git commit -m <span class="s2">&quot;made some changes&quot;</span>
+<span class="o">[</span>master 067c16e<span class="o">]</span> made some changes
+<span class="m">2</span> files changed, <span class="m">2</span> insertions<span class="o">(</span>+<span class="o">)</span>
+create mode <span class="m">100644</span> file3
+</pre></div>
+</div>
+<p>Of course, in most IDEs you could use built-in commands for committing and adding
+files. The basic flow would be the same.</p>
+</div>
+<div class="section" id="synchronize-with-upstream-changes">
+<span id="sw-sync-upstream"></span><h4>Synchronize with upstream changes<a class="headerlink" href="#synchronize-with-upstream-changes" title="Permalink to this headline">¶</a></h4>
+<p>Hopefully you are not the only one on the team doing work, and therefore you should
+expect that the main repository may have new and changed content while you are in
+the process of working. To synchronize with the latest content from the “upstream”
+(IDAES organization) repository, you should periodically run one of the two following
+commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span>
+<span class="c1"># OR -- explicit</span>
+<span class="n">git</span> <span class="n">fetch</span> <span class="o">--</span><span class="nb">all</span>
+<span class="n">git</span> <span class="n">merge</span> <span class="n">upstream</span><span class="o">/</span><span class="n">master</span>
+</pre></div>
+</div>
+<p>You’ll notice that this merge command is using the name of the “upstream” remote
+that you <a class="reference internal" href="#sw-add-upstream"><span class="std std-ref">created earlier</span></a>.</p>
+</div>
+<div class="section" id="push-changes-to-github">
+<span id="git-push"></span><h4>Push changes to Github<a class="headerlink" href="#push-changes-to-github" title="Permalink to this headline">¶</a></h4>
+<p>Once changes are <a class="reference internal" href="testing.html#tst-top"><span class="std std-ref">tested</span></a> and committed, they need to be
+synchronized up to Github. This is done with the git push command, which typically
+takes no options (assuming you have set up your fork, etc., as described so far):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+<p>The output of this command on the console should be an informative, if slightly
+cryptic, statement of how many changes were pushed and, at the bottom,
+the name of your remote fork and the local/remote branches (which should be the
+same). For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Counting</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span><span class="o">.</span>
+<span class="n">Compressing</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Writing</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="mi">528</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="mf">528.00</span> <span class="n">KiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Total</span> <span class="mi">5</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">4</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">remote</span><span class="p">:</span> <span class="n">Resolving</span> <span class="n">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span> <span class="n">completed</span> <span class="k">with</span> <span class="mi">4</span> <span class="n">local</span> <span class="n">objects</span><span class="o">.</span>
+<span class="n">To</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">dangunter</span><span class="o">/</span><span class="n">idaes</span><span class="o">-</span><span class="n">dev</span><span class="o">.</span><span class="n">git</span>
+   <span class="n">d535552</span><span class="o">..</span><span class="n">fe61fcc</span>  <span class="n">devdocs</span><span class="o">-</span><span class="n">issue65</span> <span class="o">-&gt;</span> <span class="n">devdocs</span><span class="o">-</span><span class="n">issue65</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="collaborate">
+<span id="sw-wf-collaborate"></span><h3>4. Collaborate<a class="headerlink" href="#collaborate" title="Permalink to this headline">¶</a></h3>
+<p>The collaboration phase of our journey, shown in Figure 7, is mostly about communicating what you
+did to the other developers. Through the Github “review” mechanism, people will
+be able to suggest changes and improvements. You can make changes to the code (other
+people can also make changes, see <a class="reference internal" href="#sw-share-forks"><span class="std std-ref">Shared forks</span></a>), and then push those
+changes up into the same Pull Request. When you get enough approving reviews,
+the code is merged into the master repository. At this point, you can delete the
+“topic branch” used for the pull request, and go back to <a class="reference internal" href="#sw-wf-initiate"><span class="std std-ref">initiate</span></a> your
+next set of changes.</p>
+<div class="figure align-right" id="id8">
+<a class="reference internal image-reference" href="../_images/sw-collaborate-workflow.png"><img alt="../_images/sw-collaborate-workflow.png" src="../_images/sw-collaborate-workflow.png" style="height: 400px;" /></a>
+<p class="caption"><span class="caption-text">Figure 7. Collaborate phase workflow</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="request-review">
+<h4>Request review<a class="headerlink" href="#request-review" title="Permalink to this headline">¶</a></h4>
+<p>To request review of a pull request, navigate to the pull request in the main
+(e.g., “idaes-dev”) repository and select some names in the “Reviewers”
+pull-down on the right-hand side. You need to have two
+approving reviews. The reviewers should get an email, but you can also “&#64;” people
+in a comment in the pull request to give them a little extra nudge.</p>
+<p>See the full <a class="reference internal" href="codereview.html#sw-code-review"><span class="std std-ref">code review</span></a> procedure for more details.</p>
+</div>
+<div class="section" id="make-changes">
+<h4>Make changes<a class="headerlink" href="#make-changes" title="Permalink to this headline">¶</a></h4>
+<p>You need to keep track of the comments and reviews, and make changes accordingly.
+Think of a pull request as a discussion. Normally, the person who made the pull
+request will make any requested edits. Occasionally, it may make sense for one
+or more other developers to jump in and make edits too, so how to do this is
+covered in the sub-section below.</p>
+<p>Changes made while the code is being reviewed use the normal <a class="reference internal" href="#sw-wf-develop"><span class="std std-ref">Develop</span></a>
+workflow.</p>
+<div class="section" id="shared-forks">
+<span id="sw-share-forks"></span><h5>Shared forks<a class="headerlink" href="#shared-forks" title="Permalink to this headline">¶</a></h5>
+<p>Other developers can also make changes in your fork. All they need to do
+is <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> your fork (not the main repository), switch to the correct
+topic branch, and then <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> work directly to that branch. Note since this
+does not use the whole pull-request mechanism, all developers working on the
+same branch this way need to make sure the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> to synchronize with updates
+from the other developers.</p>
+<p>For example, if Jack wants to make some edits on Rose’s fork, on a topic
+branch called “changes-issue51” he could do the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/rose/idaes-dev # clone Rose&#39;s fork
+$ git checkout changes-issue51  # checkout the topic branch
+$ echo &quot;Hello&quot; &gt;&gt; README.txt  # make some important changes
+$ pytest # always run tests!!
+$ git add README.txt ; git commit -m &quot;important changes&quot;
+$ git push # push changes to the fork
+</pre></div>
+</div>
+<p>Hopefully it also is obvious that developers working this way have less safeguards
+for overwriting each other’s work, and thus should make an effort to communicate
+clearly and in a timely manner.</p>
+</div>
+</div>
+<div class="section" id="merge">
+<span id="sw-wf-merge"></span><h4>Merge<a class="headerlink" href="#merge" title="Permalink to this headline">¶</a></h4>
+<p>Once all the tests pass and you have enough approving reviews, it’s time to merge
+the code! This is the easy part: go to the bottom of the Pull Request and hit the
+big green “merge” button.</p>
+<p>Before you close the laptop and go down to the pub, you should tidy up. First,
+delete your local branch (you can also delete that branch on Github):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span> <span class="c1"># switch back to master branch</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">d</span> <span class="n">mychanges</span><span class="o">-</span><span class="n">issue3000</span>
+</pre></div>
+</div>
+<p>Next, you should make sure your master reflects the current state of the main
+master branch, i.e. go back and <a class="reference internal" href="#sw-sync-upstream"><span class="std std-ref">synchronize with the upstream remote</span></a>,
+i.e. run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>.</p>
+<p>Now you can go and enjoy a tasty beverage. Cheers!</p>
+<img alt="../_images/beer-coffee-cheers-small.png" src="../_images/beer-coffee-cheers-small.png" />
+<p class="rubric">Footnotes</p>
+<dl class="footnote brackets">
+<dt class="label" id="f-stash"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Git has an additional saving mechanism called ‘the stash’.
+The stash is an ephemeral storage area for changes that are not ready
+to be committed. The stash operates on the working directory
+and has extensive usage options.* See the documentation for
+<a class="reference external" href="https://git-scm.com/docs/git-stash">git stash</a> for more information.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="testing.html" class="btn btn-neutral float-right" title="Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="repos.html" class="btn btn-neutral float-left" title="Github repository overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, David Miller et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
